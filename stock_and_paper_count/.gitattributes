@@ -1,0 +1,1 @@
+stock_and_paper_count/*.csv filter=lfs diff=lfs merge=lfs -text
