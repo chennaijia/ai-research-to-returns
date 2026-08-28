@@ -35,20 +35,9 @@
 #        out/tech_classification_diagnostics.txt
 # ============================================================
 
-suppressMessages({
-  library(data.table)
-})
+source(file.path("analysis", "00_common.R"))
 
-PANEL   <- file.path("stock_and_paper_count",
-                     "crsp_all_classified_with_papers_detailed.csv")
-OUT_DIR <- file.path("analysis", "out")
-
-dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)
-
-con <- file(file.path(OUT_DIR, "tech_classification_diagnostics.txt"), open = "wt")
-say <- function(...) { msg <- paste0(...); cat(msg, "\n"); writeLines(msg, con) }
-show <- function(x) { txt <- capture.output(print(x)); cat(txt, sep = "\n"); cat("\n")
-                      writeLines(txt, con) }
+start_log("tech_classification_diagnostics.txt")
 
 # ------------------------------------------------------------
 # 1. ICT 定義（6 碼，跨 NAICS 版本）
@@ -247,4 +236,4 @@ fwrite(firm, file.path(OUT_DIR, "tech_classification.csv"))
 say("")
 say("=== 已輸出 ===")
 say(file.path(OUT_DIR, "tech_classification.csv"), "  (", nrow(firm), " 家公司)")
-close(con)
+end_log()
