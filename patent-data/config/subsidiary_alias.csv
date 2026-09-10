@@ -1,0 +1,51 @@
+parent_company,ticker,assignee_name,effective_from,effective_to,date_basis,source_url,note
+Alphabet,GOOGL,WAYMO LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,Alphabet 內部分拆而非併購 2016-12 正式命名 Waymo 前身為 Google 自駕車專案 故全期間歸屬
+Alphabet,GOOGL,VERILY LIFE SCIENCES LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,Alphabet 內部分拆 前身 Google Life Sciences 故全期間歸屬
+Alphabet,GOOGL,WING AVIATION LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,Alphabet 內部分拆 前身 Google X 專案 故全期間歸屬
+Alphabet,GOOGL,DEEPMIND TECH LTD,2014-01-27,,announced,https://techcrunch.com/2014/01/26/google-deepmind/,收購宣布日 未見公開完成日
+Alphabet,GOOGL,NEST LABS INC,2014-02-07,,completed,https://www.mlex.com/mlex/articles/2126570/google-completes-acquisition-of-nest-labs,
+Alphabet,GOOGL,FITBIT INC,2021-01-14,,completed,https://techcrunch.com/2021/01/14/googles-fitbit-acquisition-is-official/,
+Alphabet,GOOGL,MOTOROLA MOBILITY LLC,2012-05-22,2014-10-30,completed,https://money.cnn.com/2012/05/22/technology/google-motorola/index.htm,2014-10-30 由聯想買下 故僅此區間歸 Google
+Alphabet,GOOGL,MOTOROLA MOBILITY INC,2012-05-22,2014-10-30,completed,https://news.lenovo.com/pressroom/press-releases/lenovo-completes-full-acquisition-motorola-mobility-from-google/,同上
+Alphabet,GOOGL,GOOGLE TECH HOLDING LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,Motorola 專利保留實體 更名後即為 Google 所有 故全期間歸屬
+Alphabet,GOOGL,GOOGLE TECHNOLOBY HOLDINGS LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上 拼寫變體
+Alphabet,GOOGL,GOOGLE TECHNOLOGY HOLDINGS INC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上
+Alphabet,GOOGL,Google Technolgy Holdings LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上 拼寫變體
+Alphabet,GOOGL,Google Technology Holdings LLC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上
+Alphabet,GOOGL,Google Technology Holdings LLP,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上
+Alphabet,GOOGL,C/O GOOGLE TECH HOLDINGS,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/1652044/000165204421000047/goog-20210630.htm,同上
+Meta,META,OCULUS VR LLC,2014-07-21,,completed,https://techcrunch.com/2014/07/21/facebooks-acquisition-of-oculus-closes-now-official/,
+Meta,META,WHATSAPP INC,2014-10-06,,completed,https://www.sec.gov/Archives/edgar/data/1326801/000132680114000037/fb_8-kxclosingxofxwhatsapp.htm,
+Meta,META,WHATSAPP LLC,2014-10-06,,completed,https://www.sec.gov/Archives/edgar/data/1326801/000132680114000037/fb_8-kxclosingxofxwhatsapp.htm,
+Meta,META,CTRL LABS CORP,2019-09-23,,announced,https://en.wikipedia.org/wiki/Reality_Labs,未見公開完成日
+Microsoft,MSFT,SKYPE,2011-10-13,,completed,https://news.microsoft.com/source/2011/10/13/microsoft-officially-welcomes-skype/,
+Microsoft,MSFT,SKYPE LTD,2011-10-13,,completed,https://news.microsoft.com/source/2011/10/13/microsoft-officially-welcomes-skype/,
+Microsoft,MSFT,LINKEDIN CORP,2016-12-08,,completed,https://news.linkedin.com/2017/microsoft-completes-acquisition-of-linkedin,
+Microsoft,MSFT,ZENIMAX MEDIA INC,2021-03-09,,completed,https://www.computerworld.com/article/3535690/microsoft-acquisitions-a-timeline-of-growth-and-a-few-missteps.html,
+Microsoft,MSFT,NUANCE COMMUNICATIONS INC,2022-03-04,,completed,https://news.microsoft.com/source/2022/03/04/microsoft-completes-acquisition-of-nuance-ushering-in-new-era-of-outcomes-based-ai/,
+Microsoft,MSFT,ACTIVISION PUBLISHING INC,2023-10-13,,completed,https://en.wikipedia.org/wiki/Acquisition_of_Activision_Blizzard_by_Microsoft,
+Microsoft,MSFT,BLIZZARD ENTERTAINMENT INC,2023-10-13,,completed,https://en.wikipedia.org/wiki/Acquisition_of_Activision_Blizzard_by_Microsoft,
+Amazon,AMZN,A9 COM INC,2010-01-01,,internal_unit,https://www.sec.gov/Archives/edgar/data/0001018724/000119312512122135/d318297dex991.htm,Amazon 自 2003 年設立之子公司 故全期間歸屬
+Amazon,AMZN,ZOOX INC,2020-06-26,,announced,https://www.aboutamazon.com/news/company-news/were-acquiring-zoox-to-help-bring-their-vision-of-autonomous-ride-hailing-to-reality,查無公開完成日 暫用宣布日 敏感度分析需檢查
+Amazon,AMZN,AUDIBLE INC,2010-01-01,,internal_unit,https://www.historyoasis.com/post/amazon-acquisitions,2008 年併購 早於樣本起點 故全期間歸屬
+Nvidia,NVDA,MELLANOX TECHNOLOGIES LTD,2020-04-27,,completed,https://nvidianews.nvidia.com/news/nvidia-completes-acquisition-of-mellanox-creating-major-force-driving-next-gen-data-centers,
+Nvidia,NVDA,MELLANOX TECH TLV LTD,2020-04-27,,completed,https://nvidianews.nvidia.com/news/nvidia-completes-acquisition-of-mellanox-creating-major-force-driving-next-gen-data-centers,
+Nvidia,NVDA,CUMULUS NETWORKS,2020-05-04,,announced,https://techcrunch.com/2020/05/04/nvidia-acquires-cumulus-networks/,
+Nvidia,NVDA,DEEPMAP INC,2021-08-26,,completed,https://www.crunchbase.com/acquisition/nvidia-acquires-deepmap--911cb5b0,
+Broadcom,AVGO,LSI CORP,2014-05-06,,completed,https://www.broadcom.com/company/news/product-releases/11581,
+Broadcom,AVGO,EMULEX CORP,2015-05-05,,completed,https://investors.broadcom.com/news-releases/news-release-details/avago-technologies-limited-acquire-emulex-corporation-8-share,
+Broadcom,AVGO,EMULEX DESIGN & MFG CORP,2015-05-05,,completed,https://investors.broadcom.com/news-releases/news-release-details/avago-technologies-limited-acquire-emulex-corporation-8-share,
+Broadcom,AVGO,BROADCOM CORP,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,2016-02-01 前為獨立上市公司 BRCM 之後為 Broadcom Inc 子公司
+Broadcom,AVGO,BROADCOM CORP IRVINE CA,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,同上
+Broadcom,AVGO,BROADCOM EUROPE LTD,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,同上 Broadcom Corp 子公司
+Broadcom,AVGO,BROADCOM INNOVISION LTD,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,同上
+Broadcom,AVGO,BROADCOM ISRAEL RES INC,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,同上
+Broadcom,AVGO,BROADCOM NETWORKS SPAIN S L,2016-02-01,,completed,https://www.britannica.com/money/Broadcom-Inc,同上
+Broadcom,AVGO,BROCADE COMM SYSTEMS INC,2017-11-17,,completed,https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-completes-acquisition-ca-technologies,
+Broadcom,AVGO,SYMANTEC CORP,2019-11-04,,completed,https://www.sec.gov/Archives/edgar/data/1730168/000119312519282605/d808250dex991.htm,僅收購企業資安事業 非全公司 專利歸屬為近似值
+Broadcom,AVGO,VMWARE INC,2023-11-22,,completed,https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware,
+Broadcom,AVGO,VMware LLC,2023-11-22,,completed,https://investors.broadcom.com/news-releases/news-release-details/broadcom-completes-acquisition-vmware,
+Tesla,TSLA,SOLARCITY CORP,2016-11-21,,completed,https://www.nasdaq.com/articles/tesla-tsla-completes-acquisition-of-solarcity-for-$2.6b-2016-11-22,
+Tesla,TSLA,TESLA GROHMANN AUTOMATION GMBH,2017-01-03,,completed,https://vectorshift.ai/research/companies/tesla/acquisition-history,前身 Grohmann Engineering GmbH
+Tesla,TSLA,Tesla Automation GmbH,2017-01-03,,completed,https://vectorshift.ai/research/companies/tesla/acquisition-history,Tesla Grohmann Automation 後續更名
+Tesla,TSLA,MAXWELL TECHNOLOGIES INC,2019-05-16,,completed,https://www.teslarati.com/tesla-energy-ultracapacitor-battery-maxwell-technologies-acquisition/,
