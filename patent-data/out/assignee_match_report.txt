@@ -1,0 +1,97 @@
+實證推導的『名字』token: 424 個
+實證推導的『常見姓氏』token: 1016 個
+判為個人發明者而排除的 assignee: 118220
+公司數: 268
+自動比對到 assignee 的公司: 237
+完全沒比對到的公司: 31
+T1+T2 自動採用列數: 1388
+T3 待複核列數:      4854
+
+沒有任何自動比對結果的公司（需人工找 assignee 或確認其無專利）
+  V       VISA INC                                      論文   16  複核候選   5
+  TGT     TARGET CORP                                   論文   11  複核候選   7
+  ALTR    ALTAIR ENGINEERING INC                        論文    4  複核候選   3
+  CACI    CACI INTERNATIONAL INC                        論文    4  複核候選   1
+  IQ      IQIYI INC                                     論文    3  複核候選   0
+  RDS     ROYAL DUTCH SHELL PLC                         論文    3  複核候選  55
+  VRSK    VERISK ANALYTICS INC                          論文    3  複核候選   0
+  AFL     AFLAC INC                                     論文    2  複核候選   0
+  IAC     IAC INTERACTIVECORP                           論文    2  複核候選   2
+  NGG     NATIONAL GRID PLC                             論文    2  複核候選 345
+  PII     POLARIS INDUSTRIES INC                        論文    2  複核候選  15
+  BRY     BERRY CORP                                    論文    1  複核候選  21
+  BRC     BRADY CORP                                    論文    1  複核候選   8
+  CLVT    CLARIVATE PLC                                 論文    1  複核候選   0
+  INGR    INGREDION INC                                 論文    1  複核候選   4
+  MELI    MERCADOLIBRE INC                              論文    1  複核候選   0
+  MUR     MURPHY OIL CORP                               論文    1  複核候選  22
+  MYL     MYLAN N V                                     論文    1  複核候選   9
+  NEM     NEWMONT MINING CORP                           論文    1  複核候選   1
+  NEE     NEXTERA ENERGY INC                            論文    1  複核候選  44
+  OXY     OCCIDENTAL PETROLEUM CORP                     論文    1  複核候選   3
+  RGTI    RIGETTI COMPUTING INC                         論文    1  複核候選   4
+  SIFY    SIFY TECHNOLOGIES LTD                         論文    1  複核候選   0
+  STN     STANTEC INC                                   論文    1  複核候選   0
+  TCH     TECHNICOLOR                                   論文    1  複核候選  27
+  TTNP    TITAN PHARMACEUTICALS INC DEL                 論文    1  複核候選  27
+  XPER    XPERI INC                                     論文    1  複核候選   0
+  HRBN    HARBIN ELECTRIC INC                           論文    0  複核候選   9
+  HSKA    HESKA CORP                                    論文    0  複核候選   0
+  LJPC    LA JOLLA PHARMACEUTICAL CO                    論文    0  複核候選  42
+  VSR     VERSAR INC                                    論文    0  複核候選   0
+
+自動比對件數 top 30（數字異常大者要懷疑誤配）
+  CAJ     CANON INC                              58871 件 /  29 個 assignee
+  QCOM    QUALCOMM INC                           49789 件 /  23 個 assignee
+  MSFT    MICROSOFT CORP                         36522 件 /  15 個 assignee
+  TM      TOYOTA MOTOR CORP                      36100 件 /  16 個 assignee
+  AAPL    APPLE INC                              33929 件 /   1 個 assignee
+  PC      PANASONIC CORP                         33673 件 /  64 個 assignee
+  SNE     SONY CORP                              33032 件 /   2 個 assignee
+  INTC    INTEL CORP                             32762 件 /  18 個 assignee
+  HIT     HITACHI LTD                            27867 件 / 130 個 assignee
+  GOOGL   ALPHABET INC                           25630 件 /   9 個 assignee
+  GE      GENERAL ELECTRIC CO                    24172 件 /  11 個 assignee
+  ERIC    ERICSSON                               22482 件 /   9 個 assignee
+  TXN     TEXAS INSTRUMENTS INC                  14629 件 /   4 個 assignee
+  NOK     NOKIA CORP                             14327 件 /  33 個 assignee
+  BA      BOEING CO                              13730 件 /   6 個 assignee
+  AMAT    APPLIED MATERIALS INC                  12118 件 /   3 個 assignee
+  ORCL    ORACLE CORP                             9818 件 /  14 個 assignee
+  MDT     MEDTRONIC PLC                           8904 件 /  31 個 assignee
+  FB      FACEBOOK INC                            8774 件 /   7 個 assignee
+  BSX     BOSTON SCIENTIFIC CORP                  8704 件 /  12 個 assignee
+  UTX     UNITED TECHNOLOGIES CORP                8688 件 /   5 個 assignee
+  PG      PROCTER & GAMBLE CO                     8214 件 /   3 個 assignee
+  GLW     CORNING INC                             7134 件 /  18 個 assignee
+  BB      BLACKBERRY LTD                          6876 件 /  11 個 assignee
+  SLB     SCHLUMBERGER LTD                        6813 件 /  11 個 assignee
+  AVGO    BROADCOM INC                            6630 件 /  23 個 assignee
+  VMW     VMWARE INC                              6357 件 /   2 個 assignee
+  NKE     NIKE INC                                6235 件 /   2 個 assignee
+  XRX     XEROX CORP                              6032 件 /   5 個 assignee
+  GFS     GLOBALFOUNDRIES INC                     5995 件 /   8 個 assignee
+
+風險：公司名剝除後只剩單一普通詞，其非完全相符的候選已全數移入複核
+  AAPL    APPLE
+  BRC     BRADY
+  BRY     BERRY
+  DAN     DANA
+  DELL    DELL
+  EBAY    EBAY
+  ETN     EATON
+  FLEX    FLEX
+  HES     HESS
+  IEX     IDEX
+  LN      LINE
+  MOGB    MOOG
+  NKE     NIKE
+  ORAN    ORANGE
+  PSO     PEARSON
+  RDS     SHELL
+  ROG     ROGERS
+  SNAP    SNAP
+  SNE     SONY
+  TCH     THOMSON
+  TGT     TARGET
+  V       VISA

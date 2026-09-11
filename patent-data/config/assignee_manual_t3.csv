@@ -1,0 +1,267 @@
+ticker,assignee_name,decision,note
+ADBE,ADOBE INC,INCLUDE,Adobe Systems 於 2018 更名為 Adobe Inc 同一法人
+AMAT,APPLIED BIOSYSTEMS LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMAT,APPLIED MED RESOURCES,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMAT,APPLIED OPTOELECTRONICS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMAT,APPLIED RES ASSOCIATES INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED BIONICS AG,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED CARDIOVASCULAR SYSTEM,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED CONNECTEK INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED DIGITAL BROADCAST SA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED ENERGY IND INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED LIQUID LOGIC INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED NEUROMODULATION SYSTEMS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED NEW TECHNOLOGIES CO LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED OPTOELECTRONIC TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED RISC MACH LTD,EXCLUDE,ARM Ltd 與 AMD 無關
+AMD,ADVANCED SEMICONDUCTOR ENG,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMD,ADVANCED TECH MATERIALS,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN AXLE & MFG INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN EXPRESS TRAVEL RELATE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN EXPRESS TRAVEL RELATED SERVICES CO INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN GREETINGS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN MEGATRENDS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN POWER CONV CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMSC,AMERICAN STERILIZER CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AMZN,AMAZON TECH INC,INCLUDE,Amazon Technologies Inc 亞馬遜的專利持有實體
+ANTM,ELEVANCE RENEWABLE SCIENCES,EXCLUDE,Elevance Renewable Sciences 為生質化學公司 與 Anthem/Elevance Health 無關
+APTV,DELPHI INT OPERATIONS LUXEMBOURG SARL,INCLUDE,Delphi/Aptiv 的海外營運實體
+APTV,DELPHI TECH INC,INCLUDE,Delphi Automotive 於 2017 更名 Aptiv CRSP 同一 permco(all_tickers 含 DLPH)
+APTV,DELPHI TECH IP LTD,INCLUDE,Delphi/Aptiv 的 IP 持有實體
+APTV,DELPHI TECH LLC,INCLUDE,Delphi/Aptiv 的營運實體
+AS,AMERICAN AXLE & MFG INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN EXPRESS TRAVEL RELATE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN EXPRESS TRAVEL RELATED SERVICES CO INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN GREETINGS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN MEGATRENDS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN POWER CONV CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AS,AMERICAN STERILIZER CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AXP,AMERICAN AXLE & MFG INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AXP,AMERICAN GREETINGS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AXP,AMERICAN MEGATRENDS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AXP,AMERICAN POWER CONV CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+AXP,AMERICAN STERILIZER CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RES & INNOVATION UK,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RES INST ELECTRONICS & TELECOMM,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RES INST IND SCIENCE & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RES INST NATIONWIDE CHILDRENS HOSPITAL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RES TRIANGLE INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BB,RESEARCH & BUSINESS FOUND SUNGKYUNKWAN UNIV,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BK,BANK OF AMERICA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+BSX,BOSTON DYNAMICS INC,EXCLUDE,Boston Dynamics 與 Boston Scientific 無關
+CAH,CARDINAL CG CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CGIX,CANCER RESEARCH TECH LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA ACADEMY OF TELECOMM TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA ACADEMY TELECOMMUNICATIONS TECHNOLOGY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA NAT PETROLEUM CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA PETROLEUM & CHEM CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA PETROLEUM & CHEMICAL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CHL,CHINA UNIONPAY CO LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+CRM,SALESFORCE INC,INCLUDE,Salesforce.com 於 2022 更名為 Salesforce Inc 同一法人
+CSCO,CISCO TECH INC,INCLUDE,Cisco Technology Inc 思科的專利持有實體
+DAL,DELTA ELECTRONICS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+DAL,DELTA ELECTRONICS SHANGHAI CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+DAL,DELTA FAUCET CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+DAN,DANA AUTOMOTIVE SYSTEMS GROUP,INCLUDE,Dana 汽車系統事業子公司
+DAN,DANA BELGIUM NV,INCLUDE,Dana 比利時 全資
+DAN,DANA CANADA CORP,INCLUDE,Dana 加拿大 全資
+DAN,DANA FARBER CANCER INST INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+DAN,DANA HEAVY VEHICLE SYS GROUP,INCLUDE,Dana 商用車事業子公司
+DAN,DANA ITALIA SRL,INCLUDE,Dana 義大利 全資
+DELL,DELL PRODUCTS LP,INCLUDE,Dell Products LP 為戴爾的專利申請主體
+DELL,DELL SOFTWARE INC,INCLUDE,Dell Software 為戴爾軟體事業子公司
+DOW,DOW AGROSCIENCES LLC,INCLUDE,Dow AgroSciences 為陶氏全資農化子公司
+DOW,DOW CORNING,INCLUDE,Dow Corning 2016 起為陶氏全資子公司
+DOW,DOW CORNING TORAY CO LTD,EXCLUDE,與東麗合資 不計入
+DOW,DOW GLOBAL TECHNOLOGIES INC,INCLUDE,Dow Global Technologies 改制前名稱
+DOW,DOW GLOBAL TECHNOLOGIES LLC,INCLUDE,Dow Global Technologies 為陶氏的專利持有實體
+DOW,DOW SILICONES CORP,INCLUDE,Dow Corning 2016 由陶氏全資持有後更名 Dow Silicones
+DOW,DOW TORAY CO LTD,EXCLUDE,與東麗合資 不計入
+EMN,EASTMAN KODAK CO,EXCLUDE,Eastman Kodak 與 Eastman Chemical 為不同公司
+ETN,EATON INTELLIGENT POWER LTD,INCLUDE,Eaton Intelligent Power Ltd 為 Eaton 的 IP 持有實體
+EW,EDWARDS JAPAN LTD,EXCLUDE,Edwards 真空設備日本 與 Edwards Lifesciences 無關
+EW,EDWARDS LTD,EXCLUDE,Edwards 真空設備 與 Edwards Lifesciences 無關
+FLEX,FLEXTRONICS AP LLC,INCLUDE,Flextronics 於 2016 更名為 Flex Ltd 同一法人
+GD,GEN CABLE TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN ELECTRIC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN HOSPITAL CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN INSTRUMENT CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN MILLS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN MOTORS LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GEN PROBE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GENERAL ELECTRIC RENOVABLES ESPANA SL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GENERAL ELECTRIC TECHNOLOGY GMBH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GD,GENERAL INTERFACE SOLUTION LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN CABLE TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN HOSPITAL CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN INSTRUMENT CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN MILLS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN MOTORS LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GEN PROBE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GE,GENERAL INTERFACE SOLUTION LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN CABLE TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN ELECTRIC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN HOSPITAL CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN INSTRUMENT CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN MOTORS LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GEN PROBE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GENERAL ELECTRIC RENOVABLES ESPANA SL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GENERAL ELECTRIC TECHNOLOGY GMBH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GIS,GENERAL INTERFACE SOLUTION LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN CABLE TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN ELECTRIC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN HOSPITAL CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN INSTRUMENT CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN MILLS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GEN PROBE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GENERAL ELECTRIC RENOVABLES ESPANA SL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GENERAL ELECTRIC TECHNOLOGY GMBH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GM,GENERAL INTERFACE SOLUTION LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+GSK,G C DENTAL IND CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+HD,HOME BOX OFFICE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+HPE,HEWLETT PACKARD DEVELOPMENT CO,EXCLUDE,屬 2015 分拆後的 HP Inc(HPQ) HPQ 不在本名冊 HPE 自身實體為 HEWLETT PACKARD ENTPR DEV LP
+HPE,HEWLETT PACKARD DEVELOPMENT CO LP,EXCLUDE,屬 2015 分拆後的 HP Inc(HPQ) 不歸 HPE
+HPE,HEWLETT PACKARD INDIGO BV,EXCLUDE,HP Indigo 數位印刷屬分拆後的 HP Inc(HPQ) 不歸 HPE
+HRBN,HARBIN INST TECHNOLOGY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+IRF,INT ENGINE INTELLECTUAL PROP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+IRF,INT FLAVORS & FRAGRANCES INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+IRF,INT PAPER CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON & JOHNSON CONSUMER,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON & JOHNSON CONSUMER INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON & JOHNSON SURGICAL VISION INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON & JOHNSON VISION CARE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON & SON INC S C,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON ELECTRIC SA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JCI,JOHNSON MATTHEY PLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,JOHNSON & SON INC S C,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,JOHNSON CONTROLS GMBH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,JOHNSON CONTROLS TECH CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,JOHNSON ELECTRIC SA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,JOHNSON MATTHEY PLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+JNJ,Johnson Controls Tyco IP Holdings LLP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA ADVANCED INST SCI & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA AEROSPACE RES INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA ATOMIC ENERGY RES,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA BASIC SCIENCE INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA ELECTRONICS TECHNOLOGY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA ELECTRONICS TELECOMM,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA ENERGY RESEARCH INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA HYDRO & NUCLEAR POWER CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA IND TECH INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST ENERGY RES,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST GEOSCIENCE & MINERA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST IND TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST MACH & MATERIALS,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST OCEAN SCI & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA INST SCI & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA MACH & MATERIALS INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA RES INST BIOSCIENCE & BIOTECHNOLOGY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA RES INST CHEMICAL TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA RES INST OF BIOSCIENCE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+KEP,KOREA RES INST STANDARDS & SCI,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+LMT,LOCKHEED CORP,INCLUDE,Lockheed Corp 為 Lockheed Martin 合併前身 專利已歸屬現法人
+LN,LINE PLUS CORP,INCLUDE,LINE Plus 為 LINE Corp 的海外營運子公司
+MSI,MOTOROLA INC,INCLUDE,Motorola Inc 2011 更名為 Motorola Solutions CRSP 同一 permco(all_tickers 含 MOT)
+MSI,MOTOROLA MOBILITY INC,EXCLUDE,Motorola Mobility 於 2011 分拆 不歸 Motorola Solutions
+MSI,MOTOROLA MOBILITY LLC,EXCLUDE,Motorola Mobility 於 2011 分拆 2012 售予 Google 2014 售予 Lenovo 不歸 Motorola Solutions
+NEE,F SECURE CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT APPLIED RES LABORATORIES,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT CANCER CT,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT CHUNG SHAN INST SCIENCE & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INST ADVANCED IND SCIENCE & TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INST FOR MATERIALS SCIENCE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INST INF & COMM TECH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INST MATERIALS SCIENCE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INST OF ADVANCED IND SCIEN,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INSTR CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT INSTRUMENTS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT JEWISH HEALTH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT OILWELL VARCO LP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT RES COUNCIL CANADA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT SEMICONDUCTOR CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT TECH & ENG SOLUTIONS SANDIA LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV CHUNG CHENG,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV CORP YOKOHAMA NAT UNIV,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV GYEONGSANG IACF,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV IRELAND GALWAY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV PUKYONG IND UNIV COOP FOUND,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV PUSAN IND UNIV COOP FOUND,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV SINGAPORE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NAT UNIV TSING HUA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NATIONAL HEALTH RES INST,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NATIONAL SUN YAT SEN UNIVERSITY,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NATIONAL UNIV CORPORATION TOKAI NATIONAL HIGHER EDUCATION AND RESEARCH SYSTEM,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+NGG,NATIONAL YANG MING CHIAO TUNG UNIV,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+ON,ON BRIGHT ELECTRONICS SHANGHAI CO LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+PANW,PALO ALTO RES CT INC,EXCLUDE,PARC 為 Xerox 旗下研究機構 與 Palo Alto Networks 無關
+PSO,PEARSON EDUCATION INC,INCLUDE,Pearson Education 為 Pearson plc 全資子公司
+RDS,ROYAL BANK OF CANADA,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+RDS,THE ROYAL INSTITUTION FOR THE ADVANCEMENT OF LEARNING/MCGILL UNIV,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SNAP,SNAP ON INCORPORATED,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SNAP,SNAP ON TOOLS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SNE,SONY COMP ENTERTAINMENT US,INCLUDE,Sony Interactive Entertainment 美國 改名前名稱
+SNE,SONY COMPUTER ENTERTAINMENT INC,INCLUDE,Sony Interactive Entertainment 改名前名稱
+SNE,SONY CORP AMERICA,INCLUDE,Sony 美國控股 全資
+SNE,SONY ELECTRONICS INC,INCLUDE,Sony 美國電子事業 全資
+SNE,SONY ERICSSON MOBILE COMM AB,EXCLUDE,與 Ericsson 各半合資 雙方皆可主張 不計入
+SNE,SONY EUROPE LTD,INCLUDE,Sony 歐洲 全資
+SNE,SONY INTERACTIVE ENTERTAINMENT AMERICA LLC,INCLUDE,Sony PlayStation 美洲 全資
+SNE,SONY INTERACTIVE ENTERTAINMENT EUROPE LTD,INCLUDE,Sony PlayStation 歐洲 全資
+SNE,SONY INTERACTIVE ENTERTAINMENT INC,INCLUDE,Sony PlayStation 事業全資子公司
+SNE,SONY MOBILE COMM AB,INCLUDE,2012 起由 Sony 全資持有（買回 Ericsson 持股）
+SNE,SONY MOBILE COMMUNICATIONS INC,INCLUDE,2012 起由 Sony 全資持有（買回 Ericsson 持股）
+SNE,SONY NETWORK ENTERTAINMENT INT,INCLUDE,Sony 網路娛樂事業 全資
+SNE,SONY OLYMPUS MEDICAL SOLUTIONS INC,EXCLUDE,與 Olympus 合資 不計入
+SNE,SONY SEMICONDUCTOR SOLUTIONS CORP,INCLUDE,Sony 半導體事業全資子公司
+SNE,Sony Interactive Entertainment LLC,INCLUDE,Sony PlayStation 事業全資子公司
+SWK,STANLEY ELECTRIC CO LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SWKS,SKYWORKS GLOBAL PTE LTD,INCLUDE,Skyworks Global 為 Skyworks Solutions 的海外持有實體
+SYMC,GEN CABLE TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN ELECTRIC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN HOSPITAL CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN INSTRUMENT CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN MILLS INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN MOTORS LLC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GEN PROBE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GENERAL ELECTRIC RENOVABLES ESPANA SL,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GENERAL ELECTRIC TECHNOLOGY GMBH,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+SYMC,GENERAL INTERFACE SOLUTION LTD,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+TDY,TELEDYNE SCIENT & IMAGING LLC,INCLUDE,Teledyne Scientific & Imaging 為 Teledyne 全資子公司
+TM,TOYOTA AUTO BODY CO LTD,EXCLUDE,豐田車體為另行上市公司 併入會重複計算
+TM,TOYOTA BOSHOKU KK,EXCLUDE,豐田紡織為另行上市公司 併入會重複計算
+TM,TOYOTA CHUO KENKYUSHO KK,EXCLUDE,豐田中央研究所為豐田集團 13 社共同出資的獨立法人 非全資
+TM,TOYOTA ENG & MFG NORTH AMERICA,INCLUDE,豐田北美研發製造中心 全資
+TM,TOYOTA JIDOSHOKKI KK,EXCLUDE,豐田自動織機為另行上市公司 併入會重複計算
+TM,TOYOTA RES INST INC,INCLUDE,Toyota Research Institute 豐田 AI 研究所 全資
+TM,TOYOTA TEKKO KK,EXCLUDE,豐田鐵工為另行上市公司 併入會重複計算
+TMO,THERMO FINNIGAN LLC,INCLUDE,Thermo Finnigan 為 Thermo Fisher 質譜事業子公司
+TMO,THERMO KING CORP,EXCLUDE,Thermo King 屬 Ingersoll Rand 非 Thermo Fisher
+TRI,THOMSON LICENSING,EXCLUDE,Thomson Licensing 屬 Technicolor(TCH) 非 Thomson Reuters
+TTEK,TETRA LAVAL HOLDINGS & FINANCE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+TTNP,TITAN MED INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+TXN,TEXAS A & M UNIV SYS,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UBX,UNITY SEMICONDUCTOR CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED PARCEL SERVICE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED STATES GYPSUM CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED STATES POSTAL SERVICE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED THERAPEUTICS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,UNITED VIDEO PROPERTIES INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UMC,United parcel service america inc,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED MICROELECTRONICS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED STATES GYPSUM CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED STATES POSTAL SERVICE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED TECHNOLOGIES CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED THERAPEUTICS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UPS,UNITED VIDEO PROPERTIES INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,RAYTHEON BBN TECHNOLOGIES CORP,EXCLUDE,屬合併前的舊 Raytheon Company(RTN) 不歸 UTX
+UTX,RAYTHEON CO,EXCLUDE,舊 Raytheon Company(RTN) 為獨立上市公司 不在本名冊 UTX 合併後實體為 RAYTHEON TECH CORP
+UTX,UNITED MICROELECTRONICS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,UNITED PARCEL SERVICE INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,UNITED STATES GYPSUM CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,UNITED STATES POSTAL SERVICE,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,UNITED THERAPEUTICS CORP,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,UNITED VIDEO PROPERTIES INC,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+UTX,United parcel service america inc,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+WDC,WESTERN UNION CO,EXCLUDE,人工複核為同名不同公司 首詞相同但非同一法人
+XRAY,DENTSPLY INT INC,INCLUDE,Dentsply International 與 Sirona 合併為 Dentsply Sirona 同一法人

@@ -2,8 +2,14 @@
 __pycache__/
 
 # 可重新產生的大型中間檔（磁碟長期接近全滿，不入版控）
-#   raw_publications.csv  135 MB  <- 01_fetch_publications.py（需 BigQuery）
+#   raw_publications.csv  804 MB  <- 01_fetch_publications.py + 01b（需 BigQuery）
 #   cpc_201710.csv        1.2 MB  <- BigQuery CPC scheme 快照
 #   cpc_current.csv       1.2 MB  <- 同上
+#   out/_parts/           分頁下載暫存，01b 合併驗證通過後即可刪
 out/raw_publications.csv
 out/cpc_*.csv
+out/_parts/
+
+# 執行紀錄與編輯備份，不是資料
+out/*.log
+*.bak

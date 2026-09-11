@@ -1,56 +1,49 @@
-公司-年度列數: 128
-有股票年報酬的列: 126
-有論文數的列:     59
+公司數: 268    年度: 2010-2025    公司-年度列數: 4288
+有股票年報酬的列: 3571 (83.3%)
+有論文數的列:     689 (16.1%)
+有 AI 專利的列:   2113 (49.3%)
+有 AI 專利的公司: 203
+多股別的公司-月份（取市值最大股別）: 604
 
-各公司 AI 專利佔全部專利比例（with_subs）
-  Alphabet     12638 /  29577 =  42.7%
-  Microsoft    10862 /  36826 =  29.5%
-  Apple         3707 /  33955 =  10.9%
-  Meta          2767 /   9221 =  30.0%
-  Nvidia        2429 /   6688 =  36.3%
-  Amazon        1854 /   6450 =  28.7%
-  Tesla          121 /    923 =  13.1%
-  Broadcom        63 /   2310 =   2.7%
-
-論文 vs AI 專利（交叉檢驗 OpenAlex 2022 斷裂）
-  公司        年          論文    AI專利
-  Alphabet  2020      896    1219
-  Alphabet  2021      654    1139
-  Alphabet  2022      101    1186
-  Alphabet  2023      101    1377
-  Amazon    2020      220     224
-  Amazon    2021      182     161
-  Amazon    2022       49     182
-  Amazon    2023       34     200
-  Apple     2020       37     308
-  Apple     2021       22     300
-  Apple     2022       10     347
-  Apple     2023       12     413
-  Meta      2020      322     155
-  Meta      2021      269     167
-  Meta      2022       23     212
-  Meta      2023       15     171
-  Microsoft 2020      543     602
-  Microsoft 2021      429     717
-  Microsoft 2022      122     856
-  Microsoft 2023       94     890
-  Nvidia    2020       99     242
-  Nvidia    2021       80     318
-  Nvidia    2022       24     352
-  Nvidia    2023       26     445
+AI 專利件數前 25 大（with_subs 全期合計）
+  ticker  公司                            AI專利      全部專利    AI佔比      論文
+  GOOGL   ALPHABET INC                 12638     29611   42.7%    3139
+  MSFT    MICROSOFT CORP               10862     36826   29.5%    2114
+  TM      TOYOTA MOTOR CORP             6743     39696   17.0%      49
+  SNE     SONY CORP                     5779     42775   13.5%      44
+  CAJ     CANON INC                     4238     58649    7.2%      15
+  INTC    INTEL CORP                    3975     32714   12.2%     414
+  AAPL    APPLE INC                     3707     33955   10.9%     117
+  QCOM    QUALCOMM INC                  3502     49783    7.0%      82
+  ADBE    ADOBE SYSTEMS INC             3108      5402   57.5%     415
+  FB      FACEBOOK INC                  2767      9221   30.0%    1022
+  PC      PANASONIC CORP                2542     33513    7.6%       0
+  ORCL    ORACLE CORP                   2475      9811   25.2%      16
+  NVDA    NVIDIA CORP                   2429      6688   36.3%     389
+  HIT     HITACHI LTD                   2383     27622    8.6%       0
+  DELL    DELL INC                      2126     14179   15.0%       0
+  CRM     SALESFORCE COM INC            1899      5195   36.6%     125
+  AMZN    AMAZON COM INC                1854      6450   28.7%     785
+  BIDU    BAIDU INC                     1593      2295   69.4%     339
+  CSCO    CISCO SYSTEMS INC             1564     12960   12.1%      32
+  SNAP    SNAP INC                      1376      3323   41.4%      38
+  WMT     WAL MART STORES INC           1359      4067   33.4%      32
+  NOK     NOKIA CORP                    1333     14252    9.4%      76
+  BA      BOEING CO                     1276     13728    9.3%      12
+  EBAY    EBAY INC                      1259      3980   31.6%      38
+  YHOO    YAHOO INC                     1096      2650   41.4%       5
 
 已知限制
   1. filing_year >= 2024 的專利數必然低估：US pre-grant publication
      自申請日起約 18 個月才公開，近兩年的申請案尚未全部公開。
      做時間序列分析時應截斷或明確標註，切勿把它當成真實下降。
-  2. 論文資料 (company_papers_annual.csv) 自 2022 年起有系統性缺漏，
-     來源為 OpenAlex 機構隸屬連結斷裂，非企業行為改變。
-     專利資料獨立於 OpenAlex，可作為該時期的對照。
-  3. 股票用 CRSP 月資料 (group_A_stocks.csv，AVGO 取自 group_C_stocks.csv)，
-     涵蓋 2010-2025 全期。先前版本用 LEVEL4/panel_monthly.csv 是錯的：
-     該檔月份由「該月有論文」驅動，AVGO 全期僅 3 個月、TSLA 僅 1 個月。
-  4. Alphabet 2014 分割 C 股 (GOOG->GOOGL)、Facebook 2022 更名 (FB->META)，
-     兩段在 CRSP 內月份不重疊，已合併為連續序列；論文數亦同樣合併。
+  2. 論文資料自 2022 年起有系統性缺漏，來源為 OpenAlex 機構隸屬連結斷裂，
+     非企業行為改變。專利資料獨立於 OpenAlex，可作為該時期的對照。
+  3. 股票與論文皆取自 stock_and_paper_count/ 的四個 CRSP group 月檔，
+     以 permco（公司層級）為鍵，涵蓋名冊全部 268 家。
+  4. 同月多股別者取市值最大股別的報酬（不可相加，那不是可持有的部位）；
+     論文則跨股別相加（已驗證同月不會有兩個股別同時掛論文）。
   5. annual_excess_return = 個股年報酬 - S&P500 年報酬（buy-and-hold 差額），
      非逐月超額報酬的複利。
-  6. 有 2 個公司-年度的月數不足 12（上市/更名當年），年報酬非全年。
+  6. 有 126 個公司-年度的月數不足 12（上市/下市/更名當年），年報酬非全年，
+     已放在 months_in_year 欄，迴歸時建議只用 months_in_year == 12 的列。

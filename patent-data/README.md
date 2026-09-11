@@ -1,6 +1,10 @@
 # patent-data
 
-八家科技公司 2010–2025 年 AI 專利的抽取、判定與對齊管線。
+**268 家上市公司** 2010–2025 年 AI 專利的抽取、判定與對齊管線。
+
+公司母體取自母專案 `stock_and_paper_count/` 的四個 group 檔全部公司（268 permco / 308 ticker），
+不是只有核心科技股。管線先在 Group A 的 8 家跑通並逐一人工查證，再擴大到全體；那 8 家保留成
+回歸測試的基準（見 §執行順序）。
 
 建立目的是檢驗一個假說：**「2022 年後企業改發專利、不發論文」**。母專案觀察到公司論文數
 在 2022 年集體暴跌約 75%，若企業真的把揭露管道從論文轉向專利，專利數應同期上升。專利資料
@@ -24,23 +28,70 @@
 | 判定標準 | WIPO Technology Trends 2019 AI 檢索式 | 國際組織公開發表、可引用的既有標準 |
 | 公司歸屬 | 母公司版 / 含子公司版**兩套** | 穩健性檢驗；子公司依併購生效日歸屬 |
 
-母體共 **144,826** 件 publication，判定為 AI 者 **37,010** 件（25.6%）。
+母體共 **838,405** 件 publication（**838,320** 個相異申請案），判定為 AI 者 **108,494** 件（12.9%，
+含子公司版）；僅母公司本體為 **87,806** 件。
+
+> AI 佔比從 8 家版的 25.6% 掉到 12.9% 是**預期內**的：母體從純科技股擴大到 268 家全產業
+> （含能源、零售、製造、醫療），這些公司有大量與 AI 無關的專利。佔比下降反映母體組成改變，
+> 不是判定規則變鬆或變嚴。
 
 ---
 
 ## 執行順序
 
+管線分成兩段。**建名單**（08–15）決定「要撈哪些 assignee 名稱」，**跑資料**（01–07）
+才真的去 BigQuery 抓件數。兩段的先後不能顛倒：01 的 SQL 是拿 alias 檔組出 `IN` 清單的，
+名單沒先蓋好就抓，漏掉的名稱在下游永遠救不回來（這個順序踩過坑，見下）。
+
 ```bash
 cd patent-data
-.venv/bin/python scripts/01_fetch_publications.py   # 需 gcloud 認證，會產生 BigQuery 費用
+
+# ── 第一段：建立公司名冊與 assignee 對照 ──
+.venv/bin/python scripts/08_build_roster.py      # CRSP 四個 group 檔 -> 268 家公司名冊
+.venv/bin/python scripts/09_fetch_assignee_dict.py
+.venv/bin/python scripts/10_match_assignees.py   # 分 T1_EXACT / T2_PREFIX / T3_REVIEW
+.venv/bin/python scripts/14_review_assist.py     # 替 T3 產生建議裁決（不下最終判斷）
+.venv/bin/python scripts/15_adjudicate.py        # 人工裁決 -> assignee_manual_t3.csv
+.venv/bin/python scripts/11_verify_manual.py     # 逐筆回驗字典 -> assignee_manual.csv
+.venv/bin/python scripts/12_build_alias.py       # 組裝 company_alias / subsidiary_alias_auto
+
+# ── 第二段：抓取、判定、對齊 ──
+.venv/bin/python scripts/01_fetch_publications.py --yes   # 需 gcloud 認證，掃 251 GB
+.venv/bin/python scripts/01b_download_result.py           # 分頁取回結果（見下）
 .venv/bin/python scripts/03_build_wipo_rules.py
 .venv/bin/python scripts/04_derive_concordance.py
 .venv/bin/python scripts/05_classify.py
 .venv/bin/python scripts/07_align.py
+.venv/bin/python scripts/13_compare_8firms.py    # 回歸檢查，新版不得低於舊版
 ```
 
 `02_check_cpc_drift.py` 與 `06_diagnose.py` 是**唯讀的診斷腳本**，不產生下游依賴，但它們是
 下面兩個關鍵決策的證據來源，建議保留並在改動規則後重跑。
+
+> ⚠️ **改了 alias 就必須重跑 01。** `01_fetch_publications.py` 在抓取當下才把 alias 展開成
+> SQL 的 `IN` 清單，所以 `out/raw_publications.csv` 只含「當時名單裡有的名稱」。後來才補進
+> 名單的公司（例如 `AMAZON TECH INC`，5,844 件）在原始檔裡根本不存在，05/07 再怎麼跑也生不
+> 出來——症狀是某家大公司莫名其妙只有個位數專利。這個坑實際發生過。
+
+> 🔴 **`bq query` 在這個資料量會卡死，所以拆成 01 + 01b 兩步。** 查詢本身在伺服器端只花
+> 7 秒（job 紀錄可查），但 `bq` CLI 把 83 萬列 / 0.8 GB 結果透過 REST API 拉回本機時會
+> **停住不動**——0% CPU、RSS 十幾 MB、放二十分鐘也不前進。更糟的是 `bq` 會把輸出緩衝到
+> 最後才寫檔，過程中檔案一直是 0 bytes，**看起來和當掉完全一樣**。實測分頁 2,000 列
+> 6 秒正常、50,000 列直接卡死。
+>
+> `01b_download_result.py` 因此改用 `bq head --start_row` 小批次分頁取回。查詢結果會留在
+> BigQuery 的暫存表 24 小時，所以 01b 可以反覆重跑而**不必重掃 251 GB**；它會自己去找最近
+> 一個欄位相符的成功 job。三道防線：每頁單獨落檔可續傳、逐頁用 CSV parser 驗列數
+> （abstract 內含換行，數行數會得到錯的數字）、合併後總列數必須等於暫存表的 `numRows`
+> 才寫出正式檔。
+>
+> 分頁暫存放在 `out/_parts/`（420 個檔、約 0.8 GB）。它是**續傳用的**，01b 中途失敗再跑一次
+> 會從這裡接續，所以不要在管線跑完前刪。確認 05/07 都跑通之後就可以整個刪掉釋出磁碟
+> （已列入 `.gitignore`）。
+
+`13_compare_8firms.py` 是這條管線的安全網：擴大版換掉了整套 alias，而原本 8 家是逐一人工
+查證過的，**新版件數只該增加、不該減少**。任何下降都代表新名單漏了舊名單有的東西，腳本會
+以 exit code 1 擋下。它曾抓出 4 家公司因為丟失拼錯變體而少算（見 §1）。
 
 ---
 
@@ -49,10 +100,83 @@ cd patent-data
 專利資料的 `assignee` 是自由文字，同一家公司有幾十種寫法（含拼錯）。對照表**全部由
 BigQuery 實際出現的字串建立**，未憑印象填寫。
 
-- `config/company_alias.csv`（182 列）—— 母公司層級。含 `MICROSOFT TECHNOLOGY LICENSING, LLC`、
-  `MICROSOFT TECHNOLOGY LICENSING, LLC.` 這類標點差異，以及觀察到的拼寫變體。
-- `config/subsidiary_alias.csv`（50 列）—— 子公司，附 `effective_from` / `effective_to` /
-  `date_basis` / `source_url`。
+### 1.1 公司名冊以 permco 為鍵，不是 ticker
+
+母體是 `stock_and_paper_count/` 四個 group 檔的全部公司：**268 家（permco）、308 個 ticker**。
+兩個數字不同，是因為 ticker 根本不是公司的識別碼：
+
+- **一家公司同時有多個股票代號**（Alphabet 的 GOOG/GOOGL、Moog A/B、Shell A/B、Zillow Z/ZG）
+- **一家公司會換代號**（FB → META、GOOG → GOOGL）
+
+CRSP 的 `permco`（公司）與 `permno`（個別證券）分得很清楚，**`permco` 是唯一穩定的公司層級
+鍵**。`scripts/firmkeys.py` 是全管線唯一的收斂點，任何地方拿到 ticker 都先過 `canon()` 換回
+標準公司，載入 alias 時也一樣。
+
+> 🔴 **不收斂會把一家公司劈成兩家。** 舊版用 ticker 當鍵，結果 Alphabet 同時以
+> `Alphabet`/GOOGL 與 `ALPHABET INC`/GOOGL 兩個標籤存在，Meta 則被 FB 與 META 拆開。
+> 修正後三家實測合併：ALPHABET INC 12,636 件（= 10,717 + 1,920 − 1 跨標籤重複）、
+> FACEBOOK INC 2,765（= 2,731 + 34）、NVIDIA 2,427（= 2,354 + 73）。
+
+多股別在**報酬**與**論文**上要用相反的聚合方式，這點在 §6 另外說明。
+
+### 1.2 三層比對 + 人工裁決
+
+268 家公司對上 BigQuery 的 assignee 字典，`10_match_assignees.py` 依可信度分三層：
+
+| Tier | 判準 | 處置 |
+|---|---|---|
+| `T1_EXACT` | 正規化後與公司名完全相同 | 自動採用，歸**母公司** |
+| `T2_PREFIX` | 以公司名為完整前綴、後面多出詞（`QUALCOMM ATHEROS`） | 自動採用，歸**子公司** |
+| `T3_REVIEW` | 只有第一個詞相同 | **一律人工裁決**，預設不採用 |
+
+T3 是偽陽性溫床，因為「第一個詞相同」太便宜：`GEN DYNAMICS` vs `GEN ELECTRIC` 毫不相干，
+`AMAZON COM` vs `AMAZON TECH` 卻是同一家。差別不在字串距離，而在**第一個詞是不是該公司獨有
+的品牌詞**。`14_review_assist.py` 用兩個資料驅動的訊號量化這件事，不憑記憶：
+
+- `head_firms`：名冊裡有幾家公司的核心名以這個詞開頭。`GEN` → 5 家（共用詞，品牌在第二個
+  詞，必須整串前綴相同）；`AMAZON` → 1 家（獨有品牌詞）。
+- `head_orgs`：字典裡有幾個不同核心名以這個詞開頭。數字大代表被無數不相干機構共用
+  （`UNIV`、`NAT`、`KOREA`…）。
+
+「品牌詞 + 功能詞」（`TECH`、`RES`、`IP`、`LICENSING`…）幾乎一定是同集團持有實體，建議
+INCLUDE；「品牌詞 + 另一個實詞」可能是另一家獨立公司（`TOYOTA JIDOSHOKKI` 是另外上市的豐田
+自動織機），一律丟回人工。**腳本只給建議與理由，不下最終判斷。**
+
+T3 共 4,854 筆 / 360,516 件。實際裁決件數 ≥100 的 **266 筆**（已涵蓋待審量的 87%），結果
+45 INCLUDE、221 EXCLUDE。排除理由分四類並逐筆記錄：A 同名不同公司、B 分拆後另立門戶、
+C 另行上市的集團關係企業、D 合資公司。
+
+> **裁決不能有幻覺。** `11_verify_manual.py` 會把每一筆人工裁決**回頭對照 BigQuery 字典**：
+> INCLUDE 的名稱必須真的存在於字典，EXCLUDE 的也必須存在（排除一個不存在的名稱，代表記錯
+> 了）。任何對不上就 exit 1 且不寫檔。實測擋下過一次我自己從截斷的終端機輸出複製錯的字串
+> （`...AMERICA LL` 少了結尾的 `C`）。目前 84 INCLUDE、247 EXCLUDE 全數通過。
+
+### 1.3 拼錯的變體只能靠人工表
+
+最終 alias **1,595 列**，來源分布 `T2_PREFIX 1036 / T1_EXACT 294 / CURATED8 182 / MANUAL 83`，
+涵蓋 258/268 家，其餘 10 家經查證確實沒有美國 pre-grant 專利。
+
+`CURATED8` 是原本 8 家的人工表，**不能因為有了自動比對就丟掉**。它收錄大量 OCR／打字錯誤的
+變體——`MICROSOFT TECH LICESNING LLC`、`GOOGLE ELLC`、`APPLE LNC`、`NVIDIA CORPRATION`、
+`AMAZON TECHOLOGEIS INC`，光 Microsoft Technology Licensing 就有約 45 種拼法。自動比對是
+「以公司名開頭」，拼錯的一個都接不到。移除後回歸測試立刻抓到 GOOGL −6、NVDA −2、AAPL −1、
+TSLA −1。
+
+它同時也決定 tier：這些是母公司**本體**的持有實體（`AMAZON TECH INC`、
+`MICROSOFT TECH LICENSING LLC`），自動比對會因為多一個詞判成 T2_PREFIX 子公司，害
+parent_only 版暴跌（實測 MSFT −75%、AMZN −99.9%）。
+
+### 1.4 檔案
+
+- `config/company_alias.csv` —— 母公司層級（T1_EXACT + MANUAL + CURATED8）。
+- `config/subsidiary_alias.csv`（50 列）—— 原 8 家人工子公司表，附 `effective_from` /
+  `effective_to` / `date_basis` / `source_url`，**優先序最高**。
+- `config/subsidiary_alias_auto.csv` —— 自動比對掃到的 T2_PREFIX 子公司。
+- `config/assignee_manual.csv` —— 人工裁決總表，由 `11_verify_manual.py` 單一產出。
+
+> 自動比對的列沒有生效日（等同「全期間持有」）。若與人工列並存，併購**前**的專利會從沒有
+> 日期的那一列漏進來——`GOOGLE TECHNOLOGY HOLDINGS`（Motorola 來源）會被回溯到 2010 年，而
+> 人工表正確地從收購日才起算。所以人工表存在時，自動列一律讓位。
 
 **併購時點必須處理。** 子公司在被收購**之前**申請的專利不能算給收購方，否則會憑空製造出
 一段成長。例如：
@@ -226,23 +350,31 @@ TRANSFER_TARGETS = [
 
 | 領域 | 件數 | 佔比 |
 |---|---|---|
-| neural_network | 7,895 | 22.9% |
-| computer_vision | 7,347 | 21.3% |
-| information_retrieval | 6,716 | 19.5% |
-| speech | 3,942 | 11.4% |
-| machine_learning | 3,180 | 9.2% |
-| nlp | 2,426 | 7.0% |
-| other | 1,303 | 3.8% |
-| control_robotics | 996 | 2.9% |
-| probabilistic_reasoning | 593 | 1.7% |
-| bioinformatics_health | 43 | 0.1% |
+| computer_vision | 29,419 | 27.1% |
+| neural_network | 22,368 | 20.6% |
+| information_retrieval | 16,030 | 14.8% |
+| machine_learning | 10,862 | 10.0% |
+| control_robotics | 7,572 | 7.0% |
+| other | 7,196 | 6.6% |
+| speech | 7,149 | 6.6% |
+| nlp | 5,399 | 5.0% |
+| probabilistic_reasoning | 2,094 | 1.9% |
+| bioinformatics_health | 405 | 0.4% |
+
+（with_subs 版 108,494 個相異申請案。`control_robotics` 佔比從 8 家版的 2.9% 升到 7.0%，
+是擴大母體後汽車與工業製造業者進來的結果，符合預期。）
 
 去重鍵為 `(歸屬公司, application_number)`，保留 `publication_number` 最小者（最早公開）。
+**「歸屬公司」是 permco 不是 ticker**——用 ticker 會讓同一家公司的兩個標籤各自去重，
+同一件專利被算兩次（見 §1.1）。
 
 `ai_patents_detail.csv` **保留 title、abstract 與完整 CPC 列表**，任何一件被判為 AI 的專利
 都可以回頭檢查判定依據（`ai_basis` 欄位記錄是哪個 Block 命中）。
 
-### with_subs 版逐年件數（依 filing year）
+### 原 8 家的 with_subs 版逐年件數（依 filing year）
+
+這張表是**回歸測試的基準**：擴大版重跑後，`13_compare_8firms.py` 驗證這 8 家的每一個
+公司-年度數字都與下表完全一致（16 年 × 8 家 × 2 版本，零下降、零上升）。
 
 | 公司 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24* | 25* |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -264,7 +396,11 @@ TRANSFER_TARGETS = [
 
 ## 6. 對齊股票與論文
 
-`07_align.py` 輸出 `out/patent_stock_paper_annual.csv`，**128 列 = 8 家 × 16 年的平衡面板**。
+`07_align.py` 輸出 `out/patent_stock_paper_annual.csv`，**4,288 列 = 268 家 × 16 年的平衡面板**。
+
+欄位覆蓋率（4,288 列）：專利與論文 100%（缺值一律補 0，見下），報酬三欄 83.3%
+（缺的是尚未上市或已下市的公司-年度，屬真實缺值）。`months_in_year` 有 126 個
+公司-年度不足 12（上市/下市當年），**迴歸時建議只用 `months_in_year == 12` 的列**。
 
 ### AI 專利為 0 的公司-年度也要有列
 
@@ -278,24 +414,34 @@ Tesla 2010–2016 的 AI 專利是**真實的 0**（該期間每年有 25–74 �
 TSLA 只有 1 個月、NVDA 好幾年只有 7–10 個月。把這種殘缺月份複利成「年報酬」，數字看起來
 正常但完全不是那一年的真實報酬（初版只有 56/116 列有報酬）。
 
-改用 CRSP 原始月資料後覆蓋率變成 **126/128**：
+### ⚠️ 四個 group 檔要全部讀，而且要以 permco 聚合
 
-| 來源 | 用途 |
-|---|---|
-| `stock_and_paper_count/group_A_stocks.csv` | 8 家中的 7 家，2010–2025 每年 12 個月齊全 |
-| `stock_and_paper_count/group_C_stocks.csv` | **AVGO 在這裡**，不在 group_A |
+初版報酬覆蓋率只有 **6.6%**，兩個原因疊在一起：
 
-唯二缺報酬的是 Meta 2010–2011（Facebook 2012 才上市，本來就該缺）。
+1. `STOCK_FILES` 只列了 4 個 group 檔中的 2 個，另外兩個檔的公司全部對不到。
+2. 用了一張手寫的 `TICKER_HISTORY` 對照表來處理換代號，而它與 CRSP 名冊不一致——名冊給
+   Meta 的主 ticker 是 **FB**（FB 有約 10 年月份，META 只有 3.5 年），手寫表卻寫 META。
 
-三個處理細節：
+兩者都靠「改用 permco 當鍵、四個檔全讀」一次解決，手寫的 `TICKER_HISTORY` 整張刪掉。
+覆蓋率 6.6% → **83.3%**。剩下的缺值是真實的：公司尚未上市或已下市的年度。
 
-- **CRSP 分割月份有重複列**，需以 `(ticker, yyyymm)` 去重（AAPL 2020-08、NVDA 2024-06）
-- **Ticker 歷史分段**：Alphabet 是 GOOG →（2014Q2）→ GOOGL，Meta 是 FB →（2022 年中）→ META。
-  在 group_A 內兩段月份**不重疊**（2014 = GOOG 3 + GOOGL 9；2022 = FB 5 + META 7），可直接
-  聯集成連續序列。論文數同樣要合併，否則 Meta 2017–2021 的論文會整段遺失。
-  ⚠️ 若同時讀 group_A 與 group_C 則**會**重疊，group_C 只取 AVGO。
+**同一家公司在同一個月可能有多個 permno（多股別），報酬與論文要用相反的聚合方式：**
+
+| 欄位 | 聚合方式 | 理由 |
+|---|---|---|
+| 報酬 | 取 **`mthcap` 最大的那個 permno** | 各股別的報酬**不能相加**——加總不對應任何可實際持有的部位。取主要股別才是一個真實可買的標的 |
+| 論文 | **加總所有 permno** | CRSP 只把 `n_papers` 掛在其中一個 permno 上，不加總會整段遺失 |
+
+這個區別很容易寫反。寫反的症狀是報酬變成兩倍上下的荒謬數字，或論文數莫名腰斬。
+
+其餘處理細節：
+
+- **CRSP 分割月份有重複列**，以 `(permno, yyyymm)` 去重（AAPL 2020-08、NVDA 2024-06）
 - **超額報酬定義**為 buy-and-hold 差額（個股年報酬 − S&P500 年報酬），而非逐月超額報酬的
   複利——後者沒有可實際持有的投資組合與之對應
+
+驗證（Meta，端到端）：2012 年月份數 = 8（5 月 IPO，正確）、2022 −64.2%、2023 +194%、
+論文 2022 從 269 掉到 23。均與實際相符。
 
 驗證：NVDA 2023 +239%、2024 +171%、2022 −50%；META 2022 −64%、2023 +194%；S&P 2022 −19.4%
 —— 均與市場實際數字相符。
@@ -319,15 +465,29 @@ TSLA 只有 1 個月、NVDA 好幾年只有 7–10 個月。把這種殘缺月�
 
 ## 輸出檔案
 
-| 檔案 | 內容 |
-|---|---|
-| `out/raw_publications.csv` | 母體 144,826 件，含 title/abstract/CPC/assignee（135 MB） |
-| `out/ai_patents_detail.csv` | 判定為 AI 的專利明細，含判定依據 `ai_basis`（70 MB） |
-| `out/ai_patents_yearly.csv` | 公司 × filing year × 版本的件數 |
-| `out/patent_stock_paper_annual.csv` | **最終面板**：專利 + 股票報酬 + 論文數 |
-| `out/alignment_report.txt` | 涵蓋率、AI 佔比、交叉檢驗表、已知限制 |
-| `out/concordance_report.txt` | CPC 對照推導的完整過程，供人工複核 |
-| `config/cpc_concordance.json` | 廢止碼 → 現行碼對照表，含來源與共現率 |
+| 檔案 | 內容 | 大小 | 版控 |
+|---|---|---|---|
+| `out/raw_publications.csv` | 母體 838,405 件，含 title/abstract/CPC/assignee | 804 MB | ignore |
+| `out/ai_patents_detail.csv` | 判定為 AI 的專利明細，含判定依據 `ai_basis` | 219 MB | LFS |
+| `out/ai_patents_detail_8firms.csv` | 原 8 家版明細，`13_compare_8firms.py` 的回歸基準 | 73 MB | LFS |
+| `out/assignee_dict.csv` | BigQuery assignee 名稱字典，人工裁決的查證依據 | 11 MB | LFS |
+| `out/ai_patents_yearly.csv` | 公司 × filing year × 版本的件數 | 167 KB | git |
+| `out/patent_stock_paper_annual.csv` | **最終面板**：專利 + 股票報酬 + 論文數 | 314 KB | git |
+| `out/alignment_report.txt` | 涵蓋率、AI 佔比、交叉檢驗表、已知限制 | — | git |
+| `out/concordance_report.txt` | CPC 對照推導的完整過程，供人工複核 | — | git |
+| `config/cpc_concordance.json` | 廢止碼 → 現行碼對照表，含來源與共現率 | — | git |
+
+### 版控與儲存
+
+超過 5 MB 的輸出走 **git LFS**（規則在 repo 根的 `.gitattributes`，與 `stock_and_paper_count/`
+沿用同一套）。`ai_patents_detail.csv` 219 MB 本身就超過 GitHub 單檔 100 MB 的硬上限，非走
+不可；另外兩個雖然沒破上限，但這種檔每改一次就在物件庫留一份完整副本，也一併納入。
+
+`out/raw_publications.csv`（804 MB）**不入版控**，它是可重新產生的中間檔。但重跑代價不低：
+BigQuery 的結果暫存表只留 24 小時，過期後 01b 找不到 job，就得回頭跑 01 重掃 251 GB。
+換機器或清磁碟前先想清楚。
+
+`out/*.log`、`*.bak`、`out/_parts/` 一律 ignore——是執行紀錄和暫存，不是資料。
 
 ---
 
@@ -343,8 +503,13 @@ TSLA 只有 1 個月、NVDA 好幾年只有 7–10 個月。把這種殘缺月�
 4. **C3/C4（JPO 的 FI 與 F-term）不適用**於美國 pre-grant publication。
 5. **子公司歸屬依併購生效日**，`date_basis = announced` 的列（如 ZOOX）用的是宣布日而非
    完成日，有數月誤差。
-6. **目前僅 Group A 八家公司。** 擴大到 `stock_and_paper_count` 的完整範圍（約 355 家）需要
-   重建 assignee 對照表，這是最耗人工的一步。
+6. **T3_REVIEW 只裁決到件數 ≥100 者。** 4,854 筆待審中裁決了 266 筆，涵蓋待審量的 87%；
+   剩下 13%（約 4.7 萬件，散在 4,588 個名稱）一律**未採用**。方向是保守的——只會少算、
+   不會多算，且漏掉的都是小量名稱。若日後要補，降低 `14_review_assist.py` 的 `MIN_PUB` 即可。
+7. **非美國公司的專利會被系統性低估。** 母體限定美國 pre-grant publication，只在美國申請的
+   外國公司（尤其日韓台歐廠商）本國專利不計入。跨國比較時要留意。
+8. **公司層級歸屬到 permco 為止，不處理集團關係企業。** 另行上市的關係企業（如豐田自動織機
+   之於 Toyota）視為獨立公司並排除，這是刻意的——它們在 CRSP 裡也是獨立的 permco。
 
 ---
 

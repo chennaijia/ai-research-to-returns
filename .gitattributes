@@ -4,3 +4,5 @@ stock_and_paper_count/crsp_all_classified_with_papers_detailed.csv filter=lfs di
 stock_and_paper_count/group_C_stocks.csv filter=lfs diff=lfs merge=lfs -text
 stock_and_paper_count/*.csv filter=lfs diff=lfs merge=lfs -text
 patent-data/out/ai_patents_detail.csv filter=lfs diff=lfs merge=lfs -text
+patent-data/out/ai_patents_detail_8firms.csv filter=lfs diff=lfs merge=lfs -text
+patent-data/out/assignee_dict.csv filter=lfs diff=lfs merge=lfs -text
