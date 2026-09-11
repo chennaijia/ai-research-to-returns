@@ -1,19 +1,24 @@
-"""把 CRSP 公司名冊比對到 BigQuery assignee 字典，產生分級候選表供人工複核。
+"""把 CRSP 公司名冊比對到 assignee 字典，分三層，並替最可疑的一層產生裁決建議。
 
 **這支腳本不下最終判斷，只做分級。** 名稱比對必然有偽陽性，而偽陽性會把別家公司的
 專利算到我們的公司頭上——這比漏抓嚴重得多，因為它會憑空製造訊號。所以：
 
-  T1_EXACT   正規化後完全相同               -> 可自動採用
-  T2_PREFIX  assignee 以公司名開頭且在詞界   -> 可自動採用（公司名需夠長）
-  T3_REVIEW  其他包含關係、或公司名太短太泛  -> **必須人工看過**
+    T1_EXACT   正規化後完全相同               -> 可自動採用
+    T2_PREFIX  assignee 以公司名開頭且在詞界   -> 可自動採用（公司名需夠長）
+    T3_REVIEW  其他包含關係、或公司名太短太泛  -> **必須人工看過**
 
-`assignee_harmonized` 已由 Google 正規化（無標點、CO LTD/KK/TECH 等縮寫），
-所以這裡只需處理法律字尾與 CRSP 自己的標記（(Last Known)、NEW 等）。
+本檔的四個段落
+--------------
+  §1 名稱正規化      法律字尾、縮寫收斂、普通詞黑名單
+  §2 個人發明者過濾   從字典自己學「名字」與「姓氏」，不靠猜字表
+  §3 三層比對        -> assignee_match_auto.csv / _review.csv / _report.txt
+  §4 T3 裁決建議      -> assignee_review_suggest.csv（供人工逐筆確認）
 
-輸出:
-  out/assignee_match_auto.csv    T1+T2，可直接進 alias 表
-  out/assignee_match_review.csv  T3，待人工裁決
-  out/assignee_match_report.txt  分布與風險摘要
+輸出：
+  out/assignee_match_auto.csv      T1+T2，可直接進 alias 表
+  out/assignee_match_review.csv    T3，待人工裁決
+  out/assignee_match_report.txt    分布與風險摘要
+  out/assignee_review_suggest.csv  T3 中件數 >= MIN_PUB 者的建議與理由
 """
 
 import collections
@@ -22,6 +27,12 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+
+# ══════════════════════════════════════════════════════════════ §1 名稱正規化
+#
+# `assignee_harmonized` 已由 Google 正規化（無標點、CO LTD/KK/TECH 等縮寫），
+# 所以這裡只需處理法律字尾與 CRSP 自己的標記（(Last Known)、NEW 等）。
 
 # 法律形式字尾，可安全從尾端剝除
 LEGAL = {
@@ -76,8 +87,25 @@ GENERIC = {
 }
 MIN_CORE_LEN = 5   # 單詞公司名短於此長度一律複核
 
-# ---------------------------------------------------------------------------
-# 個人發明者過濾
+
+def norm(s):
+    s = CRSP_TAGS.sub(" ", s.upper())
+    s = re.sub(r"[^A-Z0-9]+", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+
+def core(s):
+    """縮寫標準化 + 剝除尾端法律字尾，回傳 token list。"""
+    toks = [ABBREV.get(t, t) for t in norm(s).split()]
+    while toks and toks[-1] in LEGAL:
+        toks.pop()
+    # 開頭的 THE 也剝掉
+    while toks and toks[0] in {"THE"}:
+        toks.pop(0)
+    return toks
+
+
+# ══════════════════════════════════════════════════════════ §2 個人發明者過濾
 #
 # 姓氏型公司名（THOMSON、EATON、BRADY、ROGERS...）會前綴命中大量「姓 + 名」的個人
 # 發明者。實測 TCH（Technicolor，原名 Thomson SA）自動命中 46 個 assignee，其中
@@ -94,6 +122,7 @@ MIN_CORE_LEN = 5   # 單詞公司名短於此長度一律複核
 # follow 下限 100 是為了收進 BRAD(103)、CHAD(149) 這些較少見的名字。
 GIVEN_MIN_FOLLOW = 100
 GIVEN_MAX_LEGAL = 0.10
+
 # 只用真正的法律形式判斷 legal 比例，不含 THE/AND/GROUP 等泛詞。
 # ⚠ AS 是丹麥/挪威的 Aktieselskab（等同 Inc），漏掉它會把 NOVOZYMES AS、
 #   COLOPLAST AS、OTICON AS、DANFOSS AS 等真公司誤判成「姓+名」的個人。
@@ -104,25 +133,19 @@ LEGAL_STRICT = {
     "AS", "ASA", "APS", "OG", "PTE", "PTY", "SE", "CV", "EV",
 }
 
-
 # 該姓氏底下有幾個相異的個人 assignee 才算「常見姓氏」。
 # 設 15 是為了收進 THOMSON(19) 與 EATON(17)——TCH 是 Technicolor（原 Thomson SA），
 # 若不擋，它會自動吃下 THOMSON REUTERS 的專利，而 Thomson Reuters 以 TRI 另列在名冊中。
 # 寧可多送人工複核：偽陽性會憑空製造訊號，漏抓只是少算。
 SURNAME_MIN = 15
 
-
-def learn_surnames(raw_names, given):
-    """哪些 token 是常見姓氏：統計它作為個人名首詞出現過幾次。
-
-    公司名剝到只剩一個常見姓氏時（THOMSON、EATON、HALL），前綴比對會把
-    同姓的個人與其他同姓公司全掃進來，必須送人工複核。
-    """
-    cnt = collections.Counter()
-    for nm in raw_names:
-        if is_person(nm, given):
-            cnt[re.sub(r"[^A-Z0-9]+", " ", nm.upper()).split()[0]] += 1
-    return {k for k, v in cnt.items() if v >= SURNAME_MIN}
+# 機構前綴：這些詞開頭的一定是組織不是人。
+# 實例：UNIV CHUNG YUAN CHRISTIAN（中原大學）會因 CHRISTIAN 被當成名字而誤殺。
+INSTITUTION_HEAD = {
+    "UNIV", "UNIVERSITY", "INST", "INSTITUTE", "COLLEGE", "SCHOOL", "ACADEMY",
+    "HOSPITAL", "CLINIC", "FOUND", "FOUNDATION", "CENTER", "CENTRE", "LAB",
+    "MUSEUM", "SOCIETY", "COUNCIL", "BOARD", "AGENCY", "BUREAU", "MINISTRY",
+}
 
 
 def learn_given_names(raw_names):
@@ -147,13 +170,17 @@ def learn_given_names(raw_names):
     return given
 
 
-# 機構前綴：這些詞開頭的一定是組織不是人。
-# 實例：UNIV CHUNG YUAN CHRISTIAN（中原大學）會因 CHRISTIAN 被當成名字而誤殺。
-INSTITUTION_HEAD = {
-    "UNIV", "UNIVERSITY", "INST", "INSTITUTE", "COLLEGE", "SCHOOL", "ACADEMY",
-    "HOSPITAL", "CLINIC", "FOUND", "FOUNDATION", "CENTER", "CENTRE", "LAB",
-    "MUSEUM", "SOCIETY", "COUNCIL", "BOARD", "AGENCY", "BUREAU", "MINISTRY",
-}
+def learn_surnames(raw_names, given):
+    """哪些 token 是常見姓氏：統計它作為個人名首詞出現過幾次。
+
+    公司名剝到只剩一個常見姓氏時（THOMSON、EATON、HALL），前綴比對會把
+    同姓的個人與其他同姓公司全掃進來，必須送人工複核。
+    """
+    cnt = collections.Counter()
+    for nm in raw_names:
+        if is_person(nm, given):
+            cnt[re.sub(r"[^A-Z0-9]+", " ", nm.upper()).split()[0]] += 1
+    return {k for k, v in cnt.items() if v >= SURNAME_MIN}
 
 
 def is_person(name, given):
@@ -169,22 +196,7 @@ def is_person(name, given):
     return all(x in given or (len(x) == 1 and x.isalpha()) for x in t[1:])
 
 
-def norm(s):
-    s = CRSP_TAGS.sub(" ", s.upper())
-    s = re.sub(r"[^A-Z0-9]+", " ", s)
-    return re.sub(r"\s+", " ", s).strip()
-
-
-def core(s):
-    """縮寫標準化 + 剝除尾端法律字尾，回傳 token list。"""
-    toks = [ABBREV.get(t, t) for t in norm(s).split()]
-    while toks and toks[-1] in LEGAL:
-        toks.pop()
-    # 開頭的 THE 也剝掉
-    while toks and toks[0] in {"THE"}:
-        toks.pop(0)
-    return toks
-
+# ══════════════════════════════════════════════════════════════ §3 三層比對
 
 def load_roster():
     with open(ROOT / "out" / "firm_roster.csv", encoding="utf-8") as fh:
@@ -210,7 +222,7 @@ def load_dict():
     return out, given, surnames, persons
 
 
-def main():
+def match():
     roster = load_roster()
     adict, given, surnames, n_persons = load_dict()
 
@@ -323,6 +335,125 @@ def main():
     rep.write_text("\n".join(L), encoding="utf-8")
     print("\n".join(L))
     print(f"\n寫入 {rep}")
+
+    return roster
+
+
+# ══════════════════════════════════════════════════════════════ §4 T3 裁決建議
+#
+# T3 之所以是偽陽性溫床，是因為「第一個詞相同」太便宜：
+#   GEN DYNAMICS  vs GEN ELECTRIC      -> 兩家毫不相干
+#   AMAZON COM    vs AMAZON TECH       -> 同一家（Amazon 的專利持有實體）
+# 兩者的差別不在字串距離，而在**第一個詞是不是該公司獨有的品牌詞**。
+#
+# 所以用兩個資料驅動的訊號，不憑記憶：
+#   head_firms  名冊裡有幾家公司的核心名以這個詞開頭。
+#               GEN -> GD/GIS/GM/SYMC/GE 共 5 家，是共用詞，第二個詞才是品牌。
+#               AMAZON -> 只有 AMZN 一家，是獨有品牌詞。
+#   head_orgs   字典裡有幾個「不同的核心名」以這個詞開頭。數字大代表這個詞被
+#               無數不相干的機構共用（UNIV、NAT、KOREA…）。
+#
+# 「品牌詞 + 功能詞」幾乎一定是同集團持有實體；「品牌詞 + 另一個實詞」則可能是
+# 另一家獨立公司（TOYOTA JIDOSHOKKI 是另外上市的豐田自動織機），一律丟回人工。
+
+# 企業功能/地理詞：接在品牌詞後面時，幾乎都是同集團的持有或營運實體
+FUNCTIONAL = {
+    "TECH", "RES", "DEV", "IP", "LICENSING", "SOLUTIONS", "PRODUCTS", "SERVICES",
+    "SYS", "LAB", "GLOBAL", "INT", "ENTPR", "HOLDING", "HOLDINGS", "GROUP",
+    "DIGITAL", "VENTURES", "INVESTMENTS", "OPERATIONS", "MFG", "ENG", "DESIGN",
+    "SOFTWARE", "NETWORKS", "SEMICONDUCTOR", "MICROELECTRONICS", "INSTR",
+    "AMERICA", "AMERICAS", "NORTH", "EUROPE", "ASIA", "JAPAN", "CHINA", "KOREA",
+    "USA", "US", "UK", "DEUTSCHLAND", "FRANCE", "CANADA", "INDIA", "SINGAPORE",
+    "COM", "ONLINE", "INTERACTIVE", "ENTERTAINMENT", "MEDIA", "STUDIOS",
+}
+
+MIN_PUB = 100      # 件數門檻：>=100 的 266 筆已涵蓋未裁決量的 87%
+
+
+def suggest(roster):
+    heads_firm = collections.defaultdict(set)
+    for r in roster:
+        c = core(r["primary_name"])          # core() 回傳 token list
+        if c:
+            heads_firm[c[0]].add(r["primary_ticker"])
+
+    rev = list(csv.DictReader(open(ROOT / "out" / "assignee_match_review.csv",
+                                   encoding="utf-8")))
+    heads_org = collections.Counter()
+    for r in rev:
+        c = r["assignee_core"]
+        if c:
+            heads_org[c.split()[0]] += 1
+
+    # 已裁決過的不再重複建議。首次執行時這個檔還不存在。
+    manual = ROOT / "config" / "assignee_manual.csv"
+    done = set()
+    if manual.exists():
+        with open(manual, encoding="utf-8") as fh:
+            done = {(r["ticker"], r["assignee_name"]) for r in csv.DictReader(fh)}
+
+    out = []
+    for r in rev:
+        if (r["primary_ticker"], r["assignee_name"]) in done:
+            continue
+        n = int(r["n_publications"])
+        if n < MIN_PUB:
+            continue
+        p = (r["matched_from_name"] or "").split()
+        a = (r["assignee_core"] or "").split()
+        if not p or not a:
+            continue
+        head = p[0]
+        nf, no = len(heads_firm.get(head, ())), heads_org.get(head, 0)
+        rest = a[len(p):] if a[:len(p)] == p else None
+
+        if a[0] != head:
+            why, sug = "首詞不同", "EXCLUDE"
+        elif nf > 1:
+            # 共用首詞，品牌在第二個詞：必須整串前綴相同才可能是同一家
+            if rest is not None:
+                why, sug = f"首詞{head}為{nf}家共用，但完整前綴相符", "CHECK"
+            else:
+                why, sug = f"首詞{head}為{nf}家共用，第二詞不同", "EXCLUDE"
+        elif rest is None:
+            why, sug = "首詞獨有，但非完整前綴", "CHECK"
+        elif not rest:
+            why, sug = "核心名完全相同", "INCLUDE"
+        elif all(t in FUNCTIONAL or t in LEGAL for t in rest):
+            why, sug = f"品牌詞獨有 + 功能詞 {' '.join(rest)}", "INCLUDE"
+        else:
+            why, sug = f"品牌詞獨有，但多出實詞 {' '.join(rest)}", "CHECK"
+
+        out.append({**r, "n": n, "suggest": sug, "why": why,
+                    "head_firms": nf, "head_orgs": no})
+
+    out.sort(key=lambda x: (x["suggest"], -x["n"]))
+    p = ROOT / "out" / "assignee_review_suggest.csv"
+    cols = ["suggest", "why", "primary_ticker", "primary_name", "matched_from_name",
+            "assignee_name", "assignee_core", "n_publications", "first_filing_year",
+            "last_filing_year", "head_firms", "head_orgs", "permco"]
+    with open(p, "w", encoding="utf-8", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+        w.writeheader()
+        w.writerows(out)
+
+    c = collections.Counter(x["suggest"] for x in out)
+    print(f"\n待審且件數 >= {MIN_PUB} 的有 {len(out)} 筆")
+    for k in ("INCLUDE", "CHECK", "EXCLUDE"):
+        rows = [x for x in out if x["suggest"] == k]
+        print(f"  {k:<8}{c[k]:>4} 筆，涉及 {sum(x['n'] for x in rows):>7,} 件 publication")
+    print(f"\n寫入 {p}")
+    if not out:
+        # 這不是錯誤：所有 >= MIN_PUB 的候選都已在 assignee_manual.csv 裡裁決過了。
+        # 裁決的完整紀錄（含每一筆的理由）在 config/assignee_manual.csv，不在這裡。
+        # 要再挖一批出來審，把 MIN_PUB 調低即可。
+        print(f"  （空的是正常的：件數 >= {MIN_PUB} 者已全數裁決完畢。"
+              f"要續審請調低 MIN_PUB）")
+
+
+def main():
+    roster = match()
+    suggest(roster)
 
 
 if __name__ == "__main__":

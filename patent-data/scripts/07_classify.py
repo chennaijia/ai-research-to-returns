@@ -18,10 +18,8 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-import firmkeys  # noqa: E402
-from wipo_keywords import compile_terms  # noqa: E402
-from wipo_match import Matcher, load_rules  # noqa: E402
-from wipo_terms import K1, K2  # noqa: E402
+from common import firmkeys  # noqa: E402
+from common.wipo import K1, K2, Matcher, compile_terms, load_rules  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REPL_MIN = 0.50

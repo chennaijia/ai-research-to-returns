@@ -11,8 +11,10 @@ EXCLUDE 是**否決權**：人工看過確認是同名不同公司者，即使�
 併購換手（ACQUIRED）另行處理：同一個 assignee 名稱在不同時期屬於不同上市公司，
 必須靠申請日切開，否則會有一家被錯記成「幾乎沒有專利」。
 
-輸出 config/company_alias.csv（parent_company, ticker, assignee_name,
-effective_from, effective_to, date_basis, note）
+輸出兩份：
+  config/company_alias.csv          母公司本體（parent_company, ticker, assignee_name,
+                                    effective_from, effective_to, date_basis, note）
+  config/subsidiary_alias_auto.csv  自動比對出的子公司，供 with_subs 版使用
 """
 
 import collections
@@ -22,7 +24,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-import firmkeys  # noqa: E402
+from common import firmkeys  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 

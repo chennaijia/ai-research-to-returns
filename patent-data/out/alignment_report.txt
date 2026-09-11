@@ -1,37 +1,37 @@
 公司數: 268    年度: 2010-2025    公司-年度列數: 4288
 有股票年報酬的列: 3571 (83.3%)
 有論文數的列:     689 (16.1%)
-有 AI 專利的列:   2113 (49.3%)
+有 AI 專利的列:   2062 (48.1%)
 有 AI 專利的公司: 203
 多股別的公司-月份（取市值最大股別）: 604
 
 AI 專利件數前 25 大（with_subs 全期合計）
   ticker  公司                            AI專利      全部專利    AI佔比      論文
-  GOOGL   ALPHABET INC                 12638     29611   42.7%    3139
-  MSFT    MICROSOFT CORP               10862     36826   29.5%    2114
-  TM      TOYOTA MOTOR CORP             6743     39696   17.0%      49
-  SNE     SONY CORP                     5779     42775   13.5%      44
-  CAJ     CANON INC                     4238     58649    7.2%      15
-  INTC    INTEL CORP                    3975     32714   12.2%     414
-  AAPL    APPLE INC                     3707     33955   10.9%     117
-  QCOM    QUALCOMM INC                  3502     49783    7.0%      82
-  ADBE    ADOBE SYSTEMS INC             3108      5402   57.5%     415
-  FB      FACEBOOK INC                  2767      9221   30.0%    1022
-  PC      PANASONIC CORP                2542     33513    7.6%       0
-  ORCL    ORACLE CORP                   2475      9811   25.2%      16
-  NVDA    NVIDIA CORP                   2429      6688   36.3%     389
-  HIT     HITACHI LTD                   2383     27622    8.6%       0
-  DELL    DELL INC                      2126     14179   15.0%       0
-  CRM     SALESFORCE COM INC            1899      5195   36.6%     125
-  AMZN    AMAZON COM INC                1854      6450   28.7%     785
-  BIDU    BAIDU INC                     1593      2295   69.4%     339
-  CSCO    CISCO SYSTEMS INC             1564     12960   12.1%      32
-  SNAP    SNAP INC                      1376      3323   41.4%      38
-  WMT     WAL MART STORES INC           1359      4067   33.4%      32
-  NOK     NOKIA CORP                    1333     14252    9.4%      76
-  BA      BOEING CO                     1276     13728    9.3%      12
-  EBAY    EBAY INC                      1259      3980   31.6%      38
-  YHOO    YAHOO INC                     1096      2650   41.4%       5
+  GOOGL   ALPHABET INC                 11500     29611   38.8%    3139
+  MSFT    MICROSOFT CORP                9292     36826   25.2%    2114
+  TM      TOYOTA MOTOR CORP             6695     39696   16.9%      49
+  SNE     SONY CORP                     5544     42775   13.0%      44
+  CAJ     CANON INC                     4046     58649    6.9%      15
+  INTC    INTEL CORP                    3901     32714   11.9%     414
+  QCOM    QUALCOMM INC                  3458     49783    6.9%      82
+  AAPL    APPLE INC                     3380     33955   10.0%     117
+  ADBE    ADOBE SYSTEMS INC             2960      5402   54.8%     415
+  PC      PANASONIC CORP                2492     33513    7.4%       0
+  FB      FACEBOOK INC                  2443      9221   26.5%    1022
+  NVDA    NVIDIA CORP                   2410      6688   36.0%     389
+  HIT     HITACHI LTD                   2263     27622    8.2%       0
+  DELL    DELL INC                      2031     14179   14.3%       0
+  ORCL    ORACLE CORP                   2009      9811   20.5%      16
+  AMZN    AMAZON COM INC                1674      6450   26.0%     785
+  BIDU    BAIDU INC                     1518      2295   66.1%     339
+  CRM     SALESFORCE COM INC            1505      5195   29.0%     125
+  CSCO    CISCO SYSTEMS INC             1476     12960   11.4%      32
+  SNAP    SNAP INC                      1325      3323   39.9%      38
+  WMT     WAL MART STORES INC           1262      4067   31.0%      32
+  BA      BOEING CO                     1252     13728    9.1%      12
+  NOK     NOKIA CORP                    1231     14252    8.6%      76
+  GE      GENERAL ELECTRIC CO           1008     24059    4.2%      44
+  ERIC    ERICSSON                       983     22386    4.4%      57
 
 已知限制
   1. filing_year >= 2024 的專利數必然低估：US pre-grant publication

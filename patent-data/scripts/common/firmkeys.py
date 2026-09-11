@@ -7,7 +7,7 @@
   config/subsidiary_alias.csv  原 8 家人工表，寫 "Alphabet" / GOOGL、"Meta" / META
   out/firm_roster.csv          CRSP 名冊，寫 "ALPHABET INC" / GOOGL、"FACEBOOK INC" / FB
 
-05_classify 以 (parent_company, ticker) 聚合，標籤一不同就變成兩列。實測後果：
+07_classify 以 (parent_company, ticker) 聚合，標籤一不同就變成兩列。實測後果：
   Alphabet 的專利被拆成 ALPHABET INC 10717 件 + Alphabet 1920 件
   Meta 更慘，連 ticker 都不同（FB vs META），下游完全串不起來
 
@@ -20,7 +20,7 @@ roster 的 all_tickers 已驗證：308 個歷史 ticker 對 268 家公司，無�
 import csv
 import pathlib
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
+ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 
 _BY_TICKER = None      # 任何歷史 ticker -> 正規記錄
 _BY_PERMCO = None

@@ -39,59 +39,78 @@
 
 ## 執行順序
 
-管線分成兩段。**建名單**（08–15）決定「要撈哪些 assignee 名稱」，**跑資料**（01–07）
-才真的去 BigQuery 抓件數。兩段的先後不能顛倒：01 的 SQL 是拿 alias 檔組出 `IN` 清單的，
-名單沒先蓋好就抓，漏掉的名稱在下游永遠救不回來（這個順序踩過坑，見下）。
+九支腳本照編號跑就是完整管線。分成兩段：**建名單**（01–04）決定「要撈哪些 assignee
+名稱」，**跑資料**（05–09）才真的去 BigQuery 抓件數。兩段的先後不能顛倒：05 的 SQL 是拿
+alias 檔組出 `IN` 清單的，名單沒先蓋好就抓，漏掉的名稱在下游永遠救不回來（這個順序踩過坑，
+見下）。
 
 ```bash
 cd patent-data
 
 # ── 第一段：建立公司名冊與 assignee 對照 ──
-.venv/bin/python scripts/08_build_roster.py      # CRSP 四個 group 檔 -> 268 家公司名冊
-.venv/bin/python scripts/09_fetch_assignee_dict.py
-.venv/bin/python scripts/10_match_assignees.py   # 分 T1_EXACT / T2_PREFIX / T3_REVIEW
-.venv/bin/python scripts/14_review_assist.py     # 替 T3 產生建議裁決（不下最終判斷）
-.venv/bin/python scripts/15_adjudicate.py        # 人工裁決 -> assignee_manual_t3.csv
-.venv/bin/python scripts/11_verify_manual.py     # 逐筆回驗字典 -> assignee_manual.csv
-.venv/bin/python scripts/12_build_alias.py       # 組裝 company_alias / subsidiary_alias_auto
+.venv/bin/python scripts/01_build_roster.py --yes   # CRSP 四個 group 檔 -> 268 家名冊 + 下載 assignee 字典
+.venv/bin/python scripts/02_match_names.py          # 三層比對 + 產生 T3 待審清單
+.venv/bin/python scripts/03_adjudicate.py           # 人工裁決 -> assignee_manual.csv（逐筆回驗字典）
+.venv/bin/python scripts/04_build_alias.py          # 組裝 company_alias / subsidiary_alias_auto
 
 # ── 第二段：抓取、判定、對齊 ──
-.venv/bin/python scripts/01_fetch_publications.py --yes   # 需 gcloud 認證，掃 251 GB
-.venv/bin/python scripts/01b_download_result.py           # 分頁取回結果（見下）
-.venv/bin/python scripts/03_build_wipo_rules.py
-.venv/bin/python scripts/04_derive_concordance.py
-.venv/bin/python scripts/05_classify.py
-.venv/bin/python scripts/07_align.py
-.venv/bin/python scripts/13_compare_8firms.py    # 回歸檢查，新版不得低於舊版
+.venv/bin/python scripts/05_fetch.py --yes          # 送出查詢，需 gcloud 認證，掃 251 GB
+.venv/bin/python scripts/05_fetch.py --download     # 分頁取回結果（見下）
+.venv/bin/python scripts/06_concordance.py          # CPC 改編診斷 + 推導新舊對照表
+.venv/bin/python scripts/07_classify.py             # 套用 WIPO AI 規則 -> ai_patents_*.csv
+.venv/bin/python scripts/08_align.py                # 對齊股票與論文 -> 平衡面板
+.venv/bin/python scripts/09_verify.py               # 事後檢查，新版不得低於舊版
 ```
 
-`02_check_cpc_drift.py` 與 `06_diagnose.py` 是**唯讀的診斷腳本**，不產生下游依賴，但它們是
-下面兩個關鍵決策的證據來源，建議保留並在改動規則後重跑。
+WIPO 規則檔（`config/wipo_ai_rules.json`）由 `scripts/common/wipo.py` 直接執行產生，
+只在修改 WIPO 檢索式原文時才需要重跑：
 
-> ⚠️ **改了 alias 就必須重跑 01。** `01_fetch_publications.py` 在抓取當下才把 alias 展開成
-> SQL 的 `IN` 清單，所以 `out/raw_publications.csv` 只含「當時名單裡有的名稱」。後來才補進
-> 名單的公司（例如 `AMAZON TECH INC`，5,844 件）在原始檔裡根本不存在，05/07 再怎麼跑也生不
+```bash
+.venv/bin/python scripts/common/wipo.py
+```
+
+### 腳本一覽
+
+| 腳本 | 做什麼 | 主要輸出 |
+|---|---|---|
+| `01_build_roster.py` | 左表：CRSP 268 家公司名冊（含歷史更名）；右表：BigQuery assignee 名稱字典 | `firm_roster.csv`、`assignee_dict.csv` |
+| `02_match_names.py` | 名稱正規化、個人發明者過濾、三層比對、替 T3 產生裁決建議 | `assignee_match_auto.csv`、`assignee_match_review.csv` |
+| `03_adjudicate.py` | 人工裁決（零命中公司 + T3 大量候選），每筆回頭對照字典驗證 | `assignee_manual.csv` |
+| `04_build_alias.py` | 合併自動比對與人工裁決，處理併購換手的生效日切分 | `company_alias.csv`、`subsidiary_alias_auto.csv` |
+| `05_fetch.py` | 送出 BigQuery 查詢（`--yes`）、分頁取回結果（`--download`） | `raw_publications.csv` |
+| `06_concordance.py` | CPC 改編逐年診斷 + 推導廢止碼的現行替代碼 | `cpc_concordance.json`、`concordance_report.txt` |
+| `07_classify.py` | 套用 WIPO AI 判定規則、去重、歸屬公司 | `ai_patents_detail.csv`、`ai_patents_yearly.csv` |
+| `08_align.py` | 與 CRSP 股價、OpenAlex 論文對齊成平衡面板 | `patent_stock_paper_annual.csv` |
+| `09_verify.py` | 判定命中結構診斷 + 8 家回歸比對（有下降則 exit 1） | 僅印出，不寫檔 |
+| `common/firmkeys.py` | permco / ticker 收斂的唯一真相來源 | （模組） |
+| `common/wipo.py` | WIPO AI 判定規則：CPC 比對器 + Orbit 語法轉譯 + K1/K2 關鍵詞 | `wipo_ai_rules.json` |
+
+> ⚠️ **改了 alias 就必須重跑 05。** `05_fetch.py` 在抓取當下才把 alias 展開成 SQL 的
+> `IN` 清單，所以 `out/raw_publications.csv` 只含「當時名單裡有的名稱」。後來才補進名單的
+> 公司（例如 `AMAZON TECH INC`，5,844 件）在原始檔裡根本不存在，07/08 再怎麼跑也生不
 > 出來——症狀是某家大公司莫名其妙只有個位數專利。這個坑實際發生過。
 
-> 🔴 **`bq query` 在這個資料量會卡死，所以拆成 01 + 01b 兩步。** 查詢本身在伺服器端只花
-> 7 秒（job 紀錄可查），但 `bq` CLI 把 83 萬列 / 0.8 GB 結果透過 REST API 拉回本機時會
-> **停住不動**——0% CPU、RSS 十幾 MB、放二十分鐘也不前進。更糟的是 `bq` 會把輸出緩衝到
-> 最後才寫檔，過程中檔案一直是 0 bytes，**看起來和當掉完全一樣**。實測分頁 2,000 列
-> 6 秒正常、50,000 列直接卡死。
+> 🔴 **`bq query` 在這個資料量會卡死，所以 05 拆成 `--yes` 與 `--download` 兩步。** 查詢
+> 本身在伺服器端只花 7 秒（job 紀錄可查），但 `bq` CLI 把 83 萬列 / 0.8 GB 結果透過 REST
+> API 拉回本機時會**停住不動**——0% CPU、RSS 十幾 MB、放二十分鐘也不前進。更糟的是 `bq`
+> 會把輸出緩衝到最後才寫檔，過程中檔案一直是 0 bytes，**看起來和當掉完全一樣**。實測分頁
+> 2,000 列 6 秒正常、50,000 列直接卡死。
 >
-> `01b_download_result.py` 因此改用 `bq head --start_row` 小批次分頁取回。查詢結果會留在
-> BigQuery 的暫存表 24 小時，所以 01b 可以反覆重跑而**不必重掃 251 GB**；它會自己去找最近
-> 一個欄位相符的成功 job。三道防線：每頁單獨落檔可續傳、逐頁用 CSV parser 驗列數
-> （abstract 內含換行，數行數會得到錯的數字）、合併後總列數必須等於暫存表的 `numRows`
-> 才寫出正式檔。
+> `--yes` 因此只負責把 job 送出去（結果留在 BigQuery 暫存表），`--download` 再用
+> `bq head --start_row` 小批次分頁取回。暫存表保留 24 小時，所以 `--download` 可以反覆重跑
+> 而**不必重掃 251 GB**；它會自己去找最近一個欄位相符的成功 job。三道防線：每頁單獨落檔
+> 可續傳、逐頁用 CSV parser 驗列數（abstract 內含換行，數行數會得到錯的數字）、合併後
+> 總列數必須等於暫存表的 `numRows` 才寫出正式檔。
 >
-> 分頁暫存放在 `out/_parts/`（420 個檔、約 0.8 GB）。它是**續傳用的**，01b 中途失敗再跑一次
-> 會從這裡接續，所以不要在管線跑完前刪。確認 05/07 都跑通之後就可以整個刪掉釋出磁碟
+> 分頁暫存放在 `out/_parts/`（420 個檔、約 0.8 GB）。它是**續傳用的**，中途失敗再跑一次
+> 會從這裡接續，所以不要在管線跑完前刪。確認 07/08 都跑通之後就可以整個刪掉釋出磁碟
 > （已列入 `.gitignore`）。
 
-`13_compare_8firms.py` 是這條管線的安全網：擴大版換掉了整套 alias，而原本 8 家是逐一人工
+`09_verify.py` 的第二段是這條管線的安全網：擴大版換掉了整套 alias，而原本 8 家是逐一人工
 查證過的，**新版件數只該增加、不該減少**。任何下降都代表新名單漏了舊名單有的東西，腳本會
-以 exit code 1 擋下。它曾抓出 4 家公司因為丟失拼錯變體而少算（見 §1）。
+以 exit code 1 擋下。它曾抓出 4 家公司因為丟失拼錯變體而少算（見 §1）。第一段則是唯讀的
+命中結構診斷（各 Block 貢獻、Block3 的噪音來源），是下面兩個關鍵決策的證據來源，建議在
+改動規則後重跑。
 
 ---
 
@@ -108,7 +127,7 @@ cd patent-data
 - **一家公司會換代號**（FB → META、GOOG → GOOGL）
 
 CRSP 的 `permco`（公司）與 `permno`（個別證券）分得很清楚，**`permco` 是唯一穩定的公司層級
-鍵**。`scripts/firmkeys.py` 是全管線唯一的收斂點，任何地方拿到 ticker 都先過 `canon()` 換回
+鍵**。`scripts/common/firmkeys.py` 是全管線唯一的收斂點，任何地方拿到 ticker 都先過 `canon()` 換回
 標準公司，載入 alias 時也一樣。
 
 > 🔴 **不收斂會把一家公司劈成兩家。** 舊版用 ticker 當鍵，結果 Alphabet 同時以
@@ -120,7 +139,7 @@ CRSP 的 `permco`（公司）與 `permno`（個別證券）分得很清楚，**`
 
 ### 1.2 三層比對 + 人工裁決
 
-268 家公司對上 BigQuery 的 assignee 字典，`10_match_assignees.py` 依可信度分三層：
+268 家公司對上 BigQuery 的 assignee 字典，`02_match_names.py` 依可信度分三層：
 
 | Tier | 判準 | 處置 |
 |---|---|---|
@@ -130,7 +149,7 @@ CRSP 的 `permco`（公司）與 `permno`（個別證券）分得很清楚，**`
 
 T3 是偽陽性溫床，因為「第一個詞相同」太便宜：`GEN DYNAMICS` vs `GEN ELECTRIC` 毫不相干，
 `AMAZON COM` vs `AMAZON TECH` 卻是同一家。差別不在字串距離，而在**第一個詞是不是該公司獨有
-的品牌詞**。`14_review_assist.py` 用兩個資料驅動的訊號量化這件事，不憑記憶：
+的品牌詞**。`02_match_names.py` 用兩個資料驅動的訊號量化這件事，不憑記憶：
 
 - `head_firms`：名冊裡有幾家公司的核心名以這個詞開頭。`GEN` → 5 家（共用詞，品牌在第二個
   詞，必須整串前綴相同）；`AMAZON` → 1 家（獨有品牌詞）。
@@ -145,7 +164,7 @@ T3 共 4,854 筆 / 360,516 件。實際裁決件數 ≥100 的 **266 筆**（已
 45 INCLUDE、221 EXCLUDE。排除理由分四類並逐筆記錄：A 同名不同公司、B 分拆後另立門戶、
 C 另行上市的集團關係企業、D 合資公司。
 
-> **裁決不能有幻覺。** `11_verify_manual.py` 會把每一筆人工裁決**回頭對照 BigQuery 字典**：
+> **裁決不能有幻覺。** `03_adjudicate.py` 會把每一筆人工裁決**回頭對照 BigQuery 字典**：
 > INCLUDE 的名稱必須真的存在於字典，EXCLUDE 的也必須存在（排除一個不存在的名稱，代表記錯
 > 了）。任何對不上就 exit 1 且不寫檔。實測擋下過一次我自己從截斷的終端機輸出複製錯的字串
 > （`...AMERICA LL` 少了結尾的 `C`）。目前 84 INCLUDE、247 EXCLUDE 全數通過。
@@ -171,7 +190,7 @@ parent_only 版暴跌（實測 MSFT −75%、AMZN −99.9%）。
 - `config/subsidiary_alias.csv`（50 列）—— 原 8 家人工子公司表，附 `effective_from` /
   `effective_to` / `date_basis` / `source_url`，**優先序最高**。
 - `config/subsidiary_alias_auto.csv` —— 自動比對掃到的 T2_PREFIX 子公司。
-- `config/assignee_manual.csv` —— 人工裁決總表，由 `11_verify_manual.py` 單一產出。
+- `config/assignee_manual.csv` —— 人工裁決總表，由 `03_adjudicate.py` 單一產出。
 
 > 自動比對的列沒有生效日（等同「全期間持有」）。若與人工列並存，併購**前**的專利會從沒有
 > 日期的那一列漏進來——`GOOGLE TECHNOLOGY HOLDINGS`（Motorola 來源）會被回溯到 2010 年，而
@@ -221,7 +240,7 @@ AI = Block1  OR  Block2  OR  Block3
 判定**的詞，不需要再要求 CPC 同時命中。若寫成 `CPC AND 關鍵詞`，Block 2 會被整個吃掉。
 
 各 Block 命中的**相異申請案數**（268 家擴大版，母體 838,320 件；Block 間可重疊，數字由
-`ai_patents_detail.csv` 的 `ai_basis` 欄反推，亦可用 `06_diagnose.py` 重算）：
+`ai_patents_detail.csv` 的 `ai_basis` 欄反推，亦可用 `09_verify.py` 重算）：
 
 | Block | 命中 | 佔母體 | 其中「只有這條抓到」 |
 |---|---|---|---|
@@ -235,7 +254,7 @@ Block 3 獨有 658 件。三條可重疊，**不可相加**。
 
 ### Orbit 檢索語法轉換
 
-WIPO 使用 Questel Orbit 的檢索語法，因此需要先轉換成 Python 正規表示式。相關實作位於 `scripts/wipo_keywords.py`。
+WIPO 使用 Questel Orbit 的檢索語法，因此需要先轉換成 Python 正規表示式。相關實作位於 `scripts/common/wipo.py` §2。
 
 | 運算子     | 意義             | 對應 regex             |
 | ------- | -------------- | -------------------- |
@@ -246,7 +265,7 @@ WIPO 使用 Questel Orbit 的檢索語法，因此需要先轉換成 Python 正�
 | `nD`    | 無序鄰近           | 同上，但另外產生反向排列         |
 | `_` `-` | 詞內連接           | `[-_\s]`             |
 
-`scripts/wipo_terms.py` 將 K1（45 條）與 K2（18 條）逐條編碼，每一條規則旁都保留對應的 WIPO 原文註解，方便人工檢查。
+`scripts/common/wipo.py` §3 將 K1（45 條）與 K2（18 條）逐條編碼，每一條規則旁都保留對應的 WIPO 原文註解，方便人工檢查。
 
 ### 規則限制
 
@@ -263,7 +282,7 @@ WIPO 使用 Questel Orbit 的檢索語法，因此需要先轉換成 Python 正�
 
 CPC 分類體系會定期改版。WIPO 的代碼清單建立於 2019 年，其中部分代碼後來被廢止或重新分類，因此舊代碼在較新的專利中可能直接降到 0。這種下降代表分類方式改變，不代表相關技術活動停止。
 
-`02_check_cpc_drift.py` 的輸出如下，每一格表示該 filing year 至少包含一個該家族代碼的專利件數：
+`06_concordance.py` §1 的輸出如下，每一格表示該 filing year 至少包含一個該家族代碼的專利件數：
 
 | 代碼家族                |   15 |   16 |   17 |   18 |    19 |    20 |   21 |   22 |       23 |  24 |
 | ------------------- | ---: | ---: | ---: | ---: | ----: | ----: | ---: | ---: | -------: | --: |
@@ -315,7 +334,7 @@ CPC 分類體系會定期改版。WIPO 的代碼清單建立於 2019 年，其�
 
 第一版直接依共現率排序並取 top-N，最後約 77% 的專利被判定為 AI，明顯高於合理範圍。
 
-`06_diagnose.py` 顯示主要問題來自 Block 1。當時命中數最高的 CPC 包含：
+`09_verify.py` §1 顯示主要問題來自 Block 1。當時命中數最高的 CPC 包含：
 
 ```text
 G06F3/0482   5704
@@ -355,8 +374,8 @@ TRANSFER_TARGETS = [
 
 目前門檻設定如下：
 
-* 推導階段：共現率 `>= 0.30`（`04_derive_concordance.py`）
-* 實際採用階段：共現率 `>= 0.50`（`05_classify.py`）
+* 推導階段：共現率 `>= 0.30`（`06_concordance.py`）
+* 實際採用階段：共現率 `>= 0.50`（`07_classify.py`）
 
 375 個廢止碼中，有 349 個找到替代候選，最終納入 383 個相異替代碼。
 
@@ -392,7 +411,7 @@ TRANSFER_TARGETS = [
 
 ### 原 8 家的 with_subs 版逐年件數（依 filing year）
 
-這張表是**回歸測試的基準**：擴大版重跑後，`13_compare_8firms.py` 驗證這 8 家的每一個
+這張表是**回歸測試的基準**：擴大版重跑後，`09_verify.py` 驗證這 8 家的每一個
 公司-年度數字都與下表完全一致（16 年 × 8 家 × 2 版本，零下降、零上升）。
 
 | 公司        |  10 |  11 |  12 |  13 |  14 |  15 |  16 |  17 |  18 |   19 |   20 |   21 |   22 |   23 |  24* | 25* |
@@ -414,7 +433,7 @@ TRANSFER_TARGETS = [
 
 ## 6. 對齊股票與論文
 
-`07_align.py` 輸出 `out/patent_stock_paper_annual.csv`，**4,288 列 = 268 家 × 16 年的平衡面板**。
+`08_align.py` 輸出 `out/patent_stock_paper_annual.csv`，**4,288 列 = 268 家 × 16 年的平衡面板**。
 
 欄位覆蓋率（4,288 列）：專利與論文 100%（缺值一律補 0，見下），報酬三欄 83.3%
 （缺的是尚未上市或已下市的公司-年度，屬真實缺值）。`months_in_year` 有 126 個
@@ -491,7 +510,7 @@ TRANSFER_TARGETS = [
 |---|---|---|---|
 | `out/raw_publications.csv` | 母體 838,405 件，含 title/abstract/CPC/assignee | 804 MB | ignore |
 | `out/ai_patents_detail.csv` | 判定為 AI 的專利明細，含判定依據 `ai_basis` | 219 MB | LFS |
-| `out/ai_patents_detail_8firms.csv` | 原 8 家版明細，`13_compare_8firms.py` 的回歸基準 | 73 MB | LFS |
+| `out/ai_patents_detail_8firms.csv` | 原 8 家版明細，`09_verify.py` 的回歸基準 | 73 MB | LFS |
 | `out/assignee_dict.csv` | BigQuery assignee 名稱字典，人工裁決的查證依據 | 11 MB | LFS |
 | `out/ai_patents_yearly.csv` | 公司 × filing year × 版本的件數 | 167 KB | git |
 | `out/patent_stock_paper_annual.csv` | **最終面板**：專利 + 股票報酬 + 論文數 | 314 KB | git |
@@ -527,7 +546,7 @@ BigQuery 的結果暫存表只留 24 小時，過期後 01b 找不到 job，就�
    完成日，有數月誤差。
 6. **T3_REVIEW 只裁決到件數 ≥100 者。** 4,854 筆待審中裁決了 266 筆，涵蓋待審量的 87%；
    剩下 13%（約 4.7 萬件，散在 4,588 個名稱）一律**未採用**。方向是保守的——只會少算、
-   不會多算，且漏掉的都是小量名稱。若日後要補，降低 `14_review_assist.py` 的 `MIN_PUB` 即可。
+   不會多算，且漏掉的都是小量名稱。若日後要補，降低 `02_match_names.py` 的 `MIN_PUB` 即可。
 7. **非美國公司的專利會被系統性低估。** 母體限定美國 pre-grant publication，只在美國申請的
    外國公司（尤其日韓台歐廠商）本國專利不計入。跨國比較時要留意。
 8. **公司層級歸屬到 permco 為止，不處理集團關係企業。** 另行上市的關係企業（如豐田自動織機

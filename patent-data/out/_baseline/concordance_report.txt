@@ -1,0 +1,1828 @@
+WIPO 2019 AI 代碼清單 -> 現行 CPC 對照推導報告
+廢止判定來源: patents-public-data.cpc.definitions_201710 vs cpc.definition
+替代推導方式: 帶舊碼文件的現行碼共現率, 門檻 30%
+樣本: out/raw_publications.csv (8 家公司 US pre-grant 2010-2025)
+==============================================================================
+
+G06F17/3053  (1181 件)  Query processing with adaptation to user needs using ranking
+    -> G06F16/24578      81.5%  Query processing with adaptation to user needs using ranking
+    -> G06F16/9535       44.6%  Search customisation based on user profiles and personalisation
+
+G06N99/005  (1082 件)  Learning machines, i.e. computer in which a programme is changed according to experience g
+    -> G06N20/00         97.0%  Machine learning
+
+G06N3/0454  (819 件)  Architectures, e.g. interconnection topology using a combination of multiple neural nets
+    -> G06N3/045         98.0%  Combinations of networks
+    -> G06N3/09          68.7%  Supervised learning
+    -> G06N3/0464        62.3%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/08          58.5%  Learning methods
+    -> G06N3/084         43.7%  Backpropagation, e.g. using gradient descent
+    -> G06N3/0455        31.5%  Auto-encoder networks; Encoder-decoder networks
+
+G06N7/005  (525 件)  Probabilistic networks
+    -> G06N7/01          85.9%  Probabilistic graphical models, e.g. probabilistic networks
+    -> G06N20/00         52.8%  Machine learning
+
+G06K9/6256  (507 件)  Obtaining sets of training patterns; Bootstrap methods, e.g. bagging, boosting
+    -> G06F18/214        95.7%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/00288  (292 件)  Classification, e.g. identification
+    -> G06V40/172        95.2%  Classification, e.g. identification
+
+G06F17/2785  (281 件)  Semantic analysis
+    -> G06F40/30         96.8%  Semantic analysis
+
+G06N3/0445  (270 件)  Feedback networks, e.g. hopfield nets, associative networks
+    -> G06N3/044         89.6%  Recurrent networks, e.g. Hopfield networks
+    -> G06N3/0442        81.9%  Recurrent networks, e.g. Hopfield networks characterised by memory or gating, e.
+    -> G06N3/09          80.0%  Supervised learning
+    -> G06N3/045         62.6%  Combinations of networks
+    -> G06N3/08          61.9%  Learning methods
+    -> G06N3/084         41.1%  Backpropagation, e.g. using gradient descent
+    -> G06N3/0464        38.1%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/0455        32.6%  Auto-encoder networks; Encoder-decoder networks
+
+G06K9/6267  (268 件)  Classification techniques
+    -> G06F18/24         93.3%  Classification techniques
+
+G06K9/00671  (247 件)  Recognising scenes such as could be captured by a camera operated by a pedestrian or robot
+    -> G06V20/20         98.0%  Scenes; Scene-specific elements in augmented reality scenes
+
+G06F17/30528  (246 件)  Query processing with adaptation to user needs using context
+    -> G06F16/24575      88.6%  Query processing with adaptation to user needs using context
+    -> G06F16/9535       56.1%  Search customisation based on user profiles and personalisation
+    -> G06F16/248        39.0%  Presentation of query results
+    -> G06F16/24578      30.9%  Query processing with adaptation to user needs using ranking
+
+G10L15/265  (228 件)  Speech recognisers specially adapted for particular applications
+    -> G10L15/26         96.9%  Speech to text systems
+    -> G10L15/22         58.3%  Procedures used during a speech recognition process, e.g. man-machine dialogue
+
+G06K9/6215  (225 件)  Proximity measures, i.e. similarity or distance measures
+    -> G06F18/22         94.7%  Matching criteria, e.g. proximity measures
+
+G06K9/6262  (216 件)  Validation, performance evaluation or active pattern learning techniques
+    -> G06F18/217        98.6%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V10/82         30.1%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06F17/2705  (214 件)  Parsing
+    -> G06F40/205        86.0%  Parsing
+
+G06F15/18  (204 件)  Digital computers in general; Data processing equipment in general in which a programme is
+    -> G06N20/00         97.5%  Machine learning
+
+G06F17/28  (203 件)  Processing or translating of natural language
+    -> G06F40/40         71.4%  Processing or translation of natural language
+
+G06F17/289  (190 件)  Use of machine translation, e.g. multi-lingual retrieval, server side translation for clie
+    -> G06F40/58         93.2%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+
+G06K9/00335  (163 件)  Recognising movements or behaviour, e.g. recognition of gestures, dynamic facial expressio
+    -> G06V40/20         93.3%  Movements or behaviour, e.g. gesture recognition
+
+G06K9/00718  (162 件)  Higher-level, semantic clustering, classification or understanding of video scenes, e.g. d
+    -> G06V20/41         97.5%  Higher-level, semantic clustering, classification or understanding of video scen
+
+G06N3/0472  (155 件)  Architectures, e.g. interconnection topology using probabilistic elements, e.g. p-rams, st
+    -> G06N3/047         84.5%  Probabilistic or stochastic networks
+    -> G06N3/045         74.2%  Combinations of networks
+    -> G06N3/09          72.9%  Supervised learning
+    -> G06N3/08          61.9%  Learning methods
+    -> G06N3/0464        49.0%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/084         45.8%  Backpropagation, e.g. using gradient descent
+    -> G06N3/044         38.1%  Recurrent networks, e.g. Hopfield networks
+    -> G06N3/0442        33.5%  Recurrent networks, e.g. Hopfield networks characterised by memory or gating, e.
+
+G06K9/00791  (155 件)  Recognising scenes perceived from the perspective of a land vehicle, e.g. recognising lane
+    -> G06V20/56         98.7%  Context or environment of the image exterior to a vehicle by using sensors mount
+    -> G06V20/58         31.6%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+
+G06K9/6202  (154 件)  Comparing pixel values or logical combinations thereof, or feature values having positiona
+    -> G06V10/751        31.2%  Comparing pixel values or logical combinations thereof, or feature values having
+
+G06K9/46  (152 件)  Extraction of features or characteristics of the image
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00228  (151 件)  Detection; Localisation; Normalisation
+    -> G06V40/161        92.7%  Detection; Localisation; Normalisation
+    -> G06V40/172        31.1%  Classification, e.g. identification
+
+G06K9/00744  (148 件)  Extracting features from the video content, e.g. video "fingerprints", or characteristics,
+    -> G06V20/46         96.6%  Extracting features or characteristics from the video content, e.g. video finger
+
+G06K9/00805  (145 件)  Detecting potential obstacles
+    -> G06V20/58        100.0%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/56         31.7%  Context or environment of the image exterior to a vehicle by using sensors mount
+    -> G06V10/82         31.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/6257  (141 件)  Obtaining sets of training patterns; Bootstrap methods, e.g. bagging, boosting characteris
+    -> G06F18/2148       95.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+    -> G06V10/82         36.9%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/66  (136 件)  Methods or arrangements for recognition using electronic means using simultaneous comparis
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/276  (136 件)  Stenotyping, code gives word, guess-ahead for partial word input
+    -> G06F40/274        98.5%  Converting codes to words; Guess-ahead of partial word inputs
+
+G06K9/6218  (127 件)  Clustering techniques
+    -> G06F18/23         93.7%  Clustering techniques
+
+G06K9/00355  (125 件)  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+    -> G06V40/28         97.6%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+
+G06F17/277  (116 件)  Lexical analysis, e.g. tokenisation, collocates
+    -> G06F40/284        91.4%  Lexical analysis, e.g. tokenisation or collocates
+
+G06K9/00255  (114 件)  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/166        97.4%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/172        40.4%  Classification, e.g. identification
+
+G06K9/00771  (108 件)  Recognising scenes under surveillance, e.g. with Markovian modelling of scene activity
+    -> G06V20/52         98.1%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+    -> G06V20/44         36.1%  Event detection
+
+G06K9/00664  (104 件)  Recognising scenes such as could be captured by a camera operated by a pedestrian or robot
+    -> G06V20/10         92.3%  Terrestrial scenes
+
+G06K9/00604  (103 件)  Acquisition
+    -> G06V40/19         99.0%  Sensors therefor
+    -> G06V40/193        33.0%  Preprocessing; Feature extraction
+
+G06F17/30684  (103 件)  Query execution using natural language analysis
+    -> G06F16/3344       83.5%  Query execution using natural language analysis
+
+G06K9/4604  (99 件)  Detecting partial patterns, e.g. edges or contours, or configurations, e.g. loops, corners
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/4652  (99 件)  Extraction of features or characteristics of the image related to colour
+    -> G06V10/56         34.3%  Extraction of image or video features relating to colour
+
+G06K9/00362  (98 件)  Recognising human body or animal bodies, e.g. vehicle occupant, pedestrian; Recognising bo
+    -> G06V40/10         96.9%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+
+G06F17/2765  (97 件)  Recognition
+    -> G06F40/279        89.7%  Recognition of textual entities
+
+G06K9/00201  (95 件)  Recognising three-dimensional objects, e.g. using range or tactile information
+    -> G06V20/64         97.9%  Three-dimensional [3D] objects
+
+G06F17/278  (94 件)  Named entity recognition
+    -> G06F40/295        93.6%  Named entity recognition
+    -> G06F40/30         34.0%  Semantic analysis
+
+G06K9/52  (91 件)  Extraction of features or characteristics of the image by deriving mathematical or geometr
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00013  (90 件)  Image acquisition
+    -> G06V40/13         44.4%  Sensors therefor
+
+G06K9/623  (90 件)  Selecting the most significant subset of features by ranking or filtering the set of featu
+    -> G06F18/2113       96.7%  Selection of the most significant subset of features by ranking or filtering the
+
+G06F17/30256  (86 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/5838       94.2%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/583        31.4%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G10L17/005  (86 件)  Speaker recognisers specially adapted for particular applications
+    -> G10L17/00         95.3%  Speaker identification or verification techniques
+
+G06K9/00281  (85 件)  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geometrical r
+    -> G06V40/171        97.6%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06F17/30247  (84 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/583        92.9%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/6201  (82 件)  Matching; Proximity measures
+    -> G06F18/22         96.3%  Matching criteria, e.g. proximity measures
+
+G06F17/2735  (82 件)  Dictionaries
+    -> G06F40/242        90.2%  Dictionaries
+
+G06K9/3233  (82 件)  Determination of region of interest
+    -> G06V10/25         64.6%  Determination of region of interest [ROI] or a volume of interest [VOI]
+
+G06K9/00798  (80 件)  Recognition of lanes or road borders, e.g. of lane markings, or recognition of driver's dr
+    -> G06V20/588       100.0%  Recognition of the road, e.g. of lane markings; Recognition of the vehicle drivi
+    -> G06V20/58         42.5%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/56         31.2%  Context or environment of the image exterior to a vehicle by using sensors mount
+
+G06K9/00369  (80 件)  Recognition of whole body, e.g. static pedestrian or occupant recognition
+    -> G06V40/103        96.2%  Static body considered as a whole, e.g. static pedestrian or occupant recognitio
+
+G06K9/00624  (79 件)  Recognising scenes, i.e. recognition of a whole field of perception; recognising scene-spe
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/4671  (77 件)  Extracting features based on salient regional features, e.g. Scale Invariant Feature Trans
+    -> G06V10/462        48.1%  Salient features, e.g. scale invariant feature transforms [SIFT]
+
+G06F17/2775  (77 件)  Phrasal analysis, e.g. finite state techniques, chunking
+    -> G06F40/289        90.9%  Phrasal analysis, e.g. finite state techniques or chunking
+
+G06K9/00711  (75 件)  Recognising video content, e.g. extracting audiovisual features from movies, extracting re
+    -> G06V20/40         97.3%  Scenes; Scene-specific elements in video content
+    -> G06V20/52         33.3%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+    -> G06V20/44         30.7%  Event detection
+
+G06K9/00825  (75 件)  Recognition of vehicle or traffic lights
+    -> G06V20/584       100.0%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/58         40.0%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/56         38.7%  Context or environment of the image exterior to a vehicle by using sensors mount
+
+G06F17/274  (74 件)  Grammatical analysis; Style critique
+    -> G06F40/253        85.1%  Grammatical analysis; Style critique
+
+G06K9/0002  (74 件)  Image acquisition by non-optical methods, e.g. by ultrasonic or capacitive sensing
+    -> G06V40/1306       97.3%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/1365       50.0%  Matching; Classification
+
+G06K9/00268  (74 件)  Feature extraction; Face representation
+    -> G06V40/168        91.9%  Feature extraction; Face representation
+    -> G06V40/172        37.8%  Classification, e.g. identification
+
+G06N3/0481  (73 件)  Non-linear activation functions, e.g. sigmoids, thresholds
+    -> G06N3/048         98.6%  Activation functions
+    -> G06N3/045         80.8%  Combinations of networks
+    -> G06N3/09          63.0%  Supervised learning
+    -> G06N3/0464        58.9%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/084         54.8%  Backpropagation, e.g. using gradient descent
+    -> G06N3/08          49.3%  Learning methods
+    -> G06N3/044         34.2%  Recurrent networks, e.g. Hopfield networks
+
+G06F17/30029  (72 件)  Querying by filtering; by personalisation, e.g. querying making use of user profiles
+    -> G06F16/435        94.4%  Filtering based on additional data, e.g. user or group profiles
+    -> G06F16/9535       44.4%  Search customisation based on user profiles and personalisation
+    -> G06F16/24578      33.3%  Query processing with adaptation to user needs using ranking
+
+G06F17/30705  (72 件)  Clustering or classification
+    -> G06F16/35         93.1%  Clustering; Classification
+
+G06K9/4661  (72 件)  Extraction of features or characteristics of the image related to illumination properties,
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06N99/002  (71 件)  Quantum computers, i.e. information processing by using quantum superposition, coherence, 
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/27  (71 件)  Automatic analysis, e.g. parsing
+    -> G06F40/20         50.7%  Natural language analysis
+
+G06K9/18  (71 件)  Methods or arrangements for reading or recognising printed or written characters or for re
+    -> G06V30/224        84.5%  Character recognition characterised by the type of writing of printed characters
+    -> G06V30/10         45.1%  Character recognition
+
+G06K9/00221  (70 件)  Acquiring or recognising human faces, facial parts, facial sketches, facial expressions
+    -> G06V40/16         94.3%  Human faces, e.g. facial parts, sketches or expressions
+    -> G06V40/172        41.4%  Classification, e.g. identification
+
+G06F17/30654  (69 件)  Natural language query formulation or dialogue systems
+    -> G06F16/3329       97.1%  Natural language query formulation
+
+G06F17/273  (69 件)  Orthographic correction, e.g. spelling checkers, vowelisation
+    -> G06F40/232        97.1%  Orthographic correction, e.g. spell checking or vowelisation
+    -> G06F40/274        31.9%  Converting codes to words; Guess-ahead of partial word inputs
+
+G06K9/00087  (68 件)  Matching; Classification
+    -> G06V40/1365       91.2%  Matching; Classification
+    -> G06V40/1306       47.1%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+
+G06K9/628  (68 件)  Multiple classes
+    -> G06F18/2431       98.5%  Multiple classes
+    -> G06V10/82         38.2%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06F17/279  (68 件)  Discourse representation
+    -> G06F40/35         95.6%  Discourse or dialogue representation
+
+G06F17/275  (66 件)  Language Identification
+    -> G06F40/263        87.9%  Language identification
+    -> G06F40/58         36.4%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+
+G06K9/6259  (66 件)  Obtaining sets of training patterns; Bootstrap methods, e.g. bagging, boosting characteris
+    -> G06F18/2155       97.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G10L13/043  (65 件)  Synthesisers specially adapted to particular applications
+    -> G10L13/00         96.9%  Speech synthesis; Text to speech systems
+
+G06K9/00765  (65 件)  Segmenting video sequences, i.e. computational techniques such as parsing or cutting the s
+    -> G06V20/49         96.9%  Segmenting video sequences, i.e. computational techniques such as parsing or cut
+    -> G06V20/41         43.1%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/44         40.0%  Event detection
+    -> G06V20/46         33.8%  Extracting features or characteristics from the video content, e.g. video finger
+
+G06K9/6232  (65 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06V10/82         46.2%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/213        41.5%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+
+G06F17/30401  (63 件)  Natural language query formulation
+    -> G06F16/243        92.1%  Natural language query formulation
+
+G06K9/00677  (61 件)  Analysis of image collections based on shared content, e.g. to detect affinity between per
+    -> G06V20/30        100.0%  Scenes; Scene-specific elements in albums, collections or shared content, e.g. s
+    -> G06V40/172        32.8%  Classification, e.g. identification
+
+G06K9/6212  (60 件)  Comparing statistics of pixel or of feature values, e.g. histogram matching
+    -> G06V10/758        40.0%  Involving statistics of pixels or of feature values, e.g. histogram matching
+
+G06K9/6277  (60 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/2415       93.3%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06V10/82         35.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00302  (58 件)  Facial expression recognition
+    -> G06V40/174        91.4%  Facial expression recognition
+
+G06K9/0061  (58 件)  Preprocessing; Feature extraction
+    -> G06V40/193        96.6%  Preprocessing; Feature extraction
+    -> G06V40/19         58.6%  Sensors therefor
+
+G06F17/271  (58 件)  Syntactic parsing, e.g. based on context-free grammar [CFG], unification grammars
+    -> G06F40/211        86.2%  Syntactic parsing, e.g. based on context-free grammar [CFG] or unification gramm
+    -> G06F40/30         32.8%  Semantic analysis
+
+G06K9/00456  (58 件)  Classification of image contents, e.g. text, photographs, tables
+    -> G06V30/413        91.4%  Classification of content, e.g. text, photographs or tables
+
+G06K9/3241  (58 件)  Recognising objects as potential recognition candidates based on visual cues, e.g. shape
+    -> G06V10/255        34.5%  Detecting or recognising potential candidate objects based on visual cues, e.g. 
+
+G06K9/6269  (57 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/2411      100.0%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06V10/764        45.6%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         40.4%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00342  (57 件)  Recognition of whole body movements, e.g. for sport training
+    -> G06V40/23         96.5%  Recognition of whole body movements, e.g. for sport training
+    -> G06V40/103        35.1%  Static body considered as a whole, e.g. static pedestrian or occupant recognitio
+
+G06K9/2054  (56 件)  Selective acquisition/locating/processing of specific regions, e.g. highlighted text, fidu
+    -> G06V10/22         37.5%  Image preprocessing by selection of a specific region containing or referencing 
+
+G06N5/003  (53 件)  Dynamic search techniques, heuristics, branch-and-bound
+    -> G06N5/01          98.1%  Dynamic search techniques; Heuristics; Dynamic trees; Branch-and-bound
+
+G06K9/627  (52 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/2413       90.4%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06V10/764        36.5%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         36.5%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/214        32.7%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06F18/22         30.8%  Matching criteria, e.g. proximity measures
+
+G06K9/6263  (50 件)  Validation, performance evaluation or active pattern learning techniques based on the feed
+    -> G06F18/2178       94.0%  Validation; Performance evaluation; Active pattern learning techniques based on 
+    -> G06F18/214        40.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/00469  (49 件)  Document understanding by extracting the logical structure, e.g. chapters, sections, colum
+    -> G06V30/416        98.0%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V30/10         30.6%  Character recognition
+
+G06K9/4642  (48 件)  Extraction of features or characteristics of the image by performing operations within ima
+    -> G06V10/50         35.4%  Extraction of image or video features by performing operations within image bloc
+
+G06K9/726  (46 件)  Syntactic or semantic context, e.g. balancing
+    -> G06V30/274       100.0%  Syntactic or semantic context, e.g. balancing
+    -> G06V10/82         30.4%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/6217  (46 件)  Design or setup of recognition systems and techniques; Extraction of features in feature s
+    -> G06F18/21        100.0%  Design or setup of recognition systems or techniques; Extraction of features in 
+    -> G06V10/82         32.6%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/344  (46 件)  Segmentation of touching or overlapping patterns in the image field using recognition of c
+    -> G06V30/153        97.8%  Segmentation of character regions using recognition of characters or words
+    -> G06V30/10         39.1%  Character recognition
+
+G06K9/6288  (45 件)  Fusion techniques, i.e. combining data from various sources, e.g. sensor fusion
+    -> G06F18/25         97.8%  Fusion techniques
+
+G06K9/6255  (44 件)  Determining representative reference patterns, e.g. averaging or distorting patterns; Gene
+    -> G06F18/28         90.9%  Determining representative reference patterns, e.g. by averaging or distorting; 
+    -> G06F18/217        31.8%  Validation; Performance evaluation; Active pattern learning techniques
+
+G06K9/00463  (44 件)  Document analysis by extracting the geometrical structure, e.g. layout tree; Block segment
+    -> G06V30/414        93.2%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+    -> G06V30/416        31.8%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+
+G06F17/30525  (44 件)  Query processing with adaptation to user needs using data annotations (user-defined metada
+    -> G06F16/24573      81.8%  Query processing with adaptation to user needs using data annotations, e.g. user
+
+G06K9/6228  (43 件)  Selecting the most significant subset of features
+    -> G06F18/211        97.7%  Selection of the most significant subset of features
+    -> G06V10/82         46.5%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/217        37.2%  Validation; Performance evaluation; Active pattern learning techniques
+
+G06K9/00375  (42 件)  Recognition of hand or arm, e.g. static hand biometric or posture recognition
+    -> G06V40/107       100.0%  Static hand or arm
+    -> G06V40/28         33.3%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+
+G06K9/6268  (42 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/241        95.2%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06V10/764        71.4%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         47.6%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00315  (42 件)  Dynamic expression
+    -> G06V40/176        95.2%  Dynamic expression
+    -> G06V40/171        33.3%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06K9/00248  (41 件)  Detection; Localisation; Normalisation using facial parts and geometric relationships
+    -> G06V40/165        90.2%  Detection; Localisation; Normalisation using facial parts and geometric relation
+    -> G06V40/171        31.7%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06K9/00536  (41 件)  Classification; Matching
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00416  (41 件)  Sampling; contour coding; stroke extraction
+    -> G06V30/347        97.6%  Sampling; Contour coding; Stroke extraction
+    -> G06V30/36         43.9%  Matching; Classification
+
+G06K9/4628  (40 件)  Integrating the filters into a hierarchical structure
+    -> G06V10/454        87.5%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06V10/82         60.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06F17/2881  (39 件)  Natural language generation
+    -> G06F40/56         92.3%  Natural language generation
+
+G06F17/30743  (39 件)  Audio data retrieval using features automatically derived from the audio content, e.g. des
+    -> G06F16/683        92.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06F17/30522  (39 件)  Query processing with adaptation to user needs
+    -> G06F16/2457       84.6%  Query processing with adaptation to user needs
+
+G06F17/30663  (38 件)  Selection or weighting of terms from queries, including natural language queries
+    -> G06F16/3334       86.8%  Selection or weighting of terms from queries, including natural language queries
+
+G06F17/3043  (38 件)  Translation of natural language queries to structured queries
+    -> G06F16/24522      94.7%  Translation of natural language queries to structured queries
+
+G06K9/0063  (37 件)  Recognising patterns in remote scenes, e.g. aerial images, vegetation versus urban areas
+    -> G06V20/13         56.8%  Satellite images
+    -> G06V20/17         32.4%  Terrestrial scenes taken from planes or by drones
+
+G06K9/78  (37 件)  Combination of image acquisition and recognition functions
+    -> G06V10/10         35.1%  Image acquisition
+
+G06K9/00442  (36 件)  Document analysis and understanding; Document recognition
+    -> G06V30/40         33.3%  Document-oriented image-based pattern recognition
+
+G06K9/00751  (36 件)  Detecting suitable features for summarising video content
+    -> G06V20/47        100.0%  Detecting features for summarising video content
+    -> G06V20/41         41.7%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/49         30.6%  Segmenting video sequences, i.e. computational techniques such as parsing or cut
+
+G06K9/00818  (35 件)  Recognising traffic signs
+    -> G06V20/582       100.0%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/588        34.3%  Recognition of the road, e.g. of lane markings; Recognition of the vehicle drivi
+    -> G06V20/584        34.3%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+
+G06F17/2836  (35 件)  Machine assisted translation, e.g. translation memory
+    -> G06F40/47         88.6%  Machine-assisted translation, e.g. using translation memory
+    -> G06F40/58         54.3%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+
+G06K9/72  (34 件)  Methods or arrangements for recognition using electronic means using context analysis base
+    -> G06V10/768        47.1%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V30/10         35.3%  Character recognition
+
+G06K9/6265  (33 件)  Validation, performance evaluation or active pattern learning techniques based on a specif
+    -> G06F18/2193       93.9%  Validation; Performance evaluation; Active pattern learning techniques based on 
+    -> G06V10/82         39.4%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/774        30.3%  Generating sets of training patterns; Bootstrap methods, e.g. bagging or boostin
+    -> G06F18/2148       30.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06F17/2818  (33 件)  Statistical methods, e.g. probability models
+    -> G06F40/44         87.9%  Statistical methods, e.g. probability models
+
+G06F17/30707  (33 件)  Clustering or classification into predefined classes
+    -> G06F16/353        87.9%  Clustering; Classification into predefined classes
+
+G06K9/6289  (32 件)  Fusion techniques, i.e. combining data from various sources, e.g. sensor fusion of input o
+    -> G06F18/251       100.0%  Fusion techniques of input or preprocessed data
+    -> G06V10/82         34.4%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00033  (32 件)  Image acquisition by direct reading, i.e. contactless acquisition
+    -> G06V40/1312       68.8%  Sensors therefor direct reading, e.g. contactless acquisition
+    -> G06V40/67         40.6%  Static or dynamic means for assisting the user to position a body part for biome
+    -> G06V40/1306       31.2%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+
+G06F17/30702  (32 件)  Profile generation, learning or modification
+    -> G06F16/337        87.5%  Profile generation, learning or modification
+    -> G06F16/9535       40.6%  Search customisation based on user profiles and personalisation
+
+G06K9/6227  (32 件)  Selection of pattern recognition techniques, e.g. of classifiers in a multi-classifier sys
+    -> G06F18/285       100.0%  Selection of pattern recognition techniques, e.g. of classifiers in a multi-clas
+
+G06K9/00402  (31 件)  Recognising digital ink, i.e. recognising temporal sequences of handwritten position coord
+    -> G06V30/32         93.5%  Digital ink
+
+G06K9/00597  (31 件)  Acquiring or recognising eyes, e.g. iris verification
+    -> G06V40/18         96.8%  Eye characteristics, e.g. of the iris
+
+G06F17/2715  (31 件)  Statistical methods
+    -> G06F40/216        93.5%  Parsing using statistical methods
+
+G06K9/2027  (31 件)  Illumination control
+    -> G06V10/141        64.5%  Control of illumination
+
+G06K9/0004  (31 件)  Image acquisition by using electro-optical elements or layers, e.g. electroluminescent sen
+    -> G06V40/1318       96.8%  Sensors therefor using electro-optical elements or layers, e.g. electroluminesce
+
+G06K9/00295  (30 件)  Classification, e.g. identification of unknown faces, i.e. recognising the same non-enroll
+    -> G06V40/173        93.3%  Classification, e.g. identification face re-identification, e.g. recognising unk
+    -> G06V40/172        33.3%  Classification, e.g. identification
+    -> G06V40/167        30.0%  Detection; Localisation; Normalisation using comparisons between temporally cons
+
+G06K9/2081  (29 件)  Selective acquisition/locating/processing of specific regions, e.g. highlighted text, fidu
+    -> G06V10/235        58.6%  Image preprocessing by selection of a specific region containing or referencing 
+
+G06F17/30253  (29 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/5846       93.1%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/00617  (29 件)  Matching; Classification
+    -> G06V40/197        96.6%  Matching; Classification
+    -> G06V40/19         86.2%  Sensors therefor
+    -> G06V40/193        44.8%  Preprocessing; Feature extraction
+
+G06K9/00422  (28 件)  Matching; classification
+    -> G06V30/36        100.0%  Matching; Classification
+    -> G06V30/347        50.0%  Sampling; Contour coding; Stroke extraction
+
+G06K9/00476  (28 件)  Reading or recognising technical drawings or geographical maps
+    -> G06V30/422        92.9%  Technical drawings; Geographical maps
+
+G06K9/6223  (28 件)  Non-hierarchical partitioning techniques based on statistics with a fixed number of cluste
+    -> G06F18/23213      96.4%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+
+G06K9/00  (28 件)  Methods or arrangements for reading or recognising printed or written characters or for re
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00979  (28 件)  Hardware and software architectures for pattern recognition, e.g. modular organisation str
+    -> G06V10/95        100.0%  Hardware or software architectures specially adapted for image or video understa
+
+G06F17/30259  (28 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/5854       89.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/3258  (27 件)  Scene text, e.g. street name
+    -> G06V20/63         96.3%  Scene text, e.g. street names
+    -> G06V30/10         44.4%  Character recognition
+
+G06K9/6296  (25 件)  Graphical models, e.g. Bayesian networks
+    -> G06F18/29         92.0%  Graphical models, e.g. Bayesian networks
+
+G06K9/2036  (25 件)  Special illumination such as grating, reflections, deflections, e.g. for characters with r
+    -> G06V10/145        64.0%  Illumination specially adapted for pattern recognition, e.g. using gratings
+
+G06K9/629  (25 件)  Fusion techniques, i.e. combining data from various sources, e.g. sensor fusion of extract
+    -> G06F18/253       100.0%  Fusion techniques of extracted features
+    -> G06F18/217        44.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V10/806        44.0%  Fusion, i.e. combining data from various sources at the sensor level, preprocess
+    -> G06V20/64         40.0%  Three-dimensional [3D] objects
+    -> G06F18/28         32.0%  Determining representative reference patterns, e.g. by averaging or distorting; 
+    -> G06V40/28         32.0%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+    -> G06F18/25         32.0%  Fusion techniques
+    -> G06F18/41         32.0%  Interactive pattern learning with a human teacher
+
+G06N3/0635  (25 件)  Physical realisation, i.e. hardware implementation of neural networks, neurons or parts of
+    -> G06N3/065         92.0%  Analogue means
+    -> G06N3/0464        76.0%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/063         72.0%  Physical realisation, i.e. hardware implementation of neural networks, neurons o
+    -> G06N3/045         68.0%  Combinations of networks
+    -> G06N3/04          52.0%  Architecture, e.g. interconnection topology
+    -> G06N3/08          52.0%  Learning methods
+    -> G06N3/06          32.0%  Physical realisation, i.e. hardware implementation of neural networks, neurons o
+
+G06K9/6282  (25 件)  Tree-organised sequential classifiers
+    -> G06F18/24323     100.0%  Tree-organised classifiers
+    -> G06V10/764        32.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00926  (24 件)  Maintenance of references; Enrolment
+    -> G06V40/50        100.0%  Maintenance of biometric data or enrolment thereof
+    -> G06V40/172        66.7%  Classification, e.g. identification
+    -> G06V40/166        41.7%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/16         37.5%  Human faces, e.g. facial parts, sketches or expressions
+    -> G06V40/67         37.5%  Static or dynamic means for assisting the user to position a body part for biome
+
+G06K9/6276  (24 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/24147     100.0%  Distances to closest patterns, e.g. nearest neighbour classification
+    -> G06F18/214        45.8%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/209  (24 件)  Sensor details, e.g. position, configuration, special lenses
+    -> G06V10/147        41.7%  Details of sensors, e.g. sensor lenses
+
+G06K9/00261  (24 件)  Detection; Localisation; Normalisation using comparisons between temporally consecutive im
+    -> G06V40/167        91.7%  Detection; Localisation; Normalisation using comparisons between temporally cons
+    -> G06V40/172        45.8%  Classification, e.g. identification
+    -> G06V40/173        41.7%  Classification, e.g. identification face re-identification, e.g. recognising unk
+    -> G06V40/166        33.3%  Detection; Localisation; Normalisation using acquisition arrangements
+
+G06F17/30784  (24 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/783       100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/2018  (24 件)  Identifying/ignoring parts by sensing at different wavelengths
+    -> G06V10/143        70.8%  Sensing or illuminating at different wavelengths
+
+G06K9/00483  (24 件)  Document matching
+    -> G06V30/418       100.0%  Document matching, e.g. of document images
+    -> G06V30/416        45.8%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V30/10         33.3%  Character recognition
+
+G06K9/6253  (24 件)  User interactive design ; Environments; Tool boxes
+    -> G06F18/40         95.8%  Software arrangements specially adapted for pattern recognition, e.g. user inter
+
+G06K9/00449  (23 件)  Layout structured with printed lines or input boxes, e.g. business forms, tables
+    -> G06V30/412       100.0%  Layout analysis of documents structured with printed lines or input boxes, e.g. 
+    -> G06V30/414        34.8%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+
+G06K9/6298  (23 件)  Statistical pre-processing, e.g. techniques for normalisation or restoring missing data
+    -> G06V10/82         39.1%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/10         39.1%  Pre-processing; Data cleansing
+
+G06K9/00208  (23 件)  Recognising three-dimensional objects, e.g. using range or tactile information by matching
+    -> G06V20/647        95.7%  Three-dimensional [3D] objects by matching two-dimensional images to three-dimen
+
+G06F17/3025  (23 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/5838       95.7%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/51         30.4%  Indexing; Data structures therefor; Storage structures
+    -> G06F16/54         30.4%  Browsing; Visualisation therefor
+
+G06N3/0427  (23 件)  Architectures, e.g. interconnection topology in combination with an expert system
+    -> G06N3/042         91.3%  Knowledge-based neural networks; Logical representations of neural networks
+    -> G06N3/08          78.3%  Learning methods
+    -> G06N3/045         47.8%  Combinations of networks
+    -> G06N3/09          43.5%  Supervised learning
+    -> G06N3/0464        43.5%  Convolutional networks [CNN, ConvNet]
+    -> G06N3/044         30.4%  Recurrent networks, e.g. Hopfield networks
+    -> G06N3/0499        30.4%  Feedforward networks
+
+G06K9/036  (22 件)  Evaluation of quality of acquired pattern
+    -> G06V10/993        63.6%  Evaluation of the quality of the acquired pattern
+
+G06F17/2854  (22 件)  Translation evaluation
+    -> G06F40/51        100.0%  Translation evaluation
+    -> G06F40/58         54.5%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+    -> G06F40/47         50.0%  Machine-assisted translation, e.g. using translation memory
+
+G06K9/00389  (21 件)  Static hand gesture recognition
+    -> G06V40/113       100.0%  Recognition of static hand signs
+    -> G06V40/28         47.6%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+
+G06K9/4609  (21 件)  Detecting partial patterns, e.g. edges or contours, or configurations, e.g. loops, corners
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/3071  (21 件)  Clustering or classification including class or cluster creation or modification
+    -> G06F16/355        90.5%  Creation or modification of classes or clusters
+
+G06K9/00006  (21 件)  Acquiring or recognising fingerprints or palmprints
+    -> G06V40/12         95.2%  Fingerprints or palmprints
+    -> G06V40/13         33.3%  Sensors therefor
+    -> G06V40/1306       33.3%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+
+G06K9/00275  (21 件)  Holistic features and representations, i.e. based on the facial image taken as a whole
+    -> G06V40/169       100.0%  Holistic features and representations, i.e. based on the facial image taken as a
+    -> G06V40/172        33.3%  Classification, e.g. identification
+    -> G06V40/161        33.3%  Detection; Localisation; Normalisation
+
+G06K9/03  (20 件)  Detection or correction of errors, e.g. by rescanning the pattern
+    -> G06V10/98         50.0%  Detection or correction of errors, e.g. by rescanning the pattern or by human in
+    -> G06V10/82         35.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/222  (20 件)  Image acquisition using hand-held instruments the instrument generating sequences of posit
+    -> G06V30/1423       95.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/32         55.0%  Digital ink
+    -> G06V30/347        40.0%  Sampling; Contour coding; Stroke extraction
+
+G06K9/6254  (20 件)  Interactive pattern learning with a human teacher
+    -> G06F18/41        100.0%  Interactive pattern learning with a human teacher
+    -> G06F18/28         60.0%  Determining representative reference patterns, e.g. by averaging or distorting; 
+    -> G06V40/172        35.0%  Classification, e.g. identification
+    -> G06V40/10         30.0%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+    -> G06V20/64         30.0%  Three-dimensional [3D] objects
+    -> G06V40/28         30.0%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+    -> G06F18/25         30.0%  Fusion techniques
+    -> G06F18/253        30.0%  Fusion techniques of extracted features
+
+G06K9/62  (19 件)  Methods or arrangements for recognition using electronic means
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/30746  (19 件)  Audio data retrieval using features automatically derived from the audio content, e.g. des
+    -> G06F16/685       100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06F17/3079  (19 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/7837       94.7%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/00832  (19 件)  Recognising scenes inside a vehicle, e.g. related to occupancy, driver state, inner lighti
+    -> G06V20/59        100.0%  Context or environment of the image inside of a vehicle, e.g. relating to seat o
+    -> G06V40/19         31.6%  Sensors therefor
+    -> G06V40/20         31.6%  Movements or behaviour, e.g. gesture recognition
+
+G06K9/6261  (19 件)  Design or setup of recognition systems and techniques; Extraction of features in feature s
+    -> G06F18/2163       94.7%  Partitioning the feature space
+    -> G06V10/82         31.6%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/6264  (19 件)  Validation, performance evaluation or active pattern learning techniques based on the feed
+    -> G06F18/2185      100.0%  Validation; Performance evaluation; Active pattern learning techniques based on 
+    -> G06F18/2148       36.8%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06F17/30796  (18 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/7844      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/40  (18 件)  Noise filtering
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00241  (18 件)  Detection; Localisation; Normalisation using holistic features
+    -> G06V40/164       100.0%  Detection; Localisation; Normalisation using holistic features
+    -> G06V40/172        38.9%  Classification, e.g. identification
+
+G06K9/228  (18 件)  Hand-held scanners; Optical wands
+    -> G06V30/142        94.4%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/416        38.9%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V30/418        33.3%  Document matching, e.g. of document images
+    -> G06V10/10         33.3%  Image acquisition
+
+G06F17/2795  (18 件)  Thesaurus; Synonyms
+    -> G06F40/247        94.4%  Thesauruses; Synonyms
+
+G06F17/30035  (18 件)  Administration of user profiles, e.g. generation, initialisation, adaptation, distribution
+    -> G06F16/437        88.9%  Administration of user profiles, e.g. generation, initialisation, adaptation, di
+    -> G06F16/9535       38.9%  Search customisation based on user profiles and personalisation
+
+G06K9/00892  (17 件)  Use of multiple biometrics
+    -> G06V40/70        100.0%  Multimodal biometrics, e.g. combining information from different biometric modal
+    -> G06V40/172        41.2%  Classification, e.g. identification
+
+G06K9/00845  (17 件)  Recognising the driver's state or behaviour, e.g. attention, drowsiness
+    -> G06V20/597       100.0%  Recognising the driver's state or behaviour, e.g. attention or drowsiness
+    -> G06V40/171        35.3%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06F17/272  (17 件)  Parsing markup language streams
+    -> G06F40/221        82.4%  Parsing markup language streams
+
+G06K9/00912  (17 件)  Interactive means for assisting the user in correctly positioning the object of interest
+    -> G06V40/67        100.0%  Static or dynamic means for assisting the user to position a body part for biome
+    -> G06V40/166        52.9%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/13         47.1%  Sensors therefor
+    -> G06V40/1365       41.2%  Matching; Classification
+    -> G06V40/1306       41.2%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/50         41.2%  Maintenance of biometric data or enrolment thereof
+    -> G06V40/12         35.3%  Fingerprints or palmprints
+    -> G06V40/1312       35.3%  Sensors therefor direct reading, e.g. contactless acquisition
+
+G06K9/00684  (17 件)  Categorising the entire scene, e.g. birthday party or wedding scene
+    -> G06V20/35         94.1%  Categorising the entire scene, e.g. birthday party or wedding scene
+    -> G06V20/20         47.1%  Scenes; Scene-specific elements in augmented reality scenes
+
+G06K9/6211  (17 件)  Matching configurations of points or features, e.g. constellation matching
+    -> G06V10/757        58.8%  Matching configurations of points or features
+
+G06K9/42  (16 件)  Normalisation of the pattern dimensions
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00885  (16 件)  Biometric patterns not provided for under G06K9/00006, G06K9/00154, G06K9/00335, G06K9/003
+    -> G06V40/10         87.5%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+
+G06K9/00214  (16 件)  Recognising three-dimensional objects, e.g. using range or tactile information by matching
+    -> G06V20/653       100.0%  Three-dimensional [3D] objects by matching three-dimensional models, e.g. confor
+    -> G06V40/166        43.8%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/103        37.5%  Static body considered as a whole, e.g. static pedestrian or occupant recognitio
+    -> G06V20/52         37.5%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+    -> G06V10/94         31.2%  Hardware or software architectures specially adapted for image or video understa
+    -> G06V40/173        31.2%  Classification, e.g. identification face re-identification, e.g. recognising unk
+    -> G06V2201/05       31.2%  Recognition of patterns representing particular kinds of hidden objects, e.g. we
+    -> G06V30/274        31.2%  Syntactic or semantic context, e.g. balancing
+
+G06K9/325  (15 件)  Detection of text region in scene imagery, real life image or Web pages, e.g. licenses pla
+    -> G06V20/62        100.0%  Text, e.g. of license plates, overlay texts or captions on TV images
+    -> G06V30/10         33.3%  Character recognition
+
+G06K9/6271  (15 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/24133     100.0%  Distances to prototypes
+    -> G06V10/82         66.7%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/764        60.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V30/19173      40.0%  Classification techniques
+    -> G06V10/454        40.0%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+
+G06F17/30787  (15 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/7834      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/6231  (15 件)  Selecting the most significant subset of features by evaluating different subsets accordin
+    -> G06F18/2115      100.0%  Selection of the most significant subset of features by evaluating different sub
+    -> G06F18/2148       46.7%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06F17/30687  (15 件)  Query execution using probabilistic model
+    -> G06F16/3346       86.7%  Query execution using probabilistic model
+    -> G06F16/9535       40.0%  Search customisation based on user profiles and personalisation
+
+G06K9/00986  (14 件)  Hardware and software architectures for pattern recognition, e.g. modular organisation usi
+    -> G06V10/955       100.0%  Hardware or software architectures specially adapted for image or video understa
+    -> G06V10/454        35.7%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+
+G06K9/6219  (14 件)  Hierarchical techniques, i.e. dividing or merging pattern sets so as to obtain a dendogram
+    -> G06F18/231       100.0%  Hierarchical techniques, i.e. dividing or merging pattern sets so as to obtain a
+    -> G06V10/7625       57.1%  Hierarchical techniques, i.e. dividing or merging patterns to obtain a tree-like
+    -> G06V10/764        42.9%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V20/52         35.7%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+
+G06K9/6221  (14 件)  Non-hierarchical partitioning techniques based on statistics
+    -> G06F18/2321       92.9%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+    -> G06V20/30         35.7%  Scenes; Scene-specific elements in albums, collections or shared content, e.g. s
+    -> G06V10/764        35.7%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         35.7%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/00899  (14 件)  Spoof detection
+    -> G06V40/40        100.0%  Spoof detection, e.g. liveness detection
+    -> G06V40/172        71.4%  Classification, e.g. identification
+    -> G06V40/166        57.1%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V40/16         42.9%  Human faces, e.g. facial parts, sketches or expressions
+    -> G06V40/171        35.7%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06K9/6292  (14 件)  Fusion techniques, i.e. combining data from various sources, e.g. sensor fusion of classif
+    -> G06F18/254       100.0%  Fusion techniques of classification results, e.g. of results related to same inp
+    -> G06V20/58         42.9%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V10/809        35.7%  Fusion, i.e. combining data from various sources at the sensor level, preprocess
+
+G06K9/34  (14 件)  Segmentation of touching or overlapping patterns in the image field
+    -> G06V10/26         64.3%  Segmentation of patterns in the image field; Cutting or merging of image element
+
+G06K9/4647  (14 件)  Extraction of features or characteristics of the image by performing operations within ima
+    -> G06V10/507        64.3%  Summing image-intensity values; Histogram projection analysis
+
+G06K9/32  (14 件)  Aligning or centering of the image pick-up or image-field
+    -> G06V10/24         42.9%  Aligning, centring, orientation detection or correction of the image
+
+G06K9/3208  (14 件)  Orientation detection or correction, e.g. rotation of multiples of 90 degrees
+    -> G06V10/242        64.3%  Aligning, centring, orientation detection or correction of the image by image ro
+
+G06K9/00073  (14 件)  Extracting features related to minutiae and pores
+    -> G06V40/1353       92.9%  Extracting features related to minutiae or pores
+    -> G06V40/67         50.0%  Static or dynamic means for assisting the user to position a body part for biome
+    -> G06V40/1335       50.0%  Combining adjacent partial images (e.g. slices) to create a composite input or r
+    -> G06V40/1365       42.9%  Matching; Classification
+    -> G06V40/1306       35.7%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/1318       35.7%  Sensors therefor using electro-optical elements or layers, e.g. electroluminesce
+    -> G06V40/1329       35.7%  Protecting the fingerprint sensor against damage caused by the finger
+
+G06K9/00637  (13 件)  Recognising patterns in remote scenes, e.g. aerial images, vegetation versus urban areas o
+    -> G06V20/176        92.3%  Urban or other man-made structures
+
+G06F17/3069  (13 件)  Query execution using vector based model
+    -> G06F16/3347       92.3%  Query execution using vector based model
+    -> G06F16/35         30.8%  Clustering; Classification
+    -> G06F16/9535       30.8%  Search customisation based on user profiles and personalisation
+
+G06K9/00234  (13 件)  Detection; Localisation; Normalisation using pixel segmentation or colour matching
+    -> G06V40/162       100.0%  Detection; Localisation; Normalisation using pixel segmentation or colour matchi
+    -> G06V40/165        30.8%  Detection; Localisation; Normalisation using facial parts and geometric relation
+    -> G06V40/171        30.8%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+
+G06K9/36  (13 件)  Image preprocessing, i.e. processing the image information without deciding about the iden
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/30672  (13 件)  Query expansion
+    -> G06F16/3338      100.0%  Query expansion
+
+G06K9/00496  (12 件)  Recognising patterns in signals and combinations thereof
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00758  (12 件)  Matching video sequences
+    -> G06V20/48         91.7%  Matching video sequences
+    -> G06V20/46         66.7%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V20/41         41.7%  Higher-level, semantic clustering, classification or understanding of video scen
+
+G06F17/2755  (11 件)  Morphological analysis
+    -> G06F40/268        90.9%  Morphological analysis
+
+G06K9/00026  (11 件)  Image acquisition by combining adjacent partial images (e.g. slices) to create a composite
+    -> G06V40/1335       90.9%  Combining adjacent partial images (e.g. slices) to create a composite input or r
+    -> G06V40/1306       54.5%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/1365       45.5%  Matching; Classification
+    -> G06V40/67         36.4%  Static or dynamic means for assisting the user to position a body part for biome
+    -> G06V40/13         36.4%  Sensors therefor
+
+G06K9/186  (11 件)  Recognition of characters printed with magnetic ink
+    -> G06V30/2253       90.9%  Recognition of characters printed with magnetic ink
+    -> G06V30/10         81.8%  Character recognition
+    -> G06V30/224        81.8%  Character recognition characterised by the type of writing of printed characters
+    -> G06V30/416        81.8%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V20/63         54.5%  Scene text, e.g. street names
+    -> G06V30/142        45.5%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06F18/24         45.5%  Classification techniques
+    -> G06F18/2411       45.5%  Classification techniques relating to the classification model, e.g. parametric 
+
+G06K9/4638  (11 件)  Detecting partial patterns, e.g. edges or contours, or configurations, e.g. loops, corners
+    -> G06V10/457        45.5%  Local feature extraction by analysis of parts of the pattern, e.g. by detecting 
+
+G06K9/00067  (10 件)  Preprocessing; Feature extraction (minutiae)
+    -> G06V40/1347       90.0%  Preprocessing; Feature extraction
+    -> G06V40/1306       40.0%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/1365       40.0%  Matching; Classification
+    -> G06V40/12         30.0%  Fingerprints or palmprints
+
+G06K9/0008  (10 件)  Extracting features related to ridge properties; determining the fingerprint type, e.g. wh
+    -> G06V40/1359       70.0%  Extracting features related to ridge properties; Determining the fingerprint typ
+    -> G06V40/1335       40.0%  Combining adjacent partial images (e.g. slices) to create a composite input or r
+    -> G06V40/1318       30.0%  Sensors therefor using electro-optical elements or layers, e.g. electroluminesce
+
+G06K9/6251  (10 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/2137       90.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/214        60.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V10/764        30.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/6247  (10 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/2135      100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06V10/764        30.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/6278  (10 件)  Bayesian classification
+    -> G06F18/24155     100.0%  Bayesian classification
+
+G06K9/6272  (10 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/24137     100.0%  Distances to cluster centroïds
+    -> G06F18/23         40.0%  Clustering techniques
+
+G06K9/6297  (10 件)  Markov models and related models, e.g. semi-Markov models; Markov random fields; networks 
+    -> G06F18/295       100.0%  Markov models or related models, e.g. semi-Markov models; Markov random fields; 
+
+G06K9/6248  (10 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/21355     100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06V10/82         40.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/214        40.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V20/30         30.0%  Scenes; Scene-specific elements in albums, collections or shared content, e.g. s
+    -> G06F18/21347      30.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06V10/764        30.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/2135       30.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/23213      30.0%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+
+G06K9/00973  (10 件)  Hardware and software architectures for pattern recognition, e.g. modular organisation
+    -> G06V10/94        100.0%  Hardware or software architectures specially adapted for image or video understa
+    -> G06V40/166        50.0%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V30/274        50.0%  Syntactic or semantic context, e.g. balancing
+    -> G06V40/173        40.0%  Classification, e.g. identification face re-identification, e.g. recognising unk
+    -> G06V2201/05       40.0%  Recognition of patterns representing particular kinds of hidden objects, e.g. we
+    -> G06V20/653        40.0%  Three-dimensional [3D] objects by matching three-dimensional models, e.g. confor
+    -> G06V20/40         40.0%  Scenes; Scene-specific elements in video content
+
+G06K9/64  (10 件)  Methods or arrangements for recognition using electronic means using simultaneous comparis
+    -> G06V10/75         60.0%  Organisation of the matching processes, e.g. simultaneous or sequential comparis
+    -> G06V20/10         40.0%  Terrestrial scenes
+    -> G06V10/50         40.0%  Extraction of image or video features by performing operations within image bloc
+    -> G06F18/22         40.0%  Matching criteria, e.g. proximity measures
+
+G06K9/481  (10 件)  Extraction of features or characteristics of the image by coding the contour of the patter
+    -> G06F18/22         40.0%  Matching criteria, e.g. proximity measures
+    -> G06V10/761        30.0%  Proximity, similarity or dissimilarity measures
+
+G06K9/6284  (10 件)  Single class perspective, e.g. one-against-all classification; Novelty detection; Outlier 
+    -> G06F18/2433       90.0%  Single-class perspective, e.g. one-against-all classification; Novelty detection
+
+G06K9/4676  (9 件)  Extracting features based on a plurality of salient regional features, e.g. "bag of words"
+    -> G06V10/464        44.4%  Salient features, e.g. scale invariant feature transforms [SIFT] using a plurali
+
+G06K9/22  (9 件)  Image acquisition using hand-held instruments
+    -> G06V10/17         55.6%  Image acquisition using hand-held instruments
+    -> G06V40/172        33.3%  Classification, e.g. identification
+
+G06F19/24  (9 件)  Bioinformatics, i.e. methods or systems for genetic or protein-related data processing in 
+    -> G16B40/00        100.0%  ICT specially adapted for biostatistics; ICT specially adapted for bioinformatic
+    -> G16B40/20         44.4%  Supervised data analysis
+    -> G16B20/20         44.4%  Allele or variant detection, e.g. single nucleotide polymorphism [SNP] detection
+    -> G16B20/00         33.3%  ICT specially adapted for functional genomics or proteomics, e.g. genotype-pheno
+    -> G16B30/00         33.3%  ICT specially adapted for sequence analysis involving nucleotides or amino acids
+
+G06K9/00436  (9 件)  Matching; classification using human interaction, e.g. selection of the best displayed rec
+    -> G06V30/387       100.0%  Matching; Classification using human interaction, e.g. selection of the best dis
+    -> G06V30/347        88.9%  Sampling; Contour coding; Stroke extraction
+    -> G06V30/36         55.6%  Matching; Classification
+
+G06K9/6857  (9 件)  Coarse/fine approaches, e.g. resolution of ambiguities, multiscale approaches
+    -> G06V30/2504      100.0%  Coarse or fine approaches, e.g. resolution of ambiguities or multiscale approach
+    -> G06V10/82         44.4%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/454        44.4%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06V30/19173      44.4%  Classification techniques
+    -> G06F18/2148       33.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06F17/2725  (9 件)  Validation
+    -> G06F40/226       100.0%  Validation
+    -> G06F40/216        33.3%  Parsing using statistical methods
+
+G06K9/2063  (9 件)  Selective acquisition/locating/processing of specific regions, e.g. highlighted text, fidu
+    -> G06V10/225        55.6%  Image preprocessing by selection of a specific region containing or referencing 
+    -> G06V30/414        55.6%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+    -> G06V30/416        44.4%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V30/1478       33.3%  Inclination or skew detection or correction of characters or of image to be reco
+    -> G06F18/22         33.3%  Matching criteria, e.g. proximity measures
+
+G06K9/00053  (9 件)  Protecting the fingerprint sensor against damage caused by the finger
+    -> G06V40/1329      100.0%  Protecting the fingerprint sensor against damage caused by the finger
+    -> G06V40/1306       77.8%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/1365       55.6%  Matching; Classification
+    -> G06V40/1318       55.6%  Sensors therefor using electro-optical elements or layers, e.g. electroluminesce
+    -> G06V40/1353       44.4%  Extracting features related to minutiae or pores
+
+G06K9/00993  (9 件)  Management of recognition tasks
+    -> G06V10/96         88.9%  Management of image or video recognition tasks
+    -> G06F18/24133      44.4%  Distances to prototypes
+    -> G06V30/142        44.4%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V10/10         44.4%  Image acquisition
+    -> G06V20/20         44.4%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V20/63         44.4%  Scene text, e.g. street names
+    -> G06V10/56         44.4%  Extraction of image or video features relating to colour
+    -> G06V30/19173      44.4%  Classification techniques
+
+G06K9/00409  (9 件)  Preprocessing; Feature extraction
+    -> G06V30/333        88.9%  Preprocessing; Feature extraction
+    -> G06V30/1423       33.3%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/36         33.3%  Matching; Classification
+
+G06K9/00308  (9 件)  Static expression
+    -> G06V40/175       100.0%  Static expression
+
+G06K9/6293  (9 件)  Fusion techniques, i.e. combining data from various sources, e.g. sensor fusion of classif
+    -> G06F18/256        66.7%  Fusion techniques of classification results, e.g. of results related to same inp
+
+G06K9/6274  (9 件)  Classification techniques relating to the classification paradigm, e.g. parametric or non-
+    -> G06F18/24143     100.0%  Distances to neighbourhood prototypes, e.g. restricted Coulomb energy networks [
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/764        66.7%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/454        44.4%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06V40/20         44.4%  Movements or behaviour, e.g. gesture recognition
+    -> G06V30/19173      33.3%  Classification techniques
+    -> G06V10/7625       33.3%  Hierarchical techniques, i.e. dividing or merging patterns to obtain a tree-like
+    -> G06V10/255        33.3%  Detecting or recognising potential candidate objects based on visual cues, e.g. 
+
+G06K9/342  (9 件)  Cutting or merging image elements, e.g. region growing, watershed, clustering-based techni
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00577  (8 件)  Recognising objects characterised by unique random properties, i.e. objects having a physi
+    -> G06V20/80        100.0%  Recognising image objects characterised by unique random patterns
+
+G06K9/00523  (8 件)  Feature extraction
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/30713  (8 件)  Clustering or classification including cluster or class visualization or browsing
+    -> G06F16/358       100.0%  Browsing; Visualisation therefor
+
+G06K9/20  (8 件)  Image acquisition
+    -> G06V10/10         62.5%  Image acquisition
+    -> G06V2201/10       37.5%  Recognition assisted with metadata
+    -> G06V20/20         37.5%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V30/10         37.5%  Character recognition
+    -> G06V10/993        37.5%  Evaluation of the quality of the acquired pattern
+
+G06F17/2809  (8 件)  Data driven translation
+    -> G06F40/42         87.5%  Data-driven translation
+    -> G06F40/58         62.5%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+    -> G06F40/51         50.0%  Translation evaluation
+    -> G06F40/47         37.5%  Machine-assisted translation, e.g. using translation memory
+    -> G06F40/263        37.5%  Language identification
+
+G06F17/2872  (8 件)  Rule based translation
+    -> G06F40/55        100.0%  Rule-based translation
+    -> G06F40/279        37.5%  Recognition of textual entities
+    -> G06F40/289        37.5%  Phrasal analysis, e.g. finite state techniques or chunking
+
+G06K9/001  (8 件)  Matching features related to ridge properties or fingerprint texture
+    -> G06V40/1376       75.0%  Matching features related to ridge properties or fingerprint texture
+    -> G06V40/1365       37.5%  Matching; Classification
+    -> G06V40/50         37.5%  Maintenance of biometric data or enrolment thereof
+
+G06K9/3283  (8 件)  Inclination (skew) detection or correction of characters or of image to be recognised of c
+    -> G06V30/1478      100.0%  Inclination or skew detection or correction of characters or of image to be reco
+    -> G06V30/416        75.0%  Extracting the logical structure, e.g. chapters, sections or page numbers; Ident
+    -> G06V30/414        50.0%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+    -> G06F18/22         50.0%  Matching criteria, e.g. proximity measures
+
+G06K9/3275  (8 件)  Inclination (skew) detection or correction of characters or of image to be recognised
+    -> G06V10/243        50.0%  Aligning, centring, orientation detection or correction of the image by compensa
+    -> G06V20/38         37.5%  Outdoor scenes
+
+G06K9/6224  (8 件)  Non-hierarchical partitioning techniques based on graph theory, e.g. Minimum Spanning Tree
+    -> G06F18/2323      100.0%  Non-hierarchical techniques based on graph theory, e.g. minimum spanning trees [
+    -> G06V10/7635       37.5%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/033  (7 件)  Detection or correction of errors, e.g. by rescanning the pattern with the intervention of
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00348  (7 件)  Recognition of walking or running movements, e.g. gait recognition
+    -> G06V40/25        100.0%  Recognition of walking or running movements, e.g. gait recognition
+    -> G06V20/58         85.7%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+
+G06K9/48  (7 件)  Extraction of features or characteristics of the image by coding the contour of the patter
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06F17/30731  (7 件)  Creation of semantic tools
+    -> G06F16/36        100.0%  Creation of semantic tools, e.g. ontology or thesauri
+    -> G06F16/958        42.9%  Organisation or management of web site content, e.g. publishing, maintaining pag
+    -> G06F16/9535       42.9%  Search customisation based on user profiles and personalisation
+
+G06K9/00382  (7 件)  Static hand biometric or posture recognition
+    -> G06V40/11         85.7%  Hand-related biometrics; Hand pose recognition
+    -> G06V40/113        42.9%  Recognition of static hand signs
+
+G06K9/00838  (7 件)  Recognising seat occupancy, e.g. forward or rearward facing child seat
+    -> G06V20/593       100.0%  Recognising seat occupancy
+
+G06K9/00906  (7 件)  Detection of body part being alive
+    -> G06V40/45         85.7%  Detection of the body part being alive
+    -> G06V40/40         42.9%  Spoof detection, e.g. liveness detection
+    -> G06V40/172        42.9%  Classification, e.g. identification
+
+G06F17/2827  (7 件)  Example based machine translation; Alignment
+    -> G06F40/45        100.0%  Example-based machine translation; Alignment
+    -> G06F40/44         42.9%  Statistical methods, e.g. probability models
+    -> G06F40/242        42.9%  Dictionaries
+
+G06F17/30734  (7 件)  Ontology
+    -> G06F16/367       100.0%  Ontology
+
+G06K9/6273  (7 件)  Smoothing the distance, e.g. Radial Basis Function Networks
+    -> G06V10/764       100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/2414      100.0%  Smoothing the distance, e.g. radial basis function networks [RBFN]
+    -> G06V20/58         71.4%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06V20/588        57.1%  Recognition of the road, e.g. of lane markings; Recognition of the vehicle drivi
+    -> G06V10/955        57.1%  Hardware or software architectures specially adapted for image or video understa
+    -> G06V20/56         57.1%  Context or environment of the image exterior to a vehicle by using sensors mount
+
+G06K9/00147  (6 件)  Matching; Classification
+    -> G06V20/698       100.0%  Matching; Classification
+    -> G06V2201/03       50.0%  Recognition of patterns in medical or anatomical images
+    -> G06V20/693        50.0%  Acquisition
+    -> G06F18/217        50.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V2201/10       33.3%  Recognition assisted with metadata
+    -> G06F18/28         33.3%  Determining representative reference patterns, e.g. by averaging or distorting; 
+    -> G06V40/18         33.3%  Eye characteristics, e.g. of the iris
+
+G06K9/626  (6 件)  Selecting classification rules
+    -> G06F18/24765      83.3%  Rule-based classification
+    -> G06F18/214        50.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V20/41         33.3%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/46         33.3%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V20/47         33.3%  Detecting features for summarising video content
+    -> G06V20/70         33.3%  Labelling scene content, e.g. deriving syntactic or semantic representations
+
+G06K9/6226  (6 件)  Non-hierarchical partitioning techniques based on the modelling of probability density fun
+    -> G06F18/2321       83.3%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+    -> G06F18/285        66.7%  Selection of pattern recognition techniques, e.g. of classifiers in a multi-clas
+    -> G06V10/764        50.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/24         33.3%  Classification techniques
+    -> G06V20/41         33.3%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V40/20         33.3%  Movements or behaviour, e.g. gesture recognition
+    -> G06V40/172        33.3%  Classification, e.g. identification
+    -> G06V20/52         33.3%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+
+G06K9/723  (6 件)  Lexical context
+    -> G06V30/268       100.0%  Lexical context
+    -> G06V10/758        50.0%  Involving statistics of pixels or of feature values, e.g. histogram matching
+    -> G06V10/759        50.0%  Region-based matching
+    -> G06V10/768        50.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V20/30         50.0%  Scenes; Scene-specific elements in albums, collections or shared content, e.g. s
+
+G06F17/30669  (6 件)  Translation of the query language, e.g. Chinese to English
+    -> G06F16/3337      100.0%  Translation of the query language, e.g. Chinese to English
+    -> G06F16/951        66.7%  Indexing; Web crawling techniques
+    -> G06F16/338        50.0%  Presentation of query results
+    -> G06F16/24522      33.3%  Translation of natural language queries to structured queries
+
+G06K9/00651  (6 件)  Recognising patterns in remote scenes, e.g. aerial images, vegetation versus urban areas o
+    -> G06V20/182       100.0%  Network patterns, e.g. roads or rivers
+    -> G06V20/20         83.3%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V40/1306       50.0%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V20/176        33.3%  Urban or other man-made structures
+
+G06F17/30032  (6 件)  Querying by filtering; by personalisation, e.g. querying making use of user profiles using
+    -> G06F16/436        83.3%  Filtering based on additional data, e.g. user or group profiles using biological
+
+G06K9/6245  (6 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/764        83.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/21347      66.7%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/2148       50.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+    -> G06V10/776        33.3%  Validation; Performance evaluation
+    -> G06F18/24143      33.3%  Distances to neighbourhood prototypes, e.g. restricted Coulomb energy networks [
+    -> G06F18/21355      33.3%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06V40/172        33.3%  Classification, e.g. identification
+
+G06K9/00785  (5 件)  Recognising traffic patterns acquired by static cameras
+    -> G06V20/54        100.0%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+    -> G06V10/764        60.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V20/625        40.0%  License plates
+    -> G06V20/52         40.0%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+
+G06K9/6234  (5 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06V10/764        80.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/2132       80.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06V10/82         60.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/454        40.0%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06F18/214        40.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06F17/2845  (5 件)  Using very large corpora, e.g. the world wide web [WWW]
+    -> G06F40/58        100.0%  Use of machine translation, e.g. for multi-lingual retrieval, for server-side tr
+    -> G06F40/44         80.0%  Statistical methods, e.g. probability models
+    -> G06F40/49         60.0%  Data-driven translation using very large corpora, e.g. the web
+    -> G06F40/30         40.0%  Semantic analysis
+    -> G06F40/47         40.0%  Machine-assisted translation, e.g. using translation memory
+    -> G06F40/40         40.0%  Processing or translation of natural language
+
+G06K9/38  (5 件)  Quantising the analogue image signal, e.g. histogram thresholding for discrimination betwe
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00778  (5 件)  Recognition or static of dynamic crowd images, e.g. recognition of crowd congestion
+    -> G06V20/53        100.0%  Recognition of crowd images, e.g. recognition of crowd congestion
+    -> G06V10/25         60.0%  Determination of region of interest [ROI] or a volume of interest [VOI]
+    -> G06V40/10         60.0%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+    -> G06V10/764        40.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V20/58         40.0%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+    -> G06F18/211        40.0%  Selection of the most significant subset of features
+    -> G06V10/82         40.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/20         40.0%  Movements or behaviour, e.g. gesture recognition
+
+G06K9/6807  (5 件)  Dividing the references in groups prior to recognition, the recognition taking place in st
+    -> G06V30/242       100.0%  Division of the character sequences into groups prior to recognition; Selection 
+    -> G06F18/2185       80.0%  Validation; Performance evaluation; Active pattern learning techniques based on 
+    -> G06F18/23         40.0%  Clustering techniques
+
+G06K9/6285  (5 件)  Classification techniques relating to the decision surface
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06F18/245       100.0%  Classification techniques relating to the decision surface
+    -> G06V10/774        40.0%  Generating sets of training patterns; Bootstrap methods, e.g. bagging or boostin
+    -> G06V10/87         40.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V20/41         40.0%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06F18/2431       40.0%  Multiple classes
+    -> G06F18/285        40.0%  Selection of pattern recognition techniques, e.g. of classifiers in a multi-clas
+
+G06K9/6286  (5 件)  Linear, e.g. hyperplane
+    -> G06F18/2451      100.0%  Classification techniques relating to the decision surface linear, e.g. hyperpla
+    -> G06F18/214        40.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/6252  (5 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/21375     100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/214        40.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/621  (5 件)  Shifting or otherwise transforming the patterns to accommodate for positional errors invol
+    -> G06V10/7557       80.0%  Deformable models or variational models, e.g. snakes or active contours based on
+    -> G06V40/168        60.0%  Feature extraction; Face representation
+    -> G06V20/647        60.0%  Three-dimensional [3D] objects by matching two-dimensional images to three-dimen
+
+G06K9/00134  (4 件)  Acquisition, e.g. centering the image field
+    -> G06V2201/03       75.0%  Recognition of patterns in medical or anatomical images
+    -> G06V20/693        75.0%  Acquisition
+    -> G06F18/217        75.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V20/698        75.0%  Matching; Classification
+
+G06K9/469  (4 件)  Graphical representation, e.g. directed attributed graph
+    -> G06V10/7635       75.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/2323       75.0%  Non-hierarchical techniques based on graph theory, e.g. minimum spanning trees [
+    -> G06V20/46         50.0%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V20/698        50.0%  Matching; Classification
+    -> G06V20/49         50.0%  Segmenting video sequences, i.e. computational techniques such as parsing or cut
+
+G06K9/00154  (4 件)  Reading or verifying signatures; Writer recognition
+    -> G06V40/30        100.0%  Writer recognition; Reading and verifying signatures
+    -> G06V30/1423       50.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+
+G06K9/58  (4 件)  Image preprocessing, i.e. processing the image information without deciding about the iden
+    -> G06V20/20         50.0%  Scenes; Scene-specific elements in augmented reality scenes
+
+G06K9/00865  (4 件)  Recognising whole cursive words using stroke segmentation
+    -> G06V30/1423      100.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/2268       75.0%  Character recognition characterised by the type of writing of cursive writing us
+    -> G06V30/32         50.0%  Digital ink
+
+G06K9/0012  (4 件)  Detecting the live character of the finger, i.e. distinguishing from a fake or cadaver fin
+    -> G06V40/1394      100.0%  Detecting the live character of the finger, i.e. distinguishing from a fake or c
+
+G06K9/3266  (4 件)  Overlay text, e.g. embedded caption in TV program
+    -> G06V20/635       100.0%  Overlay text, e.g. embedded captions in a TV programme
+    -> G06V30/10         75.0%  Character recognition
+    -> G06V20/62         50.0%  Text, e.g. of license plates, overlay texts or captions on TV images
+    -> G06V10/22         50.0%  Image preprocessing by selection of a specific region containing or referencing 
+
+G06K9/6204  (4 件)  Matching of contours
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00046  (4 件)  Image acquisition by using geometrical optics, e.g. using prisms
+    -> G06V40/1324      100.0%  Sensors therefor by using geometrical optics, e.g. using prisms
+    -> G06V40/1318       75.0%  Sensors therefor using electro-optical elements or layers, e.g. electroluminesce
+
+G06K9/527  (4 件)  Scale-space domain transformation, e.g. with wavelet analysis
+    -> G06V10/52        100.0%  Scale-space analysis, e.g. wavelet analysis
+    -> G06V10/98         75.0%  Detection or correction of errors, e.g. by rescanning the pattern or by human in
+    -> G06V10/82         75.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/454        75.0%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+
+G06F17/2863  (4 件)  Processing of non-latin text
+    -> G06F40/53         75.0%  Processing of non-Latin text
+    -> G06F40/129        50.0%  Handling non-Latin characters, e.g. kana-to-kanji conversion
+    -> G06F40/274        50.0%  Converting codes to words; Guess-ahead of partial word inputs
+
+G06K9/00127  (4 件)  Acquiring and recognising microscopic objects, e.g. biological cells and cellular parts
+    -> G06V20/69        100.0%  Microscopic objects, e.g. biological cells or cellular parts
+    -> G06V10/82         75.0%  Arrangements for image or video recognition or understanding using pattern recog
+
+G06K9/44  (4 件)  Smoothing or thinning of the pattern
+    -> G06V10/34         75.0%  Smoothing or thinning of the pattern; Morphological operations; Skeletonisation
+    -> G06V10/40         50.0%  Extraction of image or video features
+
+G06K9/56  (4 件)  Combinations of preprocessing functions using a local operator, i.e. means to operate on a
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06N3/0436  (4 件)  Architectures, e.g. interconnection topology in combination with fuzzy logic
+    -> G06N3/08         100.0%  Learning methods
+    -> G06N3/084         75.0%  Backpropagation, e.g. using gradient descent
+    -> G06N3/043         75.0%  Architecture, e.g. interconnection topology based on fuzzy logic, fuzzy membersh
+    -> G06N3/006         50.0%  Artificial life, i.e. computing arrangements simulating life based on simulated 
+    -> G06N3/09          50.0%  Supervised learning
+
+G06F17/2745  (4 件)  Heading extraction; Automatic titling, numbering
+    -> G06F40/258       100.0%  Heading extraction; Automatic titling; Numbering
+    -> G06F40/103        50.0%  Formatting, i.e. changing of presentation of documents
+    -> G06F40/151        50.0%  Transformation
+
+G06K9/0055  (4 件)  Classification; Matching by matching signal segments
+    -> G06F18/22         50.0%  Matching criteria, e.g. proximity measures
+    -> G06V40/28         50.0%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+
+G06K9/624  (4 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/2134      100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+
+G06K9/00697  (4 件)  Outdoor scenes
+    -> G06V20/38        100.0%  Outdoor scenes
+
+G06K9/00691  (4 件)  Indoor scenes
+    -> G06V20/36        100.0%  Indoor scenes
+    -> G06V20/10         75.0%  Terrestrial scenes
+
+G06K9/3216  (3 件)  Aligning or centering of the image pick-up or image-field by locating a pattern
+    -> G06V10/245       100.0%  Aligning, centring, orientation detection or correction of the image by locating
+    -> G06V20/64         66.7%  Three-dimensional [3D] objects
+    -> G06V20/20         66.7%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V10/768        66.7%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/21         33.3%  Design or setup of recognition systems or techniques; Extraction of features in 
+    -> G06V30/413        33.3%  Classification of content, e.g. text, photographs or tables
+    -> G06V20/47         33.3%  Detecting features for summarising video content
+    -> G06V30/414        33.3%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+
+G06K9/80  (3 件)  Combination of image preprocessing and recognition functions
+    -> G06V2201/10       33.3%  Recognition assisted with metadata
+    -> G06F18/24         33.3%  Classification techniques
+    -> G06V10/764        33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/22         33.3%  Matching criteria, e.g. proximity measures
+    -> G06V10/758        33.3%  Involving statistics of pixels or of feature values, e.g. histogram matching
+    -> G06V10/751        33.3%  Comparing pixel values or logical combinations thereof, or feature values having
+    -> G06V10/507        33.3%  Summing image-intensity values; Histogram projection analysis
+    -> G06V10/761        33.3%  Proximity, similarity or dissimilarity measures
+
+G06K9/00852  (3 件)  Recognising whole cursive words
+    -> G06V30/226       100.0%  Character recognition characterised by the type of writing of cursive writing
+    -> G06V30/10         66.7%  Character recognition
+    -> G06V30/347        66.7%  Sampling; Contour coding; Stroke extraction
+    -> G06V30/36         33.3%  Matching; Classification
+
+G06K9/00093  (3 件)  Matching features related to minutiae and pores
+    -> G06V40/1376       66.7%  Matching features related to ridge properties or fingerprint texture
+    -> G06V40/1365       66.7%  Matching; Classification
+    -> G06V40/50         66.7%  Maintenance of biometric data or enrolment thereof
+    -> G06V40/1371       66.7%  Matching features related to minutiae or pores
+    -> G06V40/13         33.3%  Sensors therefor
+    -> G06V10/993        33.3%  Evaluation of the quality of the acquired pattern
+
+G06K9/6281  (3 件)  Piecewise classification, i.e. whereby each classification requires several discriminant r
+    -> G06F18/24317     100.0%  Piecewise classification, i.e. whereby each classification requires several disc
+    -> G06F18/214        66.7%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V20/40         33.3%  Scenes; Scene-specific elements in video content
+    -> G06V20/44         33.3%  Event detection
+
+G06K9/50  (3 件)  Extraction of features or characteristics of the image by analysing segments intersecting 
+    -> G06V10/421        66.7%  Global feature extraction by analysis of the whole pattern, e.g. using frequency
+    -> G06V2201/10       33.3%  Recognition assisted with metadata
+    -> G06F18/24         33.3%  Classification techniques
+    -> G06V20/584        33.3%  Recognition of moving objects or obstacles, e.g. vehicles or pedestrians; Recogn
+
+G06K9/0014  (3 件)  Pre-processing, e.g. image segmentation ; Feature extraction
+    -> G06V20/695       100.0%  Preprocessing, e.g. image segmentation
+    -> G06V10/764        33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/214        33.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V10/25         33.3%  Determination of region of interest [ROI] or a volume of interest [VOI]
+    -> G06V20/69         33.3%  Microscopic objects, e.g. biological cells or cellular parts
+
+G06K9/6206  (3 件)  Shifting or otherwise transforming the patterns to accommodate for positional errors invol
+    -> G06F18/22         66.7%  Matching criteria, e.g. proximity measures
+    -> G06F18/24         33.3%  Classification techniques
+    -> G06V10/764        33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V2201/06       33.3%  Recognition of objects for industrial automation
+    -> G06F18/2433       33.3%  Single-class perspective, e.g. one-against-all classification; Novelty detection
+    -> G06F18/24147      33.3%  Distances to closest patterns, e.g. nearest neighbour classification
+    -> G06V10/464        33.3%  Salient features, e.g. scale invariant feature transforms [SIFT] using a plurali
+    -> G06V10/757        33.3%  Matching configurations of points or features
+
+G06F17/30802  (3 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/785       100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/71         66.7%  Indexing; Data structures therefor; Storage structures
+    -> G06F16/2455       33.3%  Query execution
+    -> G06F16/783        33.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/2237       33.3%  Vectors, bitmaps or matrices
+    -> G06F16/2255       33.3%  Hash tables
+    -> G06F16/2228       33.3%  Indexing structures
+    -> G06F16/907        33.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/00724  (3 件)  Higher-level, semantic clustering, classification or understanding of video scenes, e.g. d
+    -> G06V20/42        100.0%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/44         66.7%  Event detection
+    -> G06V20/20         33.3%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06F18/214        33.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V10/507        33.3%  Summing image-intensity values; Histogram projection analysis
+    -> G06V10/40         33.3%  Extraction of image or video features
+    -> G06V20/46         33.3%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V10/7788       33.3%  Active pattern-learning, e.g. online learning of image or video features based o
+
+G06K9/68  (3 件)  Methods or arrangements for recognition using electronic means using sequential comparison
+    -> G06V10/75         33.3%  Organisation of the matching processes, e.g. simultaneous or sequential comparis
+    -> G06V20/13         33.3%  Satellite images
+    -> G06F18/24         33.3%  Classification techniques
+    -> G06F18/2113       33.3%  Selection of the most significant subset of features by ranking or filtering the
+
+G06K9/00114  (3 件)  Detecting the live character of the finger, i.e. distinguishing from a fake or cadaver fin
+    -> G06V40/1388      100.0%  Detecting the live character of the finger, i.e. distinguishing from a fake or c
+    -> G06V40/1335       33.3%  Combining adjacent partial images (e.g. slices) to create a composite input or r
+    -> G06V40/1359       33.3%  Extracting features related to ridge properties; Determining the fingerprint typ
+    -> G06V40/1306       33.3%  Sensors therefor non-optical, e.g. ultrasonic or capacitive sensing
+    -> G06V40/45         33.3%  Detection of the body part being alive
+    -> G06V40/19         33.3%  Sensors therefor
+    -> G06V40/197        33.3%  Matching; Classification
+    -> G06V40/12         33.3%  Fingerprints or palmprints
+
+G06K9/00543  (3 件)  Classification; Matching by matching peak patterns
+    -> G06V40/28         66.7%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+    -> G06V10/143        33.3%  Sensing or illuminating at different wavelengths
+    -> G06V20/52         33.3%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+
+G06F17/30262  (3 件)  Information retrieval; Database structures therefor ; File system structures therefor in i
+    -> G06F16/5838       66.7%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/5862       66.7%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/58         33.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/50         33.3%  Information retrieval; Database structures therefor; File system structures ther
+    -> G06F16/538        33.3%  Presentation of query results
+    -> G06F16/5854       33.3%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/6235  (3 件)  Rendering the within-class scatter matrix nonsingular
+    -> G06F18/21326     100.0%  Rendering the within-class scatter matrix non-singular involving optimisations, 
+    -> G06F18/21322     100.0%  Rendering the within-class scatter matrix non-singular
+    -> G06F18/2413       33.3%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06F18/21355      33.3%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/214        33.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V10/764        33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/82         33.3%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/2148       33.3%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06K9/74  (2 件)  Arrangements for recognition using optical reference masks
+    -> G06V20/62        100.0%  Text, e.g. of license plates, overlay texts or captions on TV images
+    -> G06V30/413       100.0%  Classification of content, e.g. text, photographs or tables
+    -> G06V30/10        100.0%  Character recognition
+    -> G06V30/158       100.0%  Segmentation of character regions using character size, text spacings or pitch e
+    -> G06V30/224       100.0%  Character recognition characterised by the type of writing of printed characters
+    -> G06V30/414       100.0%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+    -> G06V30/153       100.0%  Segmentation of character regions using recognition of characters or words
+
+G06K9/605  (2 件)  Combination of image acquisition and preprocessing functions the combination being locally
+    -> G06F18/2148      100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+
+G06K9/2072  (2 件)  Selective acquisition/locating/processing of specific regions, e.g. highlighted text, fidu
+    -> G06F18/40         50.0%  Software arrangements specially adapted for pattern recognition, e.g. user inter
+    -> G06V30/1423       50.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/347        50.0%  Sampling; Contour coding; Stroke extraction
+    -> G06V30/36         50.0%  Matching; Classification
+    -> G06F18/21         50.0%  Design or setup of recognition systems or techniques; Extraction of features in 
+    -> G06V30/413        50.0%  Classification of content, e.g. text, photographs or tables
+    -> G06V30/412        50.0%  Layout analysis of documents structured with printed lines or input boxes, e.g. 
+    -> G06F18/22         50.0%  Matching criteria, e.g. proximity measures
+
+G06K9/6229  (2 件)  Selecting the most significant subset of features by using evolutionary computational tech
+    -> G06F18/2111      100.0%  Selection of the most significant subset of features by using evolutionary compu
+    -> G06F18/295        50.0%  Markov models or related models, e.g. semi-Markov models; Markov random fields; 
+    -> G06V10/85         50.0%  Markov-related models; Markov random fields
+    -> G06V10/462        50.0%  Salient features, e.g. scale invariant feature transforms [SIFT]
+    -> G06V20/80         50.0%  Recognising image objects characterised by unique random patterns
+    -> G06V10/764        50.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06F18/217        50.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06F18/2132       50.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+
+G06F17/30793  (2 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/784       100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/41         50.0%  Indexing; Data structures therefor; Storage structures
+    -> G06F16/44         50.0%  Browsing; Visualisation therefor
+    -> G06F16/432        50.0%  Query formulation
+    -> G06F16/43         50.0%  Querying
+    -> G06F16/51         50.0%  Indexing; Data structures therefor; Storage structures
+    -> G06F16/5854       50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/434        50.0%  Query formulation using image data, e.g. images, photos, pictures taken by a use
+
+G06K9/82  (2 件)  Combination of image preprocessing and recognition functions using optical means in one or
+    -> G06V20/20         50.0%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V10/17         50.0%  Image acquisition using hand-held instruments
+    -> G06V10/22         50.0%  Image preprocessing by selection of a specific region containing or referencing 
+
+G06K9/348  (2 件)  Segmentation of touching or overlapping patterns in the image field using character size, 
+    -> G06V30/158       100.0%  Segmentation of character regions using character size, text spacings or pitch e
+    -> G06V30/10        100.0%  Character recognition
+    -> G06V30/153       100.0%  Segmentation of character regions using recognition of characters or words
+    -> G06V30/412        50.0%  Layout analysis of documents structured with printed lines or input boxes, e.g. 
+    -> G06V30/15         50.0%  Cutting or merging image elements, e.g. region growing, watershed or clustering-
+    -> G06F18/22         50.0%  Matching criteria, e.g. proximity measures
+    -> G06V10/75         50.0%  Organisation of the matching processes, e.g. simultaneous or sequential comparis
+    -> G06V30/18171      50.0%  Syntactic representation, e.g. using a grammatical approach
+
+G06K9/645  (2 件)  Methods or arrangements for recognition using electronic means using simultaneous comparis
+    -> G06V30/195       100.0%  Recognition using electronic means using simultaneous comparisons or correlation
+    -> G06V20/64        100.0%  Three-dimensional [3D] objects
+    -> G06F18/2413      100.0%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06V20/20        100.0%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V10/955       100.0%  Hardware or software architectures specially adapted for image or video understa
+    -> G06V10/454       100.0%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06F18/241       100.0%  Classification techniques relating to the classification model, e.g. parametric 
+
+G06K9/224  (2 件)  Image acquisition using hand-held instruments the instrument generating sequences of posit
+    -> G06V30/228       100.0%  Character recognition characterised by the type of writing of three-dimensional 
+    -> G06V2201/10       50.0%  Recognition assisted with metadata
+    -> G06V20/64         50.0%  Three-dimensional [3D] objects
+    -> G06V2201/12       50.0%  Acquisition of 3D measurements of objects
+    -> G06V20/35         50.0%  Categorising the entire scene, e.g. birthday party or wedding scene
+    -> G06V20/41         50.0%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/46         50.0%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V10/48         50.0%  Extraction of image or video features by mapping characteristic values of the pa
+
+G06K9/4633  (2 件)  Detecting partial patterns, e.g. edges or contours, or configurations, e.g. loops, corners
+    -> G06V20/46         50.0%  Extracting features or characteristics from the video content, e.g. video finger
+    -> G06V10/44         50.0%  Local feature extraction by analysis of parts of the pattern, e.g. by detecting 
+    -> G06V20/47         50.0%  Detecting features for summarising video content
+    -> G06V10/462        50.0%  Salient features, e.g. scale invariant feature transforms [SIFT]
+    -> G06V10/56         50.0%  Extraction of image or video features relating to colour
+    -> G06F18/2137       50.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/2113       50.0%  Selection of the most significant subset of features by ranking or filtering the
+    -> G06V2201/07       50.0%  Target detection
+
+G06K9/622  (2 件)  Non-hierarchical partitioning techniques
+    -> G06F18/22         50.0%  Matching criteria, e.g. proximity measures
+    -> G06V10/762        50.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/761        50.0%  Proximity, similarity or dissimilarity measures
+    -> G06F18/23         50.0%  Clustering techniques
+    -> G06F18/24         50.0%  Classification techniques
+    -> G06V20/20         50.0%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06F18/2163       50.0%  Partitioning the feature space
+    -> G06V20/00         50.0%  Scenes; Scene-specific elements
+
+G06K9/4619  (2 件)  Biologically-inspired filters, e.g. receptive fields
+    -> G06F18/24         50.0%  Classification techniques
+    -> G06V30/194        50.0%  References adjustable by an adaptive method, e.g. learning
+    -> G06V40/172        50.0%  Classification, e.g. identification
+    -> G06F18/214        50.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V10/449        50.0%  Biologically inspired filters, e.g. difference of Gaussians [DoG] or Gabor filte
+    -> G06V30/19147      50.0%  Obtaining sets of training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06F18/23         50.0%  Clustering techniques
+    -> G06V10/72         50.0%  Data preparation, e.g. statistical preprocessing of image or video features
+
+G06F17/30814  (2 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/7864      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7867       50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/783        50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7844       50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7847       50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06F17/30666  (2 件)  Syntactic pre-processing steps, e.g. stopword elimination, stemming
+    -> G06F16/3335      100.0%  Syntactic pre-processing, e.g. stopword elimination, stemming
+    -> G06F16/334        50.0%  Query execution
+    -> G06F16/338        50.0%  Presentation of query results
+    -> G06F16/3331       50.0%  Query processing
+    -> G06F16/3329       50.0%  Natural language query formulation
+    -> G06F16/3349       50.0%  Reuse of stored results of previous queries
+    -> G06F16/3344       50.0%  Query execution using natural language analysis
+    -> G06F16/3325       50.0%  Reformulation based on results of preceding query
+
+G06K9/00161  (2 件)  Reading or verifying signatures; Writer recognition based only on signature image, e.g. st
+    -> G06V40/33        100.0%  Writer recognition; Reading and verifying signatures based only on signature ima
+    -> G06V40/172       100.0%  Classification, e.g. identification
+    -> G06V40/16        100.0%  Human faces, e.g. facial parts, sketches or expressions
+
+G06K9/00919  (2 件)  Static means for assisting the user in correctly positioning the object of interest
+    -> G06V40/16        100.0%  Human faces, e.g. facial parts, sketches or expressions
+    -> G06V40/28        100.0%  Recognition of hand or arm movements, e.g. recognition of deaf sign language
+    -> G06V40/63        100.0%  Static or dynamic means for assisting the user to position a body part for biome
+
+G06K9/00657  (2 件)  Recognising patterns in remote scenes, e.g. aerial images, vegetation versus urban areas o
+    -> G06V20/188       100.0%  Vegetation
+    -> G06V20/41         50.0%  Higher-level, semantic clustering, classification or understanding of video scen
+    -> G06V20/52         50.0%  Surveillance or monitoring of activities, e.g. for recognising suspicious object
+    -> G06V20/49         50.0%  Segmenting video sequences, i.e. computational techniques such as parsing or cut
+    -> G06V20/182        50.0%  Network patterns, e.g. roads or rivers
+    -> G06V20/20         50.0%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V20/176        50.0%  Urban or other man-made structures
+
+G06K9/6203  (2 件)  Shifting or otherwise transforming the patterns to accommodate for positional errors
+    -> G06V30/413        50.0%  Classification of content, e.g. text, photographs or tables
+
+G06F17/30737  (2 件)  Thesaurus
+    -> G06F16/355        50.0%  Creation or modification of classes or clusters
+    -> G06F16/26         50.0%  Visual data mining; Browsing structured data
+    -> G06F16/335        50.0%  Filtering based on additional data, e.g. user or group profiles
+    -> G06F16/9566       50.0%  URL specific, e.g. using aliases, detecting broken or misspelled links
+    -> G06F16/322        50.0%  Trees
+    -> G06F16/84         50.0%  Mapping; Conversion
+    -> G06F16/374        50.0%  Thesaurus
+    -> G06F16/30         50.0%  Information retrieval; Database structures therefor; File system structures ther
+
+G06K9/6828  (2 件)  Font recognition
+    -> G06V30/245       100.0%  Font recognition
+    -> G06V30/412       100.0%  Layout analysis of documents structured with printed lines or input boxes, e.g. 
+    -> G06V30/413        50.0%  Classification of content, e.g. text, photographs or tables
+    -> G06V30/10         50.0%  Character recognition
+    -> G06V30/224        50.0%  Character recognition characterised by the type of writing of printed characters
+    -> G06V30/414        50.0%  Extracting the geometrical structure, e.g. layout tree; Block segmentation, e.g.
+
+G06F17/30805  (2 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/9024      100.0%  Graphs; Linked lists
+    -> G06F16/2455       50.0%  Query execution
+    -> G06F16/1727       50.0%  Details of free space management performed by the file system
+    -> G06F16/1724       50.0%  Details of de-fragmentation performed by the file system
+    -> G06F16/7854       50.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/532        50.0%  Query formulation, e.g. graphical querying
+    -> G06F16/24553      50.0%  Query execution of query operations
+    -> G06F16/288        50.0%  Entity relationship models
+
+G06F19/707  (1 件)  Chemoinformatics, i.e. data processing methods or systems for the retrieval, analysis, vis
+    -> G16C20/70        100.0%  Machine learning, data mining or chemometrics
+    -> G16C20/90        100.0%  Programming languages; Computing architectures; Database systems; Data warehousi
+    -> G16C20/30        100.0%  Prediction of properties of chemical compounds, compositions or mixtures
+
+G06K9/00107  (1 件)  Detecting the live character of the finger, i.e. distinguishing from a fake or cadaver fin
+    -> G06V40/1382      100.0%  Detecting the live character of the finger, i.e. distinguishing from a fake or c
+    -> G06V40/1365      100.0%  Matching; Classification
+
+G06K9/00503  (1 件)  Preprocessing, e.g. filtering
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/6287  (1 件)  Non-linear, e.g. polynomial classifier
+    -> G06F18/2451      100.0%  Classification techniques relating to the decision surface linear, e.g. hyperpla
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06F18/241       100.0%  Classification techniques relating to the classification model, e.g. parametric 
+    -> G06F18/2453      100.0%  Classification techniques relating to the decision surface non-linear, e.g. poly
+    -> G06F18/29        100.0%  Graphical models, e.g. Bayesian networks
+    -> G06F18/245       100.0%  Classification techniques relating to the decision surface
+
+G06F17/30799  (1 件)  Information retrieval; Database structures therefor ; File system structures therefor of v
+    -> G06F16/783       100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7844      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7847      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+    -> G06F16/7864      100.0%  Retrieval characterised by using metadata, e.g. metadata not derived from the co
+
+G06K9/60  (1 件)  Combination of image acquisition and preprocessing functions
+    -> G06V40/173       100.0%  Classification, e.g. identification face re-identification, e.g. recognising unk
+    -> G06V20/30        100.0%  Scenes; Scene-specific elements in albums, collections or shared content, e.g. s
+
+G06K9/30  (1 件)  Image acquisition using automatic curve following means
+    -> G06V30/1423      100.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/32        100.0%  Digital ink
+    -> G06V30/144       100.0%  Image acquisition using a slot moved over the image; using discrete sensing elem
+    -> G06V30/347       100.0%  Sampling; Contour coding; Stroke extraction
+
+G06K9/24  (1 件)  Construction of the instrument
+    -> G06V20/20        100.0%  Scenes; Scene-specific elements in augmented reality scenes
+    -> G06V10/17        100.0%  Image acquisition using hand-held instruments
+    -> G06V10/22        100.0%  Image preprocessing by selection of a specific region containing or referencing 
+
+G06K9/468  (1 件)  Extraction of features or characteristics of the image related to a structural representat
+    -> G06V40/168       100.0%  Feature extraction; Face representation
+    -> G06V40/10        100.0%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+    -> G06V40/103       100.0%  Static body considered as a whole, e.g. static pedestrian or occupant recognitio
+    -> G06F18/22        100.0%  Matching criteria, e.g. proximity measures
+
+G06K9/00181  (1 件)  Matching; classification
+    -> G06F18/253       100.0%  Fusion techniques of extracted features
+    -> G06V10/764       100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/382       100.0%  Preprocessing; Feature extraction
+    -> G06V40/394       100.0%  Matching; Classification
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/33        100.0%  Writer recognition; Reading and verifying signatures based only on signature ima
+    -> G06V10/806       100.0%  Fusion, i.e. combining data from various sources at the sensor level, preprocess
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/0051  (1 件)  Denoising
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/00557  (1 件)  Classification; Matching by matching signal segments by plotting the signal segments again
+    -> G06F18/2134      100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/2178      100.0%  Validation; Performance evaluation; Active pattern learning techniques based on 
+
+G06K9/00563  (1 件)  Classification; Matching by matching signal segments by applying autoregressive analysis
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/6814  (1 件)  Dividing the references in groups prior to recognition, the recognition taking place in st
+    -> G06V30/268       100.0%  Lexical context
+    -> G06V30/413       100.0%  Classification of content, e.g. text, photographs or tables
+    -> G06V30/10        100.0%  Character recognition
+    -> G06V30/244       100.0%  Division of the character sequences into groups prior to recognition; Selection 
+    -> G06V30/274       100.0%  Syntactic or semantic context, e.g. balancing
+    -> G06V10/94        100.0%  Hardware or software architectures specially adapted for image or video understa
+
+G06K9/6244  (1 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/21345     100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+
+G06K9/4623  (1 件)  Biologically-inspired filters, e.g. receptive fields with interaction between the response
+    -> G06V10/72        100.0%  Data preparation, e.g. statistical preprocessing of image or video features
+    -> G06V10/7715      100.0%  Feature extraction, e.g. by transforming the feature space, e.g. multi-dimension
+    -> G06V10/451       100.0%  Biologically inspired filters, e.g. difference of Gaussians [DoG] or Gabor filte
+    -> G06F18/213       100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/241       100.0%  Classification techniques relating to the classification model, e.g. parametric 
+
+G06K9/346  (1 件)  Removing patterns interfering with the pattern to be recognised, such as ruled lines, unde
+    -> G06V30/10        100.0%  Character recognition
+    -> G06V30/15        100.0%  Cutting or merging image elements, e.g. region growing, watershed or clustering-
+    -> G06V30/153       100.0%  Segmentation of character regions using recognition of characters or words
+
+G06K9/6239  (1 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06V10/7753      100.0%  Incorporation of unlabelled data, e.g. multiple instance learning [MIL]
+    -> G06F18/2133      100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/2321      100.0%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+    -> G06F18/2155      100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting charac
+    -> G06F18/23213     100.0%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+
+G06K9/6892  (1 件)  Graph matching
+    -> G06V30/1988      100.0%  Graph matching
+    -> G06F18/22        100.0%  Matching criteria, e.g. proximity measures
+    -> G06F18/2113      100.0%  Selection of the most significant subset of features by ranking or filtering the
+    -> G06F18/23213     100.0%  Non-hierarchical techniques using statistics or function optimisation, e.g. mode
+
+G06K9/6246  (1 件)  Extracting features by transforming the feature space, e.g. multidimensional scaling; Mapp
+    -> G06F18/21348     100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+    -> G06F18/2134      100.0%  Feature extraction, e.g. by transforming the feature space; Summarisation; Mappi
+
+G06K9/28  (1 件)  Image acquisition using discrete sensing elements at predetermined points
+    -> G06V40/166       100.0%  Detection; Localisation; Normalisation using acquisition arrangements
+    -> G06V20/653       100.0%  Three-dimensional [3D] objects by matching three-dimensional models, e.g. confor
+    -> G06V30/144       100.0%  Image acquisition using a slot moved over the image; using discrete sensing elem
+
+G06K9/54  (1 件)  Combinations of preprocessing functions
+    -> 無達門檻的替代候選（需人工判斷）
+
+G06K9/748  (1 件)  Arrangements for recognition using optical reference masks using spatial domain filters, e
+    -> G06V20/62        100.0%  Text, e.g. of license plates, overlay texts or captions on TV images
+    -> G06V30/164       100.0%  Noise filtering
+    -> G06F18/25        100.0%  Fusion techniques
+    -> G06V30/10        100.0%  Character recognition
+    -> G06V30/15        100.0%  Cutting or merging image elements, e.g. region growing, watershed or clustering-
+    -> G06V30/224       100.0%  Character recognition characterised by the type of writing of printed characters
+    -> G06V30/155       100.0%  Removing patterns interfering with the pattern to be recognised, such as ruled l
+    -> G06V30/162       100.0%  Quantising the image signal
+
+G06K9/70  (1 件)  Methods or arrangements for recognition using electronic means using sequential comparison
+    -> G06F18/217       100.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V30/242       100.0%  Division of the character sequences into groups prior to recognition; Selection 
+
+G06K9/6878  (1 件)  Syntactic or structural pattern recognition, e.g. symbolic string recognition
+    -> G06V30/1983      100.0%  Syntactic or structural pattern recognition, e.g. symbolic string recognition
+    -> G06F18/24137     100.0%  Distances to cluster centroïds
+    -> G06V40/107       100.0%  Static hand or arm
+    -> G06V30/19173     100.0%  Classification techniques
+
+G06K9/6279  (1 件)  Classification techniques relating to the number of classes
+    -> G06F18/243       100.0%  Classification techniques relating to the number of classes
+    -> G06V40/174       100.0%  Facial expression recognition
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V10/454       100.0%  Integrating the filters into a hierarchical structure, e.g. convolutional neural
+    -> G06V40/165       100.0%  Detection; Localisation; Normalisation using facial parts and geometric relation
+    -> G06V40/171       100.0%  Local features and components; Facial parts ; Occluding parts, e.g. glasses; Geo
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+    -> G06V40/162       100.0%  Detection; Localisation; Normalisation using pixel segmentation or colour matchi
+
+G06K9/00187  (1 件)  Preprocessing; feature extraction
+    -> G06F18/253       100.0%  Fusion techniques of extracted features
+    -> G06V10/764       100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/382       100.0%  Preprocessing; Feature extraction
+    -> G06V40/394       100.0%  Matching; Classification
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/33        100.0%  Writer recognition; Reading and verifying signatures based only on signature ima
+    -> G06V10/806       100.0%  Fusion, i.e. combining data from various sources at the sensor level, preprocess
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/00174  (1 件)  Acquisition
+    -> G06F18/253       100.0%  Fusion techniques of extracted features
+    -> G06V10/764       100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/382       100.0%  Preprocessing; Feature extraction
+    -> G06V40/394       100.0%  Matching; Classification
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V40/33        100.0%  Writer recognition; Reading and verifying signatures based only on signature ima
+    -> G06V10/806       100.0%  Fusion, i.e. combining data from various sources at the sensor level, preprocess
+    -> G06F18/214       100.0%  Generating training patterns; Bootstrap methods, e.g. bagging or boosting
+
+G06K9/00429  (1 件)  Matching; classification using a special pattern or subpattern alphabet
+    -> G06V30/1423      100.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V30/32        100.0%  Digital ink
+    -> G06V40/10        100.0%  Human or animal bodies, e.g. vehicle occupants or pedestrians; Body parts, e.g. 
+    -> G06V30/373       100.0%  Matching; Classification using a special pattern or subpattern alphabet
+
+G06K9/6842  (1 件)  Dividing the references in groups prior to recognition, the recognition taking place in st
+    -> G06V30/1423      100.0%  Image acquisition using hand-held instruments; Constructional details of the ins
+    -> G06V10/82        100.0%  Arrangements for image or video recognition or understanding using pattern recog
+    -> G06V30/32        100.0%  Digital ink
+    -> G06V30/246       100.0%  Division of the character sequences into groups prior to recognition; Selection 
+
+G06K9/6821  (1 件)  Alphabet recognition, e.g. Latin, Kanji, Katakana
+    -> G06V30/2445      100.0%  Alphabet recognition, e.g. Latin, Kanji or Katakana
+    -> G06V10/95        100.0%  Hardware or software architectures specially adapted for image or video understa
+    -> G06F18/217       100.0%  Validation; Performance evaluation; Active pattern learning techniques
+    -> G06V30/246       100.0%  Division of the character sequences into groups prior to recognition; Selection 
+    -> G06V30/293       100.0%  Character recognition specially adapted to the type of the alphabet, e.g. Latin 
+    -> G06V30/36        100.0%  Matching; Classification

@@ -34,7 +34,7 @@ import pathlib
 import sys
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-import firmkeys  # noqa: E402
+from common import firmkeys  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REPO = ROOT.parent
@@ -57,7 +57,7 @@ STOCK_FILES = [
 def load_alias():
     """{assignee_name: [(tier, parent, ticker, permco, eff_from, eff_to), ...]}
 
-    一個 assignee 可對應多家公司，靠申請日區間分開（見 05_classify.load_alias 說明）。
+    一個 assignee 可對應多家公司，靠申請日區間分開（見 07_classify.load_alias 說明）。
     公司標籤一律過 firmkeys.canon() 收斂，理由同 05。
     """
     out = collections.defaultdict(list)
