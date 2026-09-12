@@ -116,7 +116,7 @@ WIPO 規則檔（`config/wipo_ai_rules.json`）由 `scripts/common/wipo.py` 直�
 
 ## 1. 公司名稱對照
 
-專利資料中的 `assignee` 為自由文字欄位，同一家公司可能有多種名稱、標點或拼寫方式。這裡的名稱對照表都是根據 BigQuery 中實際出現的字串建立，沒有額外加入未觀察到的名稱。
+專利資料中的 `assignee` 為自由文字欄位，同一家公司可能有多種名稱、標點或拼寫方式。
 
 ### 1.1 公司名冊以 permco 為鍵，不是 ticker
 
