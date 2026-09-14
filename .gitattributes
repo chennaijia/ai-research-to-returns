@@ -1,8 +1,18 @@
-stock_and_paper_count/paper_company_panel.csv filter=lfs diff=lfs merge=lfs -text
-stock_and_paper_count/stock_on_crsp.csv filter=lfs diff=lfs merge=lfs -text
-stock_and_paper_count/crsp_all_classified_with_papers_detailed.csv filter=lfs diff=lfs merge=lfs -text
-stock_and_paper_count/group_C_stocks.csv filter=lfs diff=lfs merge=lfs -text
-stock_and_paper_count/*.csv filter=lfs diff=lfs merge=lfs -text
-patent-data/out/ai_patents_detail.csv filter=lfs diff=lfs merge=lfs -text
-patent-data/out/ai_patents_detail_8firms.csv filter=lfs diff=lfs merge=lfs -text
-patent-data/out/assignee_dict.csv filter=lfs diff=lfs merge=lfs -text
+# 超過 ~5 MB 的資料檔一律走 Git LFS。
+# GitHub 單檔硬上限是 100 MB，而這裡最大的檔案有 426 MB。
+#
+# ⚠️ 搬動或新增大檔之前，先確認它被下面的 pattern 涵蓋。
+#    漏掉的話會以裸 blob 進版控，之後只能改寫歷史才拿得掉。
+#    搬完用 `git lfs ls-files` 驗證。
+
+# ── 原始資料 ──
+data/crsp/*.csv           filter=lfs diff=lfs merge=lfs -text
+data/openalex/*.csv       filter=lfs diff=lfs merge=lfs -text
+
+# ── 01_universe 產出（CRSP 分組面板）──
+01_universe/out/*.csv     filter=lfs diff=lfs merge=lfs -text
+
+# ── 03_patents 產出（專利明細與 assignee 字典）──
+03_patents/out/ai_patents_detail.csv        filter=lfs diff=lfs merge=lfs -text
+03_patents/out/ai_patents_detail_8firms.csv filter=lfs diff=lfs merge=lfs -text
+03_patents/out/assignee_dict.csv            filter=lfs diff=lfs merge=lfs -text
