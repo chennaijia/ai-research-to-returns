@@ -1,0 +1,51 @@
+名冊公司: 268    收錄（v2 裡有資料的）: 253
+期間: 201701-202512（108 個月 / 9 年）
+
+panel_firm_month.csv  27,324 列
+  有月報酬的列:   24,092 (88.2%)
+  有 AI 專利的列: 8,258 (30.2%)
+  有論文的列:     3,606 (13.2%)
+
+panel_firm_year.csv   2,277 列
+  有年報酬的列:   2,040 (89.6%)
+  有 AI 專利的列: 1,293 (56.8%)
+
+同月多股別的公司-月（報酬取市值最大股別，論文相加）: 385
+
+已排除：名冊上但 v2 沒有的公司 15 家（2017 年前下市或 ADR 終止，v2 自 2017 起算）:
+  ['ALU', 'ATE', 'ATML', 'BRCM', 'COGT', 'DELL', 'HIT', 'HRBN', 'IRF', 'JCI', 'LNKD', 'OVTI', 'PC', 'TCH', 'XLS']
+  這些公司合計 6,049 件 AI 專利不在本面板內（DELL/PC/HIT/BRCM 等曾是大量申請者）。
+
+AI 專利前 20 大（with_subs，2017-2025 合計）
+  ticker  公司                              AI專利      全部專利    AI佔比      論文
+  GOOGL   ALPHABET INC                    8886     18818   47.2%   19468
+  MSFT    MICROSOFT CORP                  6249     18033   34.7%   13474
+  TM      TOYOTA MOTOR CORP               5907     27769   21.3%    1579
+  SNE     SONY CORP                       4108     22384   18.4%    1120
+  INTC    INTEL CORP                      3263     23141   14.1%    2052
+  CAJ     CANON INC                       2991     31916    9.4%      38
+  AAPL    APPLE INC                       2627     22345   11.8%    1550
+  QCOM    QUALCOMM INC                    2600     31685    8.2%     783
+  ADBE    ADOBE SYSTEMS INC               2475      3599   68.8%    2985
+  NVDA    NVIDIA CORP                     2356      5190   45.4%    4576
+  ORCL    ORACLE CORP                     1704      5550   30.7%     178
+  FB      FACEBOOK INC                    1589      6130   25.9%    7799
+  AMZN    AMAZON COM INC                  1352      4156   32.5%    6786
+  SNAP    SNAP INC                        1323      3318   39.9%     522
+  BIDU    BAIDU INC                       1307      1938   67.4%    1937
+  CRM     SALESFORCE COM INC              1219      3495   34.9%    1351
+  CSCO    CISCO SYSTEMS INC               1177      7981   14.7%     446
+  WMT     WAL MART STORES INC             1090      3107   35.1%     261
+  BA      BOEING CO                        897      8010   11.2%      68
+  NOK     NOKIA CORP                       864      7746   11.2%     420
+
+已知限制
+  1. filing ym >= 202410 的專利數必然低估（pre-grant publication
+     約 18 個月後才公開，本資料最大 publication_date 為 2026-04-09）。
+     已標在 patent_truncated 欄，切勿把它當成企業真的減少申請。
+  2. 論文數自 2022 年起系統性偏低，來源是 OpenAlex 機構隸屬連結斷裂
+     （資料瑕疵，非企業行為改變）。專利獨立於 OpenAlex，可作該時期的對照。
+  3. 月頻專利稀疏：多數公司-月為 0。長尾公司建議改用年頻檔。
+  4. months_in_year < 12 的年度（上市/下市當年）年報酬非全年，
+     跑迴歸時建議只取 months_in_year == 12 的列。
+  5. ai_share 的分母是該公司該期間全部 publication，分子是 with_subs 版。
