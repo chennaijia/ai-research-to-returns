@@ -16,3 +16,4 @@ data/openalex/*.csv       filter=lfs diff=lfs merge=lfs -text
 03_patents/out/ai_patents_detail.csv        filter=lfs diff=lfs merge=lfs -text
 03_patents/out/ai_patents_detail_8firms.csv filter=lfs diff=lfs merge=lfs -text
 03_patents/out/assignee_dict.csv            filter=lfs diff=lfs merge=lfs -text
+03_patents/out/raw_publications.csv         filter=lfs diff=lfs merge=lfs -text
