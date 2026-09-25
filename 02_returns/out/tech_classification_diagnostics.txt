@@ -1,179 +1,180 @@
 === 讀取 CRSP 面板 ===
-列數: 1,539,309   公司數: 18,945   期間: 2010-01 ~ 2025-12
+列數: 934,590   公司數: 15,979   期間: 2017-01 ~ 2025-12
 NAICS 缺值（is.na）: 0
-NAICS 為 0（CRSP 的缺值碼）: 25,076  (1.63%)
-NAICS 全程為 0 的公司數: 350
+NAICS 為 0（CRSP 的缺值碼）: 13,558  (1.45%)
+NAICS 全程為 0 的公司數: 308
 
 === 月層級：新舊規則差異 ===
-舊規則判定為科技的列數: 135,449
-新規則判定為科技的列數: 146,180
-新增（舊非科技→新科技）: 11,074
-移除（舊科技→新非科技）: 343
+舊規則判定為科技的列數: 91,632
+新規則判定為科技的列數: 77,937
+新增（舊非科技→新科技）: 5,316
+移除（舊科技→新非科技）: 19,011
 
 === 三種收斂規則的比較 ===
-（無任何有效 NAICS、無法分類的公司: 350 家）
-多數決  科技  1604 家，拿到 83.4% 的論文
-期末碼  科技  1654 家，拿到 83.9% 的論文
-曾經是  科技  1938 家，拿到 86.7% 的論文
-多數決與期末碼分歧的公司數: 356
+（無任何有效 NAICS、無法分類的公司: 308 家）
+多數決  科技  1121 家，拿到 74.1% 的論文
+期末碼  科技  1173 家，拿到 74.0% 的論文
+曾經是  科技  1434 家，拿到 83.4% 的論文
+多數決與期末碼分歧的公司數: 244
 
 --- 分歧公司中論文數最高的 15 家 ---
-    ticker                                   issuernm naics_modal naics_last
-    <char>                                     <char>      <char>      <int>
- 1:    CRM                             SALESFORCE INC      541611     513210
- 2:    NOK                                 NOKIA CORP      334220     517112
- 3:   NTES                                NETEASE INC      519130     551112
- 4:   NFLX                                NETFLIX INC      512199     516210
- 5:    XRX                        XEROX HOLDINGS CORP      423420     334118
- 6:     ZG                           ZILLOW GROUP INC      531311     541511
- 7:    CHL              CHINA MOBILE LTD (Last Known)      517210     517911
- 8:    TDY                      TELEDYNE TECHNOLOGIES      541330     334419
- 9:   VRSK                       VERISK ANALYTICS INC      518210     518210
-10:    MDT                              MEDTRONIC PLC      334510     339113
-11:   IRIX                                IRIDEX CORP      334510     339115
-12:   CYBE              CYBEROPTICS CORP (Last Known)      334413     333314
-13:   HTGM HTG MOLECULAR DIAGNOSTICS INC (Last Known)      541712     334516
-14:   MOGB                                   MOOG INC      336413     334511
-15:    RMD                                 RESMED INC      334510     339112
-    tech_share   tech tech_last papers
-         <num> <lgcl>    <lgcl>  <int>
- 1:       0.40  FALSE      TRUE    125
- 2:       0.91   TRUE     FALSE     76
- 3:       0.64   TRUE     FALSE     46
- 4:       0.06  FALSE      TRUE     33
- 5:       0.49  FALSE      TRUE     11
- 6:       0.36  FALSE      TRUE      6
- 7:       0.14  FALSE      TRUE      3
- 8:       0.10  FALSE      TRUE      3
- 9:       0.49  FALSE      TRUE      3
-10:       0.60   TRUE     FALSE      2
-11:       0.69   TRUE     FALSE      2
-12:       0.75   TRUE     FALSE      1
-13:       0.46  FALSE      TRUE      1
-14:       0.40  FALSE      TRUE      1
-15:       0.82   TRUE     FALSE      1
+    ticker                   issuernm naics_modal naics_last tech_share   tech
+    <char>                     <char>      <char>      <int>      <num> <lgcl>
+ 1:    NOK                 NOKIA CORP      334419     517112       0.84   TRUE
+ 2:   NFLX                NETFLIX INC      532282     516210       0.11  FALSE
+ 3:   SPOT     SPOTIFY TECHNOLOGY S A      515111     516210       0.37  FALSE
+ 4:     KT                   K T CORP      517911     517112       0.72   TRUE
+ 5:  CMCSA           COMCAST CORP NEW      515210     516210       0.15  FALSE
+ 6:      T                A T & T INC      517911     517121       0.55   TRUE
+ 7:     VZ VERIZON COMMUNICATIONS INC      517911     517121       0.71   TRUE
+ 8:   TEAM         ATLASSIAN CORP PLC      561499     541511       0.36  FALSE
+ 9:   SOHU               SOHU COM LTD      518210     541810       0.63   TRUE
+10:     BZ                KANZHUN LTD      541511     551112       0.65   TRUE
+11:    MDT              MEDTRONIC PLC      334510     339113       0.83   TRUE
+12:   PATH                 UIPATH INC      443142     513210       0.33  FALSE
+13:    VOD     VODAFONE GROUP PLC NEW      517210     517810       0.27  FALSE
+14:   TRVG                TRIVAGO N V      518210     551112       0.60   TRUE
+15:   HUYA                   HUYA INC      561499     518210       0.33  FALSE
+    tech_last papers
+       <lgcl>  <int>
+ 1:     FALSE    420
+ 2:      TRUE    260
+ 3:      TRUE    165
+ 4:     FALSE     69
+ 5:      TRUE     50
+ 6:     FALSE     44
+ 7:     FALSE     31
+ 8:      TRUE     29
+ 9:     FALSE     22
+10:     FALSE     17
+11:     FALSE     14
+12:      TRUE     10
+13:      TRUE     10
+14:     FALSE      7
+15:      TRUE      7
 
-=== 界線模糊的公司（0.2 < tech_share < 0.8）: 400 家 ===
-    ticker                            issuernm naics_modal naics_last
-    <char>                              <char>      <char>      <int>
- 1:    CRM                      SALESFORCE INC      541611     513210
- 2:   ORAN                 ORANGE (Last Known)      517110     517121
- 3:   NTES                         NETEASE INC      519130     551112
- 4:   EBAY                            EBAY INC      541512     459999
- 5:      V                            VISA INC      522320     561499
- 6:    XRX                 XEROX HOLDINGS CORP      423420     334118
- 7:     EA                 ELECTRONIC ARTS INC      511210     513210
- 8:     ZG                    ZILLOW GROUP INC      531311     541511
- 9:    NOW                      SERVICENOW INC      541512     541512
-10:     TU                          TELUS CORP      517210     517121
-11:   AMAT               APPLIED MATERIALS INC      333249     333248
-12:   ILMN                        ILLUMINA INC      334516     334516
-13:   GPRO                           GOPRO INC      423710     423710
-14:   ALTR ALTAIR ENGINEERING INC (Last Known)      511210     513210
-15:   VRSK                VERISK ANALYTICS INC      518210     518210
-    tech_share months papers
-         <num>  <int>  <int>
- 1:       0.40    192    125
- 2:       0.23    178     81
- 3:       0.64    193     46
- 4:       0.27    192     38
- 5:       0.24    192     16
- 6:       0.49    193     11
- 7:       0.76    192      8
- 8:       0.36    174      6
- 9:       0.59    163      6
-10:       0.24    156      5
-11:       0.25    192      5
-12:       0.74    192      5
-13:       0.42    139      4
-14:       0.78     89      4
-15:       0.49    192      3
+=== 界線模糊的公司（0.2 < tech_share < 0.8）: 397 家 ===
+    ticker                  issuernm naics_modal naics_last tech_share months
+    <char>                    <char>      <char>      <int>      <num>  <int>
+ 1:   BABA ALIBABA GROUP HOLDING LTD      519190     551112       0.45    108
+ 2:    CRM            SALESFORCE INC      511210     513210       0.70    108
+ 3:     JD               J D COM INC      517911     561499       0.37    108
+ 4:    NOW            SERVICENOW INC      541512     541512       0.71    108
+ 5:   NTES               NETEASE INC      238210     551112       0.35    108
+ 6:   EBAY                  EBAY INC      541512     459999       0.47    108
+ 7:   ORAN       ORANGE (Last Known)      517911     517121       0.43     94
+ 8:   SPOT    SPOTIFY TECHNOLOGY S A      515111     516210       0.37     93
+ 9:      V                  VISA INC      561499     561499       0.43    108
+10:    ACN     ACCENTURE PLC IRELAND      541611     541611       0.30    108
+11:    XRX       XEROX HOLDINGS CORP      334118     334118       0.54    108
+12:     EA       ELECTRONIC ARTS INC      711510     513210       0.57    108
+13:     KT                  K T CORP      517911     517112       0.72    108
+14:      T               A T & T INC      517911     517121       0.55    108
+15:      Z          ZILLOW GROUP INC      531210     541511       0.57    108
+    papers
+     <int>
+ 1:   5586
+ 2:   1351
+ 3:   1236
+ 4:    381
+ 5:    317
+ 6:    236
+ 7:    187
+ 8:    165
+ 9:    151
+10:    111
+11:     91
+12:     83
+13:     69
+14:     44
+15:     34
 
 === 驗證 A：Mag7 的歸類 ===
    ticker           issuernm naics_modal tech_share   tech tech_last papers
    <char>             <char>      <char>      <num> <lgcl>    <lgcl>  <int>
-1:  GOOGL       ALPHABET INC      334419          1   TRUE      TRUE   3139
-2:   MSFT     MICROSOFT CORP      511210          1   TRUE      TRUE   2114
-3:   META META PLATFORMS INC      519130          1   TRUE      TRUE   1022
-4:   AMZN     AMAZON COM INC      454110          0  FALSE     FALSE    785
-5:   NVDA        NVIDIA CORP      334413          1   TRUE      TRUE    391
-6:   AAPL          APPLE INC      334220          1   TRUE      TRUE    118
-7:   TSLA          TESLA INC      336111          0  FALSE     FALSE      1
+1:  GOOGL       ALPHABET INC      334419          1   TRUE      TRUE  19468
+2:   MSFT     MICROSOFT CORP      511210          1   TRUE      TRUE  13474
+3:   META META PLATFORMS INC      519190          1   TRUE      TRUE   7799
+4:   AMZN     AMAZON COM INC      454110          0  FALSE     FALSE   6786
+5:   NVDA        NVIDIA CORP      334413          1   TRUE      TRUE   4576
+6:   AAPL          APPLE INC      334220          1   TRUE      TRUE   1550
+7:   TSLA          TESLA INC      336111          0  FALSE     FALSE     18
 
 === 驗證 B：論文數前 25 大公司 ===
-    ticker                 issuernm naics_modal   tech tech_last ai_group
-    <char>                   <char>      <char> <lgcl>    <lgcl>   <char>
- 1:  GOOGL             ALPHABET INC      334419   TRUE      TRUE        A
- 2:   MSFT           MICROSOFT CORP      511210   TRUE      TRUE        A
- 3:   META       META PLATFORMS INC      519130   TRUE      TRUE        A
- 4:   AMZN           AMAZON COM INC      454110  FALSE     FALSE        A
- 5:   ADBE                ADOBE INC      511210   TRUE      TRUE        B
- 6:   INTC               INTEL CORP      334413   TRUE      TRUE        B
- 7:   NVDA              NVIDIA CORP      334413   TRUE      TRUE        A
- 8:   BIDU                BAIDU INC      541511   TRUE      TRUE        B
- 9:    CRM           SALESFORCE INC      541611  FALSE      TRUE        B
-10:   AAPL                APPLE INC      334220   TRUE      TRUE        A
-11:   QCOM             QUALCOMM INC      334220   TRUE      TRUE        B
-12:   ORAN      ORANGE (Last Known)      517110  FALSE     FALSE        B
-13:    NOK               NOKIA CORP      334220   TRUE     FALSE        B
-14:   ERIC                 ERICSSON      334220   TRUE      TRUE        B
-15:     TM        TOYOTA MOTOR CORP      336111  FALSE     FALSE        B
-16:   TWTR TWITTER INC (Last Known)      519190   TRUE      TRUE        B
-17:   NTES              NETEASE INC      519130   TRUE     FALSE        B
-18:     GE      GENERAL ELECTRIC CO      333611  FALSE     FALSE        B
-19:   SONY          SONY GROUP CORP      334310  FALSE     FALSE        B
-20:   SNAP                 SNAP INC      541511   TRUE      TRUE        B
-21:    AZN          ASTRAZENECA PLC      325412  FALSE     FALSE        B
-22:   EBAY                 EBAY INC      541512  FALSE     FALSE        B
-23:   NFLX              NETFLIX INC      512199  FALSE      TRUE        B
-24:    WMT              WALMART INC      452990  FALSE     FALSE        B
-25:   CSCO        CISCO SYSTEMS INC      334118   TRUE      TRUE        B
-    ticker                 issuernm naics_modal   tech tech_last ai_group
-    papers
-     <int>
- 1:   3139
- 2:   2114
- 3:   1022
- 4:    785
- 5:    415
- 6:    414
- 7:    391
- 8:    339
- 9:    125
-10:    118
-11:     82
-12:     81
-13:     76
-14:     57
-15:     49
-16:     46
-17:     46
-18:     44
-19:     44
-20:     38
-21:     38
-22:     38
-23:     33
-24:     32
-25:     32
-    papers
+    ticker                         issuernm naics_modal   tech tech_last
+    <char>                           <char>      <char> <lgcl>    <lgcl>
+ 1:  GOOGL                     ALPHABET INC      334419   TRUE      TRUE
+ 2:   MSFT                   MICROSOFT CORP      511210   TRUE      TRUE
+ 3:   META               META PLATFORMS INC      519190   TRUE      TRUE
+ 4:    IBM INTERNATIONAL BUSINESS MACHS COR      541512   TRUE      TRUE
+ 5:   AMZN                   AMAZON COM INC      454110  FALSE     FALSE
+ 6:   BABA        ALIBABA GROUP HOLDING LTD      519190  FALSE     FALSE
+ 7:   NVDA                      NVIDIA CORP      334413   TRUE      TRUE
+ 8:   ADBE                        ADOBE INC      511210   TRUE      TRUE
+ 9:   INTC                       INTEL CORP      334413   TRUE      TRUE
+10:   BIDU                        BAIDU INC      541511   TRUE      TRUE
+11:     TM                TOYOTA MOTOR CORP      336111  FALSE     FALSE
+12:   AAPL                        APPLE INC      334220   TRUE      TRUE
+13:    CRM                   SALESFORCE INC      511210   TRUE      TRUE
+14:     JD                      J D COM INC      517911  FALSE     FALSE
+15:   SONY                  SONY GROUP CORP      334310  FALSE     FALSE
+16:   QCOM                     QUALCOMM INC      334220   TRUE      TRUE
+17:    JPM              JPMORGAN CHASE & CO      522110  FALSE     FALSE
+18:   SNAP                         SNAP INC      541511   TRUE      TRUE
+19:    HMC               HONDA MOTOR CO LTD      336111  FALSE     FALSE
+20:   CSCO                CISCO SYSTEMS INC      334118   TRUE      TRUE
+21:    NOK                       NOKIA CORP      334419   TRUE     FALSE
+22:    NOW                   SERVICENOW INC      541512   TRUE      TRUE
+23:   UBER            UBER TECHNOLOGIES INC      485999  FALSE     FALSE
+24:   ERIC                         ERICSSON      517911   TRUE      TRUE
+25:   NTES                      NETEASE INC      238210  FALSE     FALSE
+    ticker                         issuernm naics_modal   tech tech_last
+    ai_group papers
+      <char>  <int>
+ 1:        A  19468
+ 2:        A  13474
+ 3:        A   7799
+ 4:        B   7036
+ 5:        A   6786
+ 6:        B   5586
+ 7:        A   4576
+ 8:        B   2985
+ 9:        B   2052
+10:        B   1937
+11:        B   1579
+12:        A   1550
+13:        B   1351
+14:        B   1236
+15:        B   1120
+16:        B    783
+17:        B    546
+18:        B    522
+19:        B    496
+20:        B    446
+21:        B    420
+22:        B    381
+23:        B    332
+24:        B    317
+25:        B    317
+    ai_group papers
 
 === 最終分組（全 CRSP，主分類＝多數決）===
      tech 公司數 總論文 平均市值_百萬 中位市值_百萬
    <lgcl>  <int>  <int>         <num>         <num>
-1:   TRUE   1604   8643        7073.7         448.4
-2:  FALSE  16991   1722        2303.4         173.9
-3:     NA    350      0         462.6          75.6
+1:   TRUE   1121  68104       13333.9         785.9
+2:  FALSE  14550  23843        3067.2         181.9
+3:     NA    308      3         588.8          74.5
 
 === 有發 AI 論文的公司分布 ===
      tech 公司數 總論文
    <lgcl>  <int>  <int>
-1:   TRUE     85   8643
-2:  FALSE    144   1722
+1:   TRUE    156  68104
+2:  FALSE    268  23843
+3:     NA      2      3
 
 === 新舊規則對照：論文落在科技組的比例 ===
-舊規則: 科技組拿到 42.2% 的論文
-新規則: 科技組拿到 83.4% 的論文
+舊規則: 科技組拿到 75.9% 的論文
+新規則: 科技組拿到 74.1% 的論文
 
 === 已輸出 ===
-02_returns/out/tech_classification.csv  (18945 家公司)
+02_returns/out/tech_classification.csv  (15979 家公司)

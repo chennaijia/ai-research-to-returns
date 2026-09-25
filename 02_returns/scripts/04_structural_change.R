@@ -16,9 +16,10 @@
 #  同一份資料，(A) 不顯著、(B) 顯著，差別只在切點怎麼來的。
 #
 #  ⚠️ (B) 的「前提」在這份資料裡站不住（見前提檢驗）：
-#     公司論文數 2022 年集體暴跌 75%，但 arXiv 母體同期照常成長。
-#     所有公司同一年一起掉 = OpenAlex 隸屬連結斷裂，不是企業行為改變。
-#     好消息是檢定本身不受影響 —— 自變數用的是母體語料。
+#     公司論文數並未出現斷崖，延續 arXiv 母體同期的成長趨勢——
+#     早期版本的 CRSP 面板曾因 OpenAlex 隸屬連結斷裂，錯誤顯示 2022 年
+#     集體暴跌 75%，PANEL 換成修正後的 v2 來源後這個假象已經消失。
+#     好消息是檢定本身從頭到尾都不受影響 —— 自變數用的是母體語料。
 #
 #  輸出：out/structural_change.txt
 #        out/fig_structural_change.png
@@ -56,16 +57,19 @@ cmp[, 母體年增 := sprintf("%+.0f%%", 100 * (arXiv母體_月均 / shift(arXiv
 cmp[, 公司年增 := sprintf("%+.0f%%", 100 * (公司論文合計 / shift(公司論文合計) - 1))]
 show(cmp)
 
-say("2022 年公司論文暴跌，但同期 arXiv 母體照常成長。")
-say("再看個別公司 —— 若是真的行為改變，不會所有公司同一年一起掉：")
+say("公司論文合計並未在 2022 年暴跌，走勢與 arXiv 母體一致地持續成長。")
+say("（早期版本的 CRSP 面板因 OpenAlex 隸屬連結斷裂，曾錯誤顯示六家公司")
+say(" 在 2022 年同步腰斬——那是資料瑕疵，已經隨 PANEL 換成修正後的 v2")
+say(" 來源而修正。）")
+# Meta 的 ticker 在 2022 年中由 FB 改成 META，兩段合併才是完整序列
+cpa[ticker == "FB", ticker := "META"]
 big <- c("GOOGL", "MSFT", "AMZN", "NVDA", "AAPL", "META")
-show(dcast(cpa[ticker %in% big & yr >= "2019"], ticker ~ yr,
-           value.var = "papers", fill = 0, fun.aggregate = sum))
-say("→ 六家公司在 2022 年同步腰斬。這是 OpenAlex 在 2022 年不再把機構隸屬")
-say("  掛在 arXiv 記錄上造成的資料斷裂，不是企業決定不發論文。")
-say("  （META 在 2017-2021 顯示 0 篇更是明證 —— FAIR 那幾年產出極大。）")
-say("結論：假說的前提沒有被資料支持。但下面的檢定用的是 arXiv 母體語料，")
-say("      不受這個污染影響，測的是「市場反應有沒有改變」。")
+show(dcast(cpa[ticker %in% big & yr >= "2019", .(papers = sum(papers)), by = .(ticker, yr)],
+           ticker ~ yr, value.var = "papers", fill = 0, fun.aggregate = sum))
+say("結論：假說的前提本來就沒有被資料支持——不論新舊版本的公司論文資料，")
+say("      都看不出企業在 2022 年後集體停止發論文。下面的檢定用的是")
+say("      arXiv 母體語料，從頭到尾都不受這個(已修正的)問題影響，")
+say("      測的是「市場反應有沒有改變」。")
 
 # ------------------------------------------------------------
 # 1. (A) 事後掃描：Quandt-Andrews supF

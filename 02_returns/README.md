@@ -23,7 +23,7 @@ A second motivation was data quality. The `is_ict` flag shipped with `01_univers
 
 Requires, relative to the repository root:
 
-- `01_universe/out/crsp_all_classified_with_papers_detailed.csv` — CRSP monthly panel (~426 MB, stored via Git LFS): returns, market cap, NAICS codes, and merged company paper counts for 18,945 firms
+- `data/crsp/crsp_all_classified_with_papers_detailed_v2.csv` — CRSP monthly panel (~297 MB, stored via Git LFS): returns, market cap, NAICS codes, and merged company paper counts for 15,979 firms, 2017-01 onward. This superseded an earlier CRSP panel whose OpenAlex-derived paper counts had a data-linkage bug (see `data/README.md`); the current file is pulled from a corrected source and no longer shows that artifact.
 - `data/arxiv/ai_monthly.csv` — monthly arXiv AI paper counts and citations
 
 ### Running the scripts in RStudio
@@ -57,7 +57,7 @@ The order matters: 01 writes the classification that 02 reads, and 02 writes the
 ### Things worth knowing before the first run
 
 - **Encoding must be UTF-8.** The scripts and their diagnostic output are commented in Chinese. If the console shows garbled characters, set Tools ▸ Global Options ▸ Code ▸ Saving ▸ Default text encoding to `UTF-8`. This mostly affects Windows, where the default is often not UTF-8.
-- **Script 02 reads a 426 MB file** and will hold several GB in memory while building the panel. It calls `rm()` and `gc()` when finished with the raw data, but if RStudio's Environment pane still shows large objects from a previous run, clear them first (the broom icon, or `rm(list = ls())`) so the two runs don't coexist in memory.
+- **Script 02 reads a 297 MB file** and will hold several GB in memory while building the panel. It calls `rm()` and `gc()` when finished with the raw data, but if RStudio's Environment pane still shows large objects from a previous run, clear them first (the broom icon, or `rm(list = ls())`) so the two runs don't coexist in memory.
 - **Script 04 takes a few minutes.** It bootstraps 2,000 replications of a full breakpoint scan. The others finish quickly. RStudio's console shows a stop-sign icon while it works; this is normal, not a hang.
 - **Figures are written to `.png` files, not to the Plots pane.** The scripts open a `png()` device explicitly, so nothing appears in RStudio's Plots pane. Look in `02_returns/out/`, or use the Files pane to click the images open.
 - **If a script stops with an error partway, just re-run it from the top.** Because an RStudio session persists between runs, an interrupted script leaves its log file open; `start_log()` detects and closes a stale connection on the next run, so this is handled. If you have interrupted many runs and see `all connections are in use`, run `closeAllConnections()` once.
@@ -78,10 +78,10 @@ The classification is enumerated at the **6-digit** level and spans the NAICS 20
 
 Two further details matter. CRSP encodes a missing NAICS as the integer `0`, not `NA`, so `is.na()` catches nothing — 1.63% of rows and 350 firms that are `0` throughout. Delisted firms are almost always `0` in their final months, so any "use the last observed code" rule classifies every delisted firm as non-technology unless zeros are excluded first. And because a firm's industry code changes over time, the firm-level label is assigned by majority vote across its valid months rather than by any single month: among the 229 firms that publish AI papers, 23.1% flip at least once under the shipped flag and 16.6% still flip under the corrected 6-digit rule.
 
-Output: 1,604 technology firms, 16,991 non-technology firms, 350 unclassifiable. Three alternative collapse rules (majority vote, last valid code, ever-ICT) are computed and compared in the diagnostics file; they disagree on only 356 firms, so downstream results are not sensitive to the choice.
+Output: 1,121 technology firms, 14,550 non-technology firms, 308 unclassifiable (out of 15,979 firms in the current CRSP panel, which starts 2017-01 — see `data/README.md`). Three alternative collapse rules (majority vote, last valid code, ever-ICT) are computed and compared in the diagnostics file; downstream results are not sensitive to the choice.
 
 ### `02_build_panel.R`
-The only script that reads the 426 MB CRSP file. Produces the monthly analysis dataset.
+The only script that reads the 297 MB CRSP file. Produces the monthly analysis dataset.
 
 - **Value weights use the *prior* month's market cap.** Month-end market cap already contains that month's return, so weighting by it would hand the best-performing stocks a mechanically higher weight and bias portfolio returns upward.
 - **Lags are taken by explicit month index, not by row shift.** Firms have gaps in CRSP coverage, so `shift()` returns "the previous observation" rather than "the previous month." The script builds an integer month index and merges on `(permno, month − 1)`.
@@ -124,29 +124,29 @@ This is not a cosmetic step. Untreated, Q1's coefficient is +0.0023 (p = 0.926);
 
 ## Results
 
-Sample: 2017-01 to 2025-12, 108 months (107 after differencing), 761 technology and 7,258 non-technology firms per month on average.
+Sample: 2017-02 to 2025-12, 107 months (106 after differencing), 716 technology and 7,809 non-technology firms per month on average.
 
 ### Portfolio construction checks
 
 | Series | Mean monthly | Annualized | SD |
 |---|---:|---:|---:|
-| Tech (value-weighted) | 1.584% | 20.8% | 5.06% |
-| Non-tech (value-weighted) | 0.956% | 12.1% | 4.14% |
-| **Spread** | **0.628%** | **7.8%** | 2.81% |
-| CRSP market | 1.112% | 14.2% | 4.22% |
+| Tech (value-weighted) | 1.807% | 24.0% | 5.48% |
+| Non-tech (value-weighted) | 0.930% | 11.7% | 4.48% |
+| **Spread** | **0.877%** | **11.0%** | 3.18% |
+| CRSP market | 1.156% | 14.8% | 4.59% |
 
-The non-tech portfolio correlates 0.987 with the CRSP market index, confirming it behaves like the market as it should. The spread averages 0.628%/month (t = 3.09, p = 0.002) — but this is simply the technology premium over the sample period and has nothing to do with AI papers yet. Replacing the classification rule with "last valid NAICS code" produces a spread series correlated 0.991 with the main one.
+The non-tech portfolio correlates 0.983 with the CRSP market index, confirming it behaves like the market as it should. The spread averages 0.877%/month (t = 2.85, p = 0.005) — but this is simply the technology premium over the sample period and has nothing to do with AI papers yet. Replacing the classification rule with "last valid NAICS code" produces a spread series correlated 0.994 with the main one.
 
-The corrected classification also fixes the flag problem: under the shipped `is_ict` field the technology group held only 42.2% of company AI papers; under the rebuilt classification it holds 83.4%.
+Under the current CRSP source's own `is_ict` field the technology group holds 75.9% of company AI papers; the rebuilt 6-digit classification holds 74.1% — comparable, unlike the gap seen under the panel this project used through August 2026, where a single-vintage flag held only 42.2%.
 
 ### Q1 — AI research and technology returns
 
 | Lag | Coefficient | HAC SE | t | p | BH-adjusted p |
 |---:|---:|---:|---:|---:|---:|
-| 0 | +0.0701 | 0.0331 | +2.12 | 0.036 | 0.073 |
-| 1 | −0.0488 | 0.0345 | −1.41 | 0.160 | 0.208 |
-| 2 | +0.0655 | 0.0290 | +2.26 | 0.026 | 0.073 |
-| 3 | −0.0501 | 0.0395 | −1.27 | 0.208 | 0.208 |
+| 0 | +0.0708 | 0.0324 | +2.18 | 0.031 | 0.062 |
+| 1 | −0.0481 | 0.0339 | −1.42 | 0.159 | 0.212 |
+| 2 | +0.0618 | 0.0282 | +2.19 | 0.031 | 0.062 |
+| 3 | −0.0470 | 0.0377 | −1.24 | 0.216 | 0.216 |
 
 The contemporaneous coefficient is significant at 5% on its own, but **0 of 4 lags survive BH correction.** Treated as four tests of one hypothesis, this is at best marginal evidence.
 
@@ -154,34 +154,34 @@ The contemporaneous coefficient is significant at 5% on its own, but **0 of 4 la
 
 | Lag | Coefficient | HAC SE | t | p | BH-adjusted p |
 |---:|---:|---:|---:|---:|---:|
-| 0 | +0.0466 | 0.0285 | +1.63 | 0.105 | 0.202 |
-| 1 | −0.0368 | 0.0193 | −1.90 | 0.060 | 0.202 |
-| 2 | +0.0268 | 0.0185 | +1.44 | 0.152 | 0.202 |
-| 3 | −0.0152 | 0.0256 | −0.59 | 0.553 | 0.553 |
+| 0 | +0.0475 | 0.0282 | +1.69 | 0.095 | 0.190 |
+| 1 | −0.0352 | 0.0196 | −1.80 | 0.075 | 0.190 |
+| 2 | +0.0228 | 0.0179 | +1.28 | 0.205 | 0.273 |
+| 3 | −0.0124 | 0.0244 | −0.51 | 0.614 | 0.614 |
 
 **Not significant.** Over the full sample, the evidence does not support the claim that AI research output affects technology stocks specifically.
 
-The control group makes this interpretable. The non-tech portfolio's own coefficient is +0.0235 (p = 0.512) — a clean null. So Q2's insignificance is *not* the case where both groups respond and the difference cancels; the tech group's response simply is not strong enough to separate from zero at this sample size.
+The control group makes this interpretable. The non-tech portfolio's own coefficient is +0.0233 (p = 0.519) — a clean null. So Q2's insignificance is *not* the case where both groups respond and the difference cancels; the tech group's response simply is not strong enough to separate from zero at this sample size.
 
 ### Robustness (Q2, contemporaneous)
 
 | Specification | Coefficient | t | p |
 |---|---:|---:|---:|
-| Main: value-weighted, majority-vote classification | +0.0466 | +1.63 | 0.105 |
-| Equal-weighted | +0.0592 | +3.00 | 0.003 |
-| Last-NAICS-code classification | +0.0491 | +1.70 | 0.092 |
-| X not deseasonalized | +0.0286 | +1.55 | 0.125 |
-| Controlling for market return | +0.0418 | +1.38 | 0.169 |
+| Main: value-weighted, majority-vote classification | +0.0475 | +1.69 | 0.095 |
+| Equal-weighted | +0.0591 | +2.87 | 0.005 |
+| Last-NAICS-code classification | +0.0493 | +1.71 | 0.091 |
+| X not deseasonalized | +0.0305 | +1.64 | 0.104 |
+| Controlling for market return | +0.0436 | +1.47 | 0.144 |
 
 Equal weighting is significant while value weighting is not, which needs explaining rather than reporting selectively. Splitting the market into size quintiles and computing the spread within each:
 
 | Size quintile | Coefficient | t | p | BH-adjusted p |
 |---|---:|---:|---:|---:|
-| Q1 (smallest) | +0.0751 | +1.77 | 0.079 | 0.131 |
-| Q2 | +0.0666 | +3.12 | 0.002 | 0.012 |
-| Q3 | +0.0698 | +2.39 | 0.019 | 0.047 |
-| Q4 | +0.0349 | +1.30 | 0.197 | 0.197 |
-| Q5 (largest) | +0.0470 | +1.63 | 0.105 | 0.132 |
+| Q1 (smallest) | +0.0846 | +1.80 | 0.074 | 0.118 |
+| Q2 | +0.0739 | +3.35 | 0.001 | 0.006 |
+| Q3 | +0.0725 | +2.41 | 0.018 | 0.045 |
+| Q4 | +0.0337 | +1.24 | 0.219 | 0.219 |
+| Q5 (largest) | +0.0479 | +1.69 | 0.094 | 0.118 |
 
 All five coefficients are positive, of similar magnitude, and show no monotonic pattern in size. The equal-vs-value discrepancy is therefore a **statistical power** difference, not evidence that the effect lives only in microcaps — which would have been a reason to discount it.
 
@@ -189,28 +189,28 @@ All five coefficients are positive, of similar magnitude, and show no monotonic 
 
 | Method | Q1 coefficient | Q1 p | Q2 coefficient | Q2 p | n |
 |---|---:|---:|---:|---:|---:|
-| 0 Raw (untreated) | +0.0023 | 0.926 | +0.0286 | 0.125 | 107 |
-| 1 Month-demeaned (main) | +0.0701 | 0.036 | +0.0466 | 0.105 | 107 |
-| 2 Year-over-year | +0.0271 | 0.568 | +0.0255 | 0.241 | 96 |
-| 3 STL adjusted | +0.0702 | 0.037 | +0.0463 | 0.106 | 107 |
-| 1b Month-demeaned, rolling | +0.0471 | 0.256 | +0.0553 | 0.048 | 71 |
+| 0 Raw (untreated) | +0.0021 | 0.931 | +0.0305 | 0.104 | 106 |
+| 1 Month-demeaned (main) | +0.0708 | 0.031 | +0.0475 | 0.095 | 106 |
+| 2 Year-over-year | +0.0234 | 0.619 | +0.0242 | 0.246 | 95 |
+| 3 STL adjusted | +0.0686 | 0.035 | +0.0469 | 0.097 | 106 |
+| 1b Month-demeaned, rolling | +0.0523 | 0.219 | +0.0549 | 0.052 | 70 |
 
-Month-demeaning and STL correlate 0.999 and give effectively identical answers, so the choice between them does not drive any conclusion. Year-over-year differencing should not be used here: taking a 12-period difference flattens the series, pushing first-order autocorrelation from −0.26 to +0.47 and destroying the contemporaneous relationship.
+Month-demeaning and STL correlate 0.999 and give effectively identical answers, so the choice between them does not drive any conclusion. Year-over-year differencing should not be used here: taking a 12-period difference flattens the series and destroys the contemporaneous relationship.
 
-Two cautions on reading this table. The residual-seasonality ANOVA reports F = 0 and p = 1 for method 1, but that is an *identity* — the monthly means were subtracted out by construction, not tested and found absent. And method 1b's apparent Q2 significance comes with a shortened sample (71 months, starting 2020-02), which is where the next section begins.
+Two cautions on reading this table. The residual-seasonality ANOVA reports F = 0 and p = 1 for method 1, but that is an *identity* — the monthly means were subtracted out by construction, not tested and found absent. And method 1b's apparent Q2 significance comes with a shortened sample (70 months, starting 2020-03), which is where the next section begins.
 
 ### Structural change
 
-Method 1b requires three years of history before it can estimate a monthly mean, so it silently truncates the sample to 2020-02 onward — and in that subsample Q2 is significant. Testing 2020-02 directly as a breakpoint gives an interaction term with p = 0.037. That looks like a finding.
+Method 1b requires three years of history before it can estimate a monthly mean, so it silently truncates the sample to 2020-03 onward — and in that subsample Q2 is significant. Testing 2020-02 directly as a breakpoint gives an interaction term with p = 0.042. That looks like a finding.
 
 It is not:
 
 | Approach | Result |
 |---|---|
-| Impose 2020-02 as the break date | interaction p = 0.037 (significant) |
-| Scan all candidate break dates (supF) | supF = 4.36 at 2020-09, bootstrap p = 0.145 (not significant) |
+| Impose 2020-02 as the break date | interaction p = 0.042 (significant) |
+| Scan all candidate break dates (supF) | supF = 4.64 at 2022-12, bootstrap p = 0.110 (not significant) |
 
-Both computations are correct. The difference is where the date came from. 2020-02 was not predicted by any theory — it fell out of a sample-length artifact of one deseasonalization method. With 76 candidate break dates, some will produce p < 0.05 by chance, and the bootstrap supF prices that in. The correct statistic to report is the supF result. (For reference, neither GPT-3 in 2020-05 nor ChatGPT in 2022-11 lines up with 2020-02.) Q1 shows no break at all (supF = 0.91, p = 0.967).
+Both computations are correct. The difference is where the date came from. 2020-02 was not predicted by any theory — it fell out of a sample-length artifact of one deseasonalization method. With 77 candidate break dates, some will produce p < 0.05 by chance, and the bootstrap supF prices that in. The correct statistic to report is the supF result. (For reference, neither GPT-3 in 2020-05 nor ChatGPT in 2022-11 lines up with 2020-02.) Q1 shows no break at all (supF = 0.96, p = 0.967).
 
 ### Pre-specified 2021 / 2022 breakpoints
 
@@ -220,63 +220,63 @@ The interaction is significant at both dates — but the direction is the opposi
 
 | Break | Pre-period | Post-period | Interaction | BH-adjusted p |
 |---|---|---|---|---:|
-| 2021-01 | −0.0093 (p = 0.653, n = 47) | +0.1079 (p = 0.012, n = 60) | +0.1172, p = 0.013 | 0.019 |
-| 2022-01 | +0.0007 (p = 0.975, n = 59) | +0.1332 (p = 0.011, n = 48) | +0.1325, p = 0.019 | 0.019 |
+| 2021-01 | −0.0070 (p = 0.728, n = 46) | +0.1078 (p = 0.012, n = 60) | +0.1148, p = 0.015 | 0.021 |
+| 2022-01 | +0.0024 (p = 0.913, n = 58) | +0.1331 (p = 0.012, n = 48) | +0.1306, p = 0.021 | 0.021 |
 
 Decomposing the 2022 split into each group's own response gives the most informative table in this analysis:
 
 | Period | Tech | Non-tech | Spread |
 |---|---|---|---|
-| Before (n = 59) | +0.0381 (p = 0.265) | +0.0373 (p = 0.307) | **+0.0007 (p = 0.975)** |
-| After (n = 48) | +0.1283 (p = 0.070) | −0.0049 (p = 0.947) | **+0.1332 (p = 0.011)** |
+| Before (n = 58) | +0.0397 (p = 0.231) | +0.0373 (p = 0.308) | **+0.0024 (p = 0.913)** |
+| After (n = 48) | +0.1277 (p = 0.070) | −0.0054 (p = 0.942) | **+0.1331 (p = 0.012)** |
 
-In the pre-period the two groups respond almost identically (0.0381 vs 0.0373), so the spread is essentially exactly zero — a natural placebo test that the design passes. In the post-period only the technology group moves while the non-tech group sits at zero. That asymmetry is precisely the differential response Q2 was designed to detect. The rolling 36-month coefficient jumps in windows ending in early 2023, which lines up with ChatGPT's release in 2022-11.
+In the pre-period the two groups respond almost identically (0.0397 vs 0.0373), so the spread is essentially exactly zero — a natural placebo test that the design passes. In the post-period only the technology group moves while the non-tech group sits at zero. That asymmetry is precisely the differential response Q2 was designed to detect. The rolling 36-month coefficient jumps in windows ending in early 2023, which lines up with ChatGPT's release in 2022-11.
 
-Note that the same split on Q1 is *not* significant (interaction p = 0.211 and 0.243). The break shows up in the tech-versus-market difference, not in tech returns alone.
+Note that the same split on Q1 is *not* significant (interaction p = 0.221 and 0.252). The break shows up in the tech-versus-market difference, not in tech returns alone.
 
 **This result is fragile and should be treated as a lead, not a conclusion.** With n = 48:
 
 | Check | Coefficient | p |
 |---|---:|---:|
-| Main | +0.1332 | 0.011 |
-| STL deseasonalization | +0.1308 | 0.013 |
-| No deseasonalization | +0.0639 | 0.037 |
-| Equal-weighted | +0.1010 | 0.015 |
-| Last-NAICS-code classification | +0.1371 | 0.013 |
-| Controlling for market return | +0.1246 | 0.040 |
-| Excluding 2023 | +0.0893 | 0.070 |
-| Excluding 2024 | +0.1182 | 0.095 |
-| Excluding 3 most extreme months | +0.0697 | 0.072 |
+| Main | +0.1331 | 0.012 |
+| STL deseasonalization | +0.1314 | 0.014 |
+| No deseasonalization | +0.0640 | 0.036 |
+| Equal-weighted | +0.1028 | 0.018 |
+| Last-NAICS-code classification | +0.1364 | 0.013 |
+| Controlling for market return | +0.1251 | 0.040 |
+| Excluding 2023 | +0.0872 | 0.078 |
+| Excluding 2024 | +0.1174 | 0.102 |
+| Excluding 3 most extreme months | +0.0705 | 0.069 |
 
 It survives every change of specification but not the removal of three observations or a single year. Forty-eight months cannot support a strong claim.
 
 ### The hypothesis's premise does not hold
 
-The 2021/2022 hypothesis assumed firms stopped publishing. The data disagree:
+The 2021/2022 hypothesis assumed firms stopped publishing. The data disagree — and disagree more clearly now than in an earlier version of this analysis:
 
 | Year | arXiv population (monthly avg) | Company papers | Population YoY | Company YoY |
 |---|---:|---:|---:|---:|
-| 2020 | 3,888 | 2,727 | +33% | +33% |
-| 2021 | 4,306 | 2,114 | +11% | −22% |
-| 2022 | 4,513 | 548 | +5% | **−74%** |
-| 2023 | 5,624 | 513 | +25% | −6% |
+| 2020 | 3,888 | 10,471 | +33% | +23% |
+| 2021 | 4,306 | 10,281 | +11% | −2% |
+| 2022 | 4,513 | 11,466 | +5% | **+12%** |
+| 2023 | 5,624 | 13,033 | +25% | +14% |
 
-Company-attributed papers collapse in 2022 while the arXiv population keeps growing. Firm by firm: GOOGL 654 → 101, MSFT 429 → 122, AMZN 182 → 49, NVDA 80 → 24, AAPL 22 → 10. Every firm halving in the same calendar year is the signature of a data break, not of independent corporate decisions — OpenAlex stopped attaching institutional affiliations to arXiv records in 2022, and this project's company-paper counts depend on exactly that link. Meta showing 0 papers for 2017–2021 confirms the linkage is unreliable, since FAIR published heavily in those years.
+Company-attributed papers do not collapse in 2022 — they keep growing, in step with the arXiv population. Firm by firm (Meta's FB→META ticker history merged into one series): GOOGL 2,274 → 2,482, MSFT 1,450 → 1,711, AMZN 703 → 912, NVDA 438 → 521, AAPL 131 → 170, META 1,047 → 1,130. **An earlier CRSP panel this project used through August 2026 had shown the opposite** — a spurious ~75% collapse (GOOGL 654 → 101, MSFT 429 → 122) driven by OpenAlex no longer attaching institutional affiliations to arXiv records from 2022 onward. That panel has since been replaced by a corrected source (`data/crsp/crsp_all_classified_with_papers_detailed_v2.csv`; see `data/README.md`), and the artifact is gone. The conclusion is unchanged either way: nothing in the company-paper data — broken or fixed — supports firms having stopped publishing after 2021/2022.
 
-**The Q1/Q2 tests are unaffected**, because their independent variable is the arXiv population series, which has no such break. But any claim that firms "shifted to patents" would need patent data and a clean publication series; it cannot be established from this dataset.
+**The Q1/Q2 tests were never affected by this**, because their independent variable is the arXiv population series, which never had a break. But any claim that firms "shifted to patents" would need patent data and a clean publication series; it cannot be established from company-paper counts alone (see `03_patents/README.md` for the independent patent-based check).
 
 ## Conclusions
 
-1. **Over the full 2017–2025 sample, the effect is not shown to be technology-specific.** Q2 gives +0.0466 (p = 0.105), and the non-tech control group is a clean null. Q1 is significant contemporaneously but does not survive multiple-testing correction.
+1. **Over the full 2017–2025 sample, the effect is not shown to be technology-specific.** Q2 gives +0.0475 (p = 0.095), and the non-tech control group is a clean null. Q1 is significant contemporaneously but does not survive multiple-testing correction.
 
-2. **This null is now hard to attribute to sample size.** Extending the cross-section from 9 mega-cap firms to 18,595 classified CRSP firms did not change the answer, and the size-quintile decomposition rules out the "effect only exists in small caps" explanation.
+2. **This null is now hard to attribute to sample size.** Extending the cross-section from 9 mega-cap firms to 15,671 classified CRSP firms did not change the answer, and the size-quintile decomposition rules out the "effect only exists in small caps" explanation.
 
-3. **Deseasonalization is essential, not optional.** Conference deadlines account for 53.4% of the variance in AI paper growth. Untreated, Q1's coefficient is 30× smaller and nowhere near significant.
+3. **Deseasonalization is essential, not optional.** Conference deadlines account for 52.6% of the variance in AI paper growth. Untreated, Q1's coefficient is over 30× smaller and nowhere near significant.
 
 4. **The most methodologically instructive result is a contradiction.** The same data yield "significant" or "not significant" for the same break date depending only on whether the date was chosen before or after looking at the data. Reporting the imposed-breakpoint interaction rather than the supF statistic would have been p-hacking, and would have been invisible to a reader.
 
-5. **The strongest positive result in the project is the post-2022 subsample** (+0.1332, p = 0.011), with a clean placebo in the pre-period and a control group that does not move. It is worth pursuing, but 48 months and its sensitivity to dropping three observations mean it cannot carry a strong claim on its own.
+5. **The strongest positive result in the project is the post-2022 subsample** (+0.1331, p = 0.012), with a clean placebo in the pre-period and a control group that does not move. It is worth pursuing, but 48 months and its sensitivity to dropping three observations mean it cannot carry a strong claim on its own.
 
 ### Where this could go next
 
-The binding constraint is statistical power in the time dimension: a monthly time series would need roughly 300 months — 25 years — to detect an effect this size reliably, and the AI-paper series only begins in 2017. The time dimension is exhausted. Any real improvement has to come from the cross-section (firm-level panel tests using within-firm variation), from higher-frequency data (weekly returns against weekly submission counts), or from a cleaner measure of corporate AI activity than affiliation-linked paper counts — patents, job postings, or product releases.
+The binding constraint is statistical power in the time dimension: a monthly time series would need roughly 300 months — 25 years — to detect an effect this size reliably, and the AI-paper series only begins in 2017. The time dimension is exhausted. A firm-level panel test using within-firm variation has since been run in [`05_panel`](../05_panel/README.md): firm and month fixed effects on a company's own paper and patent counts against its own returns, still a clean null. Further improvement would have to come from higher-frequency data (weekly returns against weekly submission counts) or from a cleaner measure of corporate AI activity than paper counts — R&D spend or patents, which this project has already collected.

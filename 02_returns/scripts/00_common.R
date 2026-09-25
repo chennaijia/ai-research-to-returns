@@ -11,8 +11,8 @@ suppressMessages({
   library(lmtest)
 })
 
-PANEL      <- file.path("01_universe", "out",
-                        "crsp_all_classified_with_papers_detailed.csv")
+PANEL      <- file.path("data", "crsp",
+                        "crsp_all_classified_with_papers_detailed_v2.csv")
 AI_MONTHLY <- file.path("data", "arxiv", "ai_monthly.csv")
 OUT_DIR    <- file.path("02_returns", "out")
 dir.create(OUT_DIR, recursive = TRUE, showWarnings = FALSE)

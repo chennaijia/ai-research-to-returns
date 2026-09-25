@@ -9,7 +9,7 @@ B_other_stocks <- fread("01_universe/out/group_B_OTHER.csv")
 
 # ---- 2. A 組每年總論文數 ----
 A_yearly <- A_stocks |>
-  mutate(year = year(my(year_month))) |>
+  mutate(year = year(parse_date_time(year_month, orders = c("my", "ym", "ymd")))) |>
   filter(!is.na(year)) |>
   distinct(permno, year_month, .keep_all = TRUE) |>
   group_by(year) |>
@@ -95,7 +95,7 @@ p2 <- ggplot(all_yearly_indexed, aes(x = year, y = index_2020, color = group, gr
   geom_line(size = 1.2) +
   geom_point(size = 2.5) +
   geom_hline(yintercept = 100, linetype = "dashed", color = "grey50") +
-  annotate("text", x = 2017, y = 105, label = "2020 peak = 100",
+  annotate("text", x = 2017, y = 105, label = "2020 level = 100",
            color = "grey40", size = 3.5, hjust = 0) +
   scale_x_continuous(breaks = 2017:2025) +
   scale_color_manual(values = c(
@@ -104,8 +104,8 @@ p2 <- ggplot(all_yearly_indexed, aes(x = year, y = index_2020, color = group, gr
     "B_Other (Non-Tech)" = "#2ca02c"
   )) +
   labs(
-    title = "AI Paper Decline After 2020: Magnificent 7 vs. Other Sectors",
-    subtitle = "Index = 100 at each group's 2020 level; downward slope indicates a decline",
+    title = "AI Paper Output Since 2020: Magnificent 7 vs. Other Sectors",
+    subtitle = "Index = 100 at each group's 2020 level; all three groups keep growing, no post-2022 collapse",
     x = "Year",
     y = "Index (2020 = 100)",
     color = NULL

@@ -12,21 +12,22 @@ The project ran in **two generations**, and the disagreement between them is par
 
 The **first generation** (Levels 0–4) regressed a hand-picked, value-weighted portfolio of nine mega-cap technology stocks on arXiv AI paper growth, using ADF tests, ARDL with Newey-West HAC errors, Granger causality, VAR / impulse responses, and firm-level Spearman correlations. It found essentially no aggregate effect, two marginal semiconductor-related signals, and a sharp post-2021 decline in corporate AI publications that it interpreted as a disclosure shift.
 
-An audit of that design found a problem it could not fix from within: **a treatment group with no control group**. The nine-stock portfolio correlates 0.91 with the overall market, so a positive coefficient is equally consistent with a market-wide effect and a technology-specific one. The **second generation** therefore rebuilt the test on the CRSP full market — 18,945 firms — split into a technology and a non-technology group, and made the **spread between them** the dependent variable. A separate patent pipeline was built to test the first generation's disclosure-shift story against an independent data source.
+An audit of that design found a problem it could not fix from within: **a treatment group with no control group**. The nine-stock portfolio correlates 0.91 with the overall market, so a positive coefficient is equally consistent with a market-wide effect and a technology-specific one. The **second generation** therefore rebuilt the test on the CRSP full market — 15,979 firms — split into a technology and a non-technology group, and made the **spread between them** the dependent variable. A separate patent pipeline was built to test the first generation's disclosure-shift story against an independent data source.
 
 Both generations are reported below. The first-generation code lives on the `archive/v1-level1-4` branch; `main` contains the second generation.
 
 ## Repository Structure
 
-Four numbered pipelines. **The numbering is the dependency order**, and every script's paths are written relative to the repository root.
+Five numbered pipelines. **The numbering is the dependency order**, and every script's paths are written relative to the repository root.
 
 | Folder | What it does | Details |
 |---|---|---|
-| [`data/`](data/README.md) | Raw, non-reproducible inputs (CRSP / OpenAlex / arXiv / Compustat / SEC) | `data/README.md` |
-| [`01_universe/`](01_universe/README.md) | CRSP full market → A/B/C/D group panels | `01_universe/README.md` |
+| [`data/`](data/README.md) | Raw, non-reproducible inputs (CRSP+OpenAlex merged panel / arXiv / Compustat / SEC) | `data/README.md` |
+| [`01_universe/`](01_universe/README.md) | CRSP full market → A/B_ICT/B_Other/C group panels | `01_universe/README.md` |
 | [`02_returns/`](02_returns/README.md) | **Main line**: is the AI-research effect specific to technology stocks? | `02_returns/README.md` |
 | [`03_patents/`](03_patents/README.md) | AI patent extraction and alignment for 268 listed firms | `03_patents/README.md` |
 | [`04_rnd/`](04_rnd/README.md) | R&D expense for the eight target firms | `04_rnd/README.md` |
+| [`05_panel/`](05_panel/README.md) | Firm-level panel: does a company's own papers/patents predict its own returns? | `05_panel/README.md` |
 
 Everything under `data/` must be obtained from its original source; everything under each pipeline's `out/` can be rebuilt by re-running that pipeline.
 
@@ -34,14 +35,13 @@ Everything under `data/` must be obtained from its original source; everything u
 
 | Source | Description | Range | Size |
 |---|---|---|---|
-| **CRSP** (via WRDS) | Full-market monthly stock file: returns, market cap, NAICS codes for 18,945 firms | 2010 – 2025 | 399 MB |
-| **OpenAlex + arXiv** | Paper–author–institution records, used to identify firms with AI publications | 2010 – 2025 | 78 MB |
+| **CRSP + OpenAlex** (via WRDS, merged) | Full-market monthly stock file — returns, market cap, NAICS codes, and merged company AI-paper counts — for 15,979 firms | 2017-01 – 2025-12 | 297 MB |
 | **arXiv metadata** | Monthly count of papers in AI categories (`cs.LG`, `cs.AI`, `cs.CL`, `cs.CV`, `cs.NE`, `stat.ML`) and their citation counts | 2017-01 – 2026-05 | 4.5 KB |
 | **Google Patents Public Data** (BigQuery) | U.S. pre-grant publications for 268 firms, classified as AI by the WIPO 2019 search rules | 2010 – 2025 | 838,405 publications |
 | **Compustat** | Annual (`xrd`) and quarterly (`xrdq`) R&D expense for the 8 target firms | 2010 – 2025 | 151 KB |
 | **SEC EDGAR / XBRL** | Annual R&D expense for the 8 target firms, kept as a cross-check on Compustat | 2017 – 2025 | 9 KB |
 
-The two large files are stored via Git LFS. See [`data/README.md`](data/README.md) for the per-file dependency map and three data traps that will silently corrupt results if missed (CRSP encodes missing NAICS as the integer `0`, not `NA`; CRSP split months contain duplicate rows; OpenAlex company papers are systematically missing from 2022 onward).
+The large CRSP+OpenAlex file is stored via Git LFS. See [`data/README.md`](data/README.md) for the per-file dependency map and two data traps that will silently corrupt results if missed (CRSP encodes missing NAICS as the integer `0`, not `NA`; CRSP split months contain duplicate rows). An earlier version of this file had a third trap — OpenAlex company papers systematically missing from 2022 onward — that has since been fixed at the source; see `data/README.md` for what changed.
 
 #### AI papers by year
 
@@ -66,20 +66,20 @@ The two large files are stored via Git LFS. See [`data/README.md`](data/README.m
 
 ## Getting Started
 
-Clone the repository with [Git LFS](https://git-lfs.com) installed, so the two large data files download as real content rather than pointer stubs. Then open `ai-research-to-returns.Rproj` in RStudio. **The project file exists specifically to set the working directory to the repository root**, which every script assumes. Running a script with RStudio pointed one level deeper — at `02_returns/`, say — will fail to find `02_returns/scripts/00_common.R`.
+Clone the repository with [Git LFS](https://git-lfs.com) installed, so the large CRSP+OpenAlex file downloads as real content rather than a pointer stub. Then open `ai-research-to-returns.Rproj` in RStudio. **The project file exists specifically to set the working directory to the repository root**, which every script assumes. Running a script with RStudio pointed one level deeper — at `02_returns/`, say — will fail to find `02_returns/scripts/00_common.R`.
 
 ```r
-install.packages(c("data.table", "sandwich", "lmtest", "tidyverse", "lubridate"))
+install.packages(c("data.table", "sandwich", "lmtest", "tidyverse", "lubridate", "plm"))
 ```
 
 Then run the pipelines in numeric order. Each folder's README documents its own scripts, outputs, and caveats; the short version is:
 
 ```r
-# 01 — build the CRSP group panels (slow, writes ~1.2 GB of intermediates)
+# 01 — build the group panels for the papers-trend figure (fast: just splits the v2 file)
 source("01_universe/scripts/01_build_groups.R")
 source("01_universe/scripts/02_plot_group_papers.R")
 
-# 02 — the main analysis (order matters: 01 feeds 02, 02 feeds 03 and 04)
+# 02 — the main analysis
 source("02_returns/scripts/01_tech_classification.R", echo = TRUE)
 source("02_returns/scripts/02_build_panel.R",         echo = TRUE)
 source("02_returns/scripts/03_main_tests.R",          echo = TRUE)
@@ -89,9 +89,9 @@ source("02_returns/scripts/04_structural_change.R",   echo = TRUE)
 source("04_rnd/scripts/01_plot_rd.R")
 ```
 
-The patent pipeline (`03_patents/`) is Python, uses its own virtual environment, and needs an authenticated Google Cloud account because it queries BigQuery through the `bq` CLI. Its outputs are committed, so it does not need to be re-run to read the results. See [`03_patents/README.md`](03_patents/README.md).
+The patent pipeline (`03_patents/`) is Python, uses its own virtual environment, and needs an authenticated Google Cloud account because it queries BigQuery through the `bq` CLI. Its outputs are committed, so it does not need to be re-run to read the results. See [`03_patents/README.md`](03_patents/README.md). The firm-level panel (`05_panel/`) is also Python for the merge step, then R for the tests — see [`05_panel/README.md`](05_panel/README.md).
 
-Two things worth knowing on a first run. `02_build_panel.R` reads a 426 MB file and holds several GB in memory. `04_structural_change.R` takes a few minutes because it bootstraps 2,000 replications of a full breakpoint scan. Every script mirrors its console output into a diagnostics file under its `out/` folder, so every number quoted below can be traced back to a logged run.
+Two things worth knowing on a first run. `02_build_panel.R` reads a 297 MB file and holds several GB in memory. `04_structural_change.R` takes a few minutes because it bootstraps 2,000 replications of a full breakpoint scan. Every script mirrors its console output into a diagnostics file under its `out/` folder, so every number quoted below can be traced back to a logged run.
 
 ## Analysis
 
@@ -107,6 +107,7 @@ The project uses monthly time-series econometrics to test whether AI research ou
 | **L4 Own-company Research Effect** | Does a firm's own AI research output predict its own stock returns? | Spearman correlation, firm case studies, R&D-expense comparison, VAR/IRF |
 | **Q1 Full market** | Does AI research output move technology stocks, measured across all of CRSP? | ARDL + HAC, Benjamini-Hochberg correction across lags |
 | **Q2 Tech-specificity** | Is that effect *specific* to technology stocks? | Tech − non-tech spread, size-quintile decomposition, Quandt-Andrews supF with bootstrapped critical values |
+| **Q3 Firm panel** | Does a firm's own paper/patent activity predict its own return? | Firm + month fixed effects, firm-clustered robust SE (`05_panel`) |
 | **P Patents** | Did firms substitute patents for papers after 2022? | WIPO 2019 AI classification of 838k pre-grant publications, CPC concordance, alignment against the paper series |
 
 #### Subfield-to-firm mapping (Level 3)
@@ -196,20 +197,20 @@ Two problems motivated a rebuild rather than an extension.
 
 **No control group.** Levels 1–3 regress a mega-cap technology portfolio on AI paper growth. That portfolio correlates 0.91 with the overall market. If AI paper growth happened to be high in months when the whole market rose, a positive coefficient would appear even with no technology-specific channel at all. A treatment group without a control group cannot separate those two stories — and "AI research moves technology stocks *specifically*" is the claim the project is actually making.
 
-**A broken industry flag.** The `is_ict` field shipped with the group panels misclassifies firms in two independent ways, placing Alphabet, Meta, and Amazon in the *non*-technology group. Under that flag the non-technology group held 57.8% of all company AI papers, which would have inverted the meaning of any spread built from it. The rebuilt 6-digit, four-vintage classification puts 83.4% of company AI papers in the technology group.
+**A broken industry flag.** The `is_ict` field shipped with the group panels used at the time misclassified firms in two independent ways, placing Alphabet, Meta, and Amazon in the *non*-technology group. Under that flag the non-technology group held 57.8% of all company AI papers, which would have inverted the meaning of any spread built from it. The rebuilt 6-digit, four-vintage classification put 83.4% of company AI papers in the technology group. (These specific percentages come from the CRSP panel this project used through August 2026, since retired in favor of a corrected source — see `data/README.md`. The corrected source's own classification is close to the rebuilt one, 75.9% vs. 74.1%, so the fix mattered mainly for the earlier panel, not for the current one.)
 
 ### Second generation — Q1 and Q2 on the CRSP full market
 
-Sample: 2017-01 to 2025-12, 107 months after differencing; 761 technology and 7,258 non-technology firms per month on average. Q1's dependent variable is the value-weighted technology return; Q2's is the tech − non-tech spread, which removes the common market component.
+Sample: 2017-02 to 2025-12, 106 months after differencing; 716 technology and 7,809 non-technology firms per month on average. Q1's dependent variable is the value-weighted technology return; Q2's is the tech − non-tech spread, which removes the common market component.
 
 | Series | Mean monthly | Annualized | SD |
 |---|---|---|---|
-| Tech (value-weighted) | 1.584% | 20.8% | 5.06% |
-| Non-tech (value-weighted) | 0.956% | 12.1% | 4.14% |
-| **Spread** | **0.628%** | **7.8%** | 2.81% |
-| CRSP market | 1.112% | 14.2% | 4.22% |
+| Tech (value-weighted) | 1.807% | 24.0% | 5.48% |
+| Non-tech (value-weighted) | 0.930% | 11.7% | 4.48% |
+| **Spread** | **0.877%** | **11.0%** | 3.18% |
+| CRSP market | 1.156% | 14.8% | 4.59% |
 
-The non-technology portfolio correlates 0.987 with the CRSP market index, confirming it behaves like the market — which is what makes it usable as a control.
+The non-technology portfolio correlates 0.983 with the CRSP market index, confirming it behaves like the market — which is what makes it usable as a control.
 
 ![Q1 and Q2 main tests](02_returns/out/fig_main_tests.png)
 
@@ -219,10 +220,10 @@ The top row is the setup: AI paper counts grow steadily with strong monthly seas
 
 | Lag | Coefficient | HAC SE | t | p | BH-adjusted p |
 |---|---|---|---|---|---|
-| 0 | +0.0701 | 0.0331 | +2.12 | 0.036 | 0.073 |
-| 1 | −0.0488 | 0.0345 | −1.41 | 0.160 | 0.208 |
-| 2 | +0.0655 | 0.0290 | +2.26 | 0.026 | 0.073 |
-| 3 | −0.0501 | 0.0395 | −1.27 | 0.208 | 0.208 |
+| 0 | +0.0708 | 0.0324 | +2.18 | 0.031 | 0.062 |
+| 1 | −0.0481 | 0.0339 | −1.42 | 0.159 | 0.212 |
+| 2 | +0.0618 | 0.0282 | +2.19 | 0.031 | 0.062 |
+| 3 | −0.0470 | 0.0377 | −1.24 | 0.216 | 0.216 |
 
 The contemporaneous coefficient is significant at 5% on its own, but **0 of 4 lags survive BH correction**.
 
@@ -230,27 +231,27 @@ The contemporaneous coefficient is significant at 5% on its own, but **0 of 4 la
 
 | Lag | Coefficient | HAC SE | t | p | BH-adjusted p |
 |---|---|---|---|---|---|
-| 0 | +0.0466 | 0.0285 | +1.63 | 0.105 | 0.202 |
-| 1 | −0.0368 | 0.0193 | −1.90 | 0.060 | 0.202 |
-| 2 | +0.0268 | 0.0185 | +1.44 | 0.152 | 0.202 |
-| 3 | −0.0152 | 0.0256 | −0.59 | 0.553 | 0.553 |
+| 0 | +0.0475 | 0.0282 | +1.69 | 0.095 | 0.190 |
+| 1 | −0.0352 | 0.0196 | −1.80 | 0.075 | 0.190 |
+| 2 | +0.0228 | 0.0179 | +1.28 | 0.205 | 0.273 |
+| 3 | −0.0124 | 0.0244 | −0.51 | 0.614 | 0.614 |
 
-**Not significant.** The control group makes this interpretable: the non-technology portfolio's own coefficient is +0.0235 (p = 0.512), a clean null. So Q2's insignificance is *not* the case where both groups respond and the difference cancels — the technology group's response simply is not strong enough to separate from zero at this sample size.
+**Not significant.** The control group makes this interpretable: the non-technology portfolio's own coefficient is +0.0233 (p = 0.519), a clean null. So Q2's insignificance is *not* the case where both groups respond and the difference cancels — the technology group's response simply is not strong enough to separate from zero at this sample size.
 
-Splitting the market into size quintiles gives five positive coefficients of similar magnitude with no monotonic size pattern, so the gap between equal-weighted (+0.0592, p = 0.003) and value-weighted (+0.0466, p = 0.105) results is a **statistical power** difference, not evidence that the effect lives only in microcaps.
+Splitting the market into size quintiles gives five positive coefficients of similar magnitude with no monotonic size pattern, so the gap between equal-weighted (+0.0591, p = 0.005) and value-weighted (+0.0475, p = 0.095) results is a **statistical power** difference, not evidence that the effect lives only in microcaps.
 
-**A structural break, and a lesson about where break dates come from.** One deseasonalization variant truncates the sample to 2020-02 onward, and in that subsample Q2 is significant; imposing 2020-02 as a breakpoint gives an interaction p = 0.037. Scanning all 76 candidate dates and bootstrapping the Quandt-Andrews supF distribution gives p = 0.145 — not significant. Both computations are correct; the difference is entirely whether the date was chosen before or after looking at the data.
+**A structural break, and a lesson about where break dates come from.** One deseasonalization variant truncates the sample to 2020-03 onward, and in that subsample Q2 is significant; imposing 2020-02 as a breakpoint gives an interaction p = 0.042. Scanning all 77 candidate dates and bootstrapping the Quandt-Andrews supF distribution gives p = 0.110 — not significant. Both computations are correct; the difference is entirely whether the date was chosen before or after looking at the data.
 
 ![Structural change diagnostics](02_returns/out/fig_structural_change.png)
 
-Top left: the supF scan never reaches the bootstrapped 5% critical value (dashed line), at any candidate date. Top right: the bootstrap null distribution, with the observed supF marked in red sitting well inside it. Bottom left: the rolling 36-month coefficient is flat around zero until windows ending in early 2023, then steps up and stays up — the pattern behind the pre-specified 2022 result below. Bottom right: the arXiv population series has no 2022 cliff, which is what keeps the Q1/Q2 tests clear of the data break discussed further down.
+Top left: the supF scan never reaches the bootstrapped 5% critical value (dashed line), at any candidate date. Top right: the bootstrap null distribution, with the observed supF marked in red sitting well inside it. Bottom left: the rolling 36-month coefficient is flat around zero until windows ending in early 2023, then steps up and stays up — the pattern behind the pre-specified 2022 result below. Bottom right: the arXiv population series has no 2022 cliff, which is what keeps the Q1/Q2 tests clear of the company-paper data issue discussed further down.
 
 A **pre-specified** 2022 split, by contrast, needs no such penalty, and it produces the most informative table in the project:
 
 | Period | Tech | Non-tech | Spread |
 |---|---|---|---|
-| Before (n = 59) | +0.0381 (p = 0.265) | +0.0373 (p = 0.307) | **+0.0007 (p = 0.975)** |
-| After (n = 48) | +0.1283 (p = 0.070) | −0.0049 (p = 0.947) | **+0.1332 (p = 0.011)** |
+| Before (n = 58) | +0.0397 (p = 0.231) | +0.0373 (p = 0.308) | **+0.0024 (p = 0.913)** |
+| After (n = 48) | +0.1277 (p = 0.070) | −0.0054 (p = 0.942) | **+0.1331 (p = 0.012)** |
 
 In the pre-period the two groups respond almost identically, so the spread is essentially exactly zero — a natural placebo that the design passes. In the post-period only the technology group moves. The rolling 36-month coefficient jumps in windows ending in early 2023, lining up with ChatGPT's release in 2022-11. **This is a lead, not a conclusion**: it survives every change of specification but not the removal of a single year or the three most extreme months.
 
@@ -258,38 +259,40 @@ In the pre-period the two groups respond almost identically, so the spread is es
 
 The first generation's disclosure-shift story has a stronger version: firms stopped publishing and *shifted to patents*. Patent data are independent of OpenAlex, so they can serve as an independent witness. The [`03_patents`](03_patents/README.md) pipeline classified 838,405 U.S. pre-grant publications from 268 firms using the WIPO 2019 AI search rules.
 
-**No substitution appears.** AI patent filings grow steadily straight through the period in which company paper counts collapse. And the collapse itself does not look like corporate behavior:
+**No substitution appears — and there is no collapse to substitute for.** AI patent filings and company-attributed AI papers both grow steadily through the period:
 
-![AI paper decline after 2020 by group](01_universe/out/fig_papers_indexed_3groups.png)
+![AI paper output since 2020 by group](01_universe/out/fig_papers_indexed_3groups.png)
 
-Each group is indexed to its own 2020 level, so the lines are comparable regardless of scale. The Magnificent 7 (red) and other technology firms (blue) both fall off a cliff in 2022 and never recover. Non-technology firms (green) dip in the same year and then climb back. A behavioral explanation would have to explain why firms in energy, retail, and healthcare made the same publication decision in the same year as Alphabet and Microsoft — and then reversed it.
+Each group is indexed to its own 2020 level. The Magnificent 7 (red), other technology firms (blue), and non-technology firms (green) all keep climbing through 2025, with no post-2022 break in any of them.
 
 | Year | arXiv population (monthly avg) | Company papers | Population YoY | Company YoY |
 |---|---|---|---|---|
-| 2020 | 3,888 | 2,727 | +33% | +33% |
-| 2021 | 4,306 | 2,114 | +11% | −22% |
-| 2022 | 4,513 | 548 | +5% | **−74%** |
-| 2023 | 5,624 | 513 | +25% | −6% |
+| 2020 | 3,888 | 10,471 | +33% | +23% |
+| 2021 | 4,306 | 10,281 | +11% | −2% |
+| 2022 | 4,513 | 11,466 | +5% | **+12%** |
+| 2023 | 5,624 | 13,033 | +25% | +14% |
 
-Every firm halves in the same calendar year — GOOGL 654 → 101, MSFT 429 → 122, AMZN 182 → 49, NVDA 80 → 24, AAPL 22 → 10 — while the arXiv population keeps growing. That is the signature of a data break, not of independent corporate decisions: OpenAlex stopped attaching institutional affiliations to arXiv records in 2022, and the company-paper counts depend on exactly that link. Meta showing zero papers for 2017–2021, when FAIR published heavily, confirms the linkage was never reliable.
+This table looked very different in an earlier version of this project. Through August 2026, the CRSP panel behind the company-paper numbers had a data-linkage bug — OpenAlex stopped attaching institutional affiliations to arXiv records from 2022 onward, and every firm's count halved in that single calendar year (GOOGL 654 → 101, MSFT 429 → 122, AMZN 182 → 49), which is the signature of a data break rather than independent corporate decisions. That panel has since been replaced by a corrected source (see `data/README.md`), and the artifact is gone. The conclusion does not depend on which version is read: neither the broken nor the fixed company-paper data shows firms cutting back on publishing after 2021/2022, so the "shifted to patents" story has nothing to explain in either version, and it is contradicted outright by the patent data regardless.
 
-So the Level 4 interpretation needs splitting in two. Movva et al.'s finding of a genuine but modest decline in Big Tech's LLM publication *share* stands — it comes from a hand-curated corpus. But the 74% collapse visible in this project's company-paper series is dominated by a data artifact, and the "shifted to patents" version of the story is contradicted outright by the patent data. **The Q1 and Q2 tests are unaffected**, because their independent variable is the arXiv population series, which has no such break.
+So the Level 4 interpretation needs splitting in two. Movva et al.'s finding of a genuine but modest decline in Big Tech's LLM publication *share* stands — it comes from a hand-curated corpus and is a share, not a level. But this project's own company-paper series shows no comparable decline once the OpenAlex linkage bug is corrected, and the "shifted to patents" version of the story is contradicted outright by the patent data either way. **The Q1 and Q2 tests were never affected by any of this**, because their independent variable is the arXiv population series, which never had a break.
 
 ## Conclusion
 
 1. **Aggregate AI research output does not reliably predict market or technology-sector returns once shared trends are removed.** This held in the first generation's 9-stock portfolio and again in the full-market re-test.
 
-2. **The effect is not shown to be technology-specific over the full sample.** Q2 gives +0.0466 (p = 0.105) with a clean null in the control group. Extending the cross-section from 9 mega-caps to 18,595 classified CRSP firms did not change the answer, and the size-quintile decomposition rules out the "effect only exists in small caps" explanation — so this null is hard to attribute to sample size.
+2. **The effect is not shown to be technology-specific over the full sample.** Q2 gives +0.0475 (p = 0.095) with a clean null in the control group. Extending the cross-section from 9 mega-caps to 15,671 classified CRSP firms did not change the answer, and the size-quintile decomposition rules out the "effect only exists in small caps" explanation — so this null is hard to attribute to sample size.
 
-3. **The strongest positive result is the post-2022 subsample** (+0.1332, p = 0.011), with a clean pre-period placebo and a control group that does not move. It is worth pursuing, but 48 months and sensitivity to dropping three observations mean it cannot carry a strong claim alone.
+3. **The strongest positive result is the post-2022 subsample** (+0.1331, p = 0.012), with a clean pre-period placebo and a control group that does not move. It is worth pursuing, but 48 months and sensitivity to dropping three observations mean it cannot carry a strong claim alone.
 
-4. **The post-2021 decline in visible corporate AI papers is mostly a measurement failure, not a disclosure decision.** Patent data show no substitution, and the collapse is synchronized across every firm in a single year. Affiliation-linked paper counts are not a trustworthy measure of corporate AI activity after 2022.
+4. **A firm-level panel test tells the same story.** Regressing a company's own return on its own paper and patent counts, with firm and month fixed effects (so common market shocks are removed the same way Q2 removes them), gives another clean null — see [`05_panel`](05_panel/README.md).
 
-5. **The most methodologically instructive result is a contradiction.** The same data yield "significant" or "not significant" for the same break date depending only on whether the date was chosen before or after looking at the data. Reporting the imposed-breakpoint interaction instead of the bootstrapped supF would have been p-hacking, and would have been invisible to a reader.
+5. **The post-2021 decline in visible corporate AI papers reported by an earlier version of this project was a measurement failure, not a disclosure decision.** A CRSP panel used through August 2026 had an OpenAlex institutional-affiliation linkage bug that produced a synchronized, spurious collapse in company paper counts; a corrected data source (see `data/README.md`) shows continuous growth instead. Patent data — independent of OpenAlex throughout — showed no substitution either way. **The Q1/Q2/panel results above are unaffected by this bug and its fix**, since none of them depend on company-level paper counts.
+
+6. **The most methodologically instructive result is a contradiction.** The same data yield "significant" or "not significant" for the same break date depending only on whether the date was chosen before or after looking at the data. Reporting the imposed-breakpoint interaction instead of the bootstrapped supF would have been p-hacking, and would have been invisible to a reader.
 
 ### Where this could go next
 
-The binding constraint is statistical power in the time dimension: detecting an effect of this size reliably in a monthly series would take roughly 300 months — 25 years — and the AI-paper series only begins in 2017. The time dimension is exhausted. Real improvement has to come from the cross-section (firm-level panel tests using within-firm variation), from higher-frequency data (weekly returns against weekly submission counts), or from a cleaner measure of corporate AI activity than affiliation-linked paper counts — patents, job postings, or product releases.
+The binding constraint is statistical power in the time dimension: detecting an effect of this size reliably in a monthly series would take roughly 300 months — 25 years — and the AI-paper series only begins in 2017. The time dimension is exhausted. A firm-level panel test using within-firm variation has already been run (`05_panel`) and is also a clean null. Further improvement would have to come from higher-frequency data (weekly returns against weekly submission counts) or from a cleaner measure of corporate AI activity than paper counts — R&D spend or patents, both already collected in this project.
 
 ## Contributors
 
